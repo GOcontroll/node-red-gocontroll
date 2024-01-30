@@ -9,7 +9,7 @@ module.exports = function(RED) {
 	   RED.nodes.createNode(this,config);
 
 		/* Serial port used for simcom on Moduline 4 */
-		const port = new SerialPort("/dev/ttymxc1", { baudRate: 115200 , autoOpen: false })
+		const port = new SerialPort("/dev/ttymxc1", { baudRate: 115200 , autoOpen: false });
 
 		var interval = null;
 		var modulePowered = false;
@@ -28,7 +28,7 @@ module.exports = function(RED) {
 			}
 		});
 
-		node.status({fill:"yellow",shape:"dot",text:"Waiting for satelite"})
+		node.status({fill:"yellow",shape:"dot",text:"Waiting for satelite"});
 		
 		GpsModule_SwitchOnModulePower();
 		
