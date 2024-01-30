@@ -16,36 +16,59 @@
         label: function() {
 			if(this.name != "")
 			{
-            return this.name;
+            	return this.name;
 			}
 			if(this.moduleSlot == "0" || this.channel == "")
 			{
-            return "Choose module location and channel";
+            	return "Choose module location and channel";
 			}
 			
 			var id = $("#node-input-moduleType").val();
 			if(id == 1){
-			return "Reset module " + this.moduleSlot + " channel " + this.channel6;
+				return "Reset module " + this.moduleSlot + " channel " + this.channel6;
 			}else{
-			return "Reset module " + this.moduleSlot + " channel " + this.channel10;
+				return "Reset module " + this.moduleSlot + " channel " + this.channel10;
 			}
 			
 		
-        },
+		},
 		oneditprepare: function() {
-		$(this.moduleType).trigger("change");
-		
-		$("#node-input-moduleType").on("change", function() {
-			var id = $("#node-input-moduleType").val();
-			if(id == 1){
-			$("#10-channel").hide();
-			$("#6-channel").show();
-			}else{
-			$("#6-channel").hide();
-			$("#10-channel").show();
-			}
+			$(this.moduleType).trigger("change");
 			
-          });
+			$("#node-input-moduleType").on("change", function() {
+				var id = $("#node-input-moduleType").val();
+				if(id == 1){
+					$("#10-channel").hide();
+					$("#6-channel").show();
+				}else{
+					$("#6-channel").hide();
+					$("#10-channel").show();
+				}
+				
+			});
+			$.getJSON("controllertype", function(data) {
+				if (data.includes("IV")) {
+					// console.log("IV");
+					$(".Mini").hide();
+					$(".Display").hide();
+					$(".IV").show(); //show should be the last DOM action
+				} else if (data.includes("Mini")) {
+					// console.log("Mini");
+					$(".IV").hide();
+					$(".Display").hide();
+					$(".Mini").show(); //show should be the last DOM action
+				} else if (data.includes("Display")) {
+					// console.log("Display");
+					$(".IV").hide();
+					$(".Mini").hide();
+					$(".Display").show(); //show should be the last DOM action
+				} else {
+					console.log("error getting controllertype");
+					$(".IV").hide();
+					$(".Mini").hide();
+					$(".Display").hide();
+				}
+			});
 		}
     });
 </script>
@@ -67,14 +90,14 @@
     <div class="form-row">
         <label for="node-input-moduleSlot"><i class="fa fa-microchip"></i> Module</label>
         <select id="node-input-moduleSlot" style="width:300px">
-            <option value=1>Module on slot 1</option>
-            <option value=2>Module on slot 2</option>
-            <option value=3>Module on slot 3</option>
-            <option value=4>Module on slot 4</option>
-            <option value=5>Module on slot 5</option>
-            <option value=6>Module on slot 6</option>
-            <option value=7>Module on slot 7</option>
-            <option value=8>Module on slot 8</option>
+            <option value="1">Module on slot 1</option>
+            <option value="2">Module on slot 2</option>
+            <option class="IV Mini" value="3">Module on slot 3</option>
+            <option class="IV Mini" value="4">Module on slot 4</option>
+            <option class="IV" value="5">Module on slot 5</option>
+            <option class="IV" value="6">Module on slot 6</option>
+            <option class="IV" value="7">Module on slot 7</option>
+            <option class="IV" value="8">Module on slot 8</option>
         </select>
     </div>
 	

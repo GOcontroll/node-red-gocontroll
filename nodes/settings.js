@@ -1,42 +1,14 @@
 module.exports = function(RED) {
     "use strict"
 
-	function GOcontrollSettings(config) {
-	RED.nodes.createNode(this,config);
-	
 	const fs = require('fs');
 
-	var node = this;
+	function GOcontrollSettings(config) {
+		RED.nodes.createNode(this,config);
 
-	Settings_ShowVersionInformation ();
-	
-	/***************************************************************************************
-	** \brief
-	**
-	**
-	** \param
-	** \param
-	** \return
-	**
-	****************************************************************************************/
-	function Settings_ShowVersionInformation (){
-		var PackageVersion = fs.readFileSync('/root/version.txt').toString().split(/\r?\n/);
-		node.status({fill:"green",shape:"dot",text:"GOcontroll SW: "+ PackageVersion[0] });
-	}
-	
-		/***************************************************************************************
-		** \brief
-		**
-		**
-		** \param
-		** \param
-		** \return
-		**
-		****************************************************************************************/
-		this.on('input', function(msg) {
-			
-			
-        });
+		var node = this;
+
+		Settings_ShowVersionInformation ();
 		
 		/***************************************************************************************
 		** \brief
@@ -47,13 +19,20 @@ module.exports = function(RED) {
 		** \return
 		**
 		****************************************************************************************/
-		node.on('close', function(done) {
-
-		done();
-		});
-			
-    }
+		function Settings_ShowVersionInformation (){
+			var PackageVersion = fs.readFileSync('/root/version.txt').toString().split(/\r?\n/);
+			node.status({fill:"green",shape:"dot",text:"GOcontroll SW: "+ PackageVersion[0] });
+		}
+	}
 	
 
 	RED.nodes.registerType("Settings",GOcontrollSettings);
+
+	RED.httpAdmin.get("/controllertype", RED.auth.needsPermission(""), function(req, res) {
+		try {
+			res.json(fs.readFileSync("/sys/firmware/devicetree/base/hardware").toString())
+		} catch (e) {
+			res.json("");
+		}
+	});
 }

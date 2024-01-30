@@ -42,24 +42,47 @@
 		else
           return "Configure CAN Receive";
         },
-		/* function executed while done is clicked */
+		/* function executed when the node is opened */
 		oneditprepare: function() {
-		$(this.signals).trigger("change");
-		$(this.sb1).trigger("change");
-		
-		$("#node-input-signals").on("change", function() {
-			var id = $("#node-input-signals").val();
-			if(id > 0){$("#can-signal-1").show();}else{$("#can-signal-1").hide();}
-			if(id > 0){$("#data-alignment").show();}else{$("#data-alignment").hide();}
-			if(id > 1){$("#can-signal-2").show();}else{$("#can-signal-2").hide();}
-			if(id > 2){$("#can-signal-3").show();}else{$("#can-signal-3").hide();}
-			if(id > 3){$("#can-signal-4").show();}else{$("#can-signal-4").hide();}
-			if(id > 4){$("#can-signal-5").show();}else{$("#can-signal-5").hide();}
-			if(id > 5){$("#can-signal-6").show();}else{$("#can-signal-6").hide();}
-			if(id > 6){$("#can-signal-7").show();}else{$("#can-signal-7").hide();}
-			if(id > 7){$("#can-signal-8").show();}else{$("#can-signal-8").hide();}
-		//	$("#node-input-dlc").value("2");}
-          });
+			$(this.signals).trigger("change");
+			$(this.sb1).trigger("change");
+			
+			$("#node-input-signals").on("change", function() {
+				var id = $("#node-input-signals").val();
+				if(id > 0){$("#can-signal-1").show();}else{$("#can-signal-1").hide();}
+				if(id > 0){$("#data-alignment").show();}else{$("#data-alignment").hide();}
+				if(id > 1){$("#can-signal-2").show();}else{$("#can-signal-2").hide();}
+				if(id > 2){$("#can-signal-3").show();}else{$("#can-signal-3").hide();}
+				if(id > 3){$("#can-signal-4").show();}else{$("#can-signal-4").hide();}
+				if(id > 4){$("#can-signal-5").show();}else{$("#can-signal-5").hide();}
+				if(id > 5){$("#can-signal-6").show();}else{$("#can-signal-6").hide();}
+				if(id > 6){$("#can-signal-7").show();}else{$("#can-signal-7").hide();}
+				if(id > 7){$("#can-signal-8").show();}else{$("#can-signal-8").hide();}
+			//	$("#node-input-dlc").value("2");}
+			});
+			$.getJSON("controllertype", function(data) {
+				if (data.includes("IV")) {
+					// console.log("IV");
+					$(".Mini").hide();
+					$(".Display").hide();
+					$(".IV").show(); //show should be the last DOM action
+				} else if (data.includes("Mini")) {
+					// console.log("Mini");
+					$(".IV").hide();
+					$(".Display").hide();
+					$(".Mini").show(); //show should be the last DOM action
+				} else if (data.includes("Display")) {
+					// console.log("Display");
+					$(".IV").hide();
+					$(".Mini").hide();
+					$(".Display").show(); //show should be the last DOM action
+				} else {
+					console.log("error getting controllertype");
+					$(".IV").hide();
+					$(".Mini").hide();
+					$(".Display").hide();
+				}
+			});
 		}
 	});
 </script>
@@ -70,14 +93,14 @@
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
-  
-		<div class="form-row">
+
+	<div class="form-row">
         <label for="node-input-caninterface"><i class="fa fa-plug"></i> Interface</label>
         <select id="node-input-caninterface" style="width:204px">
             <option value="CAN 1">CAN 1</option>
             <option value="CAN 2">CAN 2</option>
-			<option value="CAN 3">CAN 3</option>
-            <option value="CAN 4">CAN 4</option>
+			<option class="IV" value="CAN 3">CAN 3</option>
+            <option class="IV" value="CAN 4">CAN 4</option>
         </select>
  	</div>
 
@@ -165,17 +188,29 @@
 <p>The CAN receive node receives a CAN message from on of the two onboard CAN busses. The node will convert the messages to a JSON string with corresponding key's for the value.</p>
 <h2><strong>How to configure:</strong></h2>
 <p><strong>Config:</strong></p>
-<p>Here you select the onboard CAN bus from the controller. If used the first time, also the speed of the CAN bus needs to be set in the settings node.</p>
-<p>The two CAN busses are connected to the C connecter (middle).</p>
+<p>Here you select the onboard CAN bus from the controller.</p>
+<h3>Moduline IV</h3>
+<p>The four CAN busses are connected to the C connecter (middle).</p>
 <p>CAN1 - Connector C pin 14 (L) and pin 15 (H)</p>
 <p>CAN2 - Connector C pin 20 (L) and pin 21 (H)</p>
 <p>CAN3 - Connector C pin 19 (L) and pin 18 (H)</p>
 <p>CAN4 - Connector C pin 13 (L) and pin 12 (H)</p>
+
+<h3>Moduline Mini</h3>
+<p>The two CAN busses are connected to both connector A and B.</p>
+<p>CAN1 - Connector B pin 24 (L) and pin 25 (H)</p>
+<p>CAN2 - Connector A pin 24 (L) and pin 25 (H)</p>
+
+<h3>Moduline Display</h3>
+<p>The two CAN busses are connected to the main connector.</p>
+<p>CAN1 - Main Connector pin 16 (L) and pin 17 (H)</p>
+<p>CAN2 - Main Connector pin 24 (L) and pin 25 (H)</p>
+
 <p>&nbsp;</p>
-<p><strong>CAN ID:&nbsp;</strong></p>
+<h3><strong>CAN ID:&nbsp;</strong></h3>
 <p>The CAN ID needs to be given in hexadecimal format and can be either a 11 bit (standard) or 29 bit (extended) identifier. The node will only listen for incoming message with this specific identifier.</p>
 <p>&nbsp;</p>
-<p><strong>Signals:&nbsp;</strong></p>
+<h3><strong>Signals:&nbsp;</strong></h3>
 <p>Here can be specified which signals are received by CAN. This improves the readability and the traceability from messages in a flow.</p>
 <p>Example:</p>
 <p>A CAN message contains the vehicle engine speed (uint16) on data byte 5 and 6. For readability, a key can be provided in the form of <em>engineSpeed</em>. The start byte of the value is <em>5</em> and the end byte will be <em>6</em>. The node will retrieve data byte 5 and 6, convert them to a (uint16) and push the value out of the node in form of a JSON object <em>{"engineSpeed": 2560}</em>&nbsp;&nbsp;</p>

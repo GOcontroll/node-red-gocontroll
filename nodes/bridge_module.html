@@ -16,17 +16,42 @@
         outputs:1,
         icon: "arrow-in.png",
 		paletteLabel: "Bridge Mod",
-        label: function() {
+		label: function() {
 			if(this.name != "")
 			{
-            return this.name;
+				return this.name;
 			}
 			if(this.moduleSlot == "0")
 			{
-            return "Choose bridge module location";
+				return "Choose bridge module location";
 			}
-		return "Bridge module on slot " + this.moduleSlot;
-        }
+			return "Bridge module on slot " + this.moduleSlot;
+		},
+		oneditprepare: function() {
+			$.getJSON("controllertype", function(data) {
+				if (data.includes("IV")) {
+					// console.log("IV");
+					$(".Mini").hide();
+					$(".Display").hide();
+					$(".IV").show(); //show should be the last DOM action
+				} else if (data.includes("Mini")) {
+					// console.log("Mini");
+					$(".IV").hide();
+					$(".Display").hide();
+					$(".Mini").show(); //show should be the last DOM action
+				} else if (data.includes("Display")) {
+					// console.log("Display");
+					$(".IV").hide();
+					$(".Mini").hide();
+					$(".Display").show(); //show should be the last DOM action
+				} else {
+					console.log("error getting controllertype");
+					$(".IV").hide();
+					$(".Mini").hide();
+					$(".Display").hide();
+				}
+			});
+		}
     });
 </script>
 
@@ -41,12 +66,12 @@
         <select id="node-input-moduleSlot" style="width:300px">
             <option value="1">Module on slot 1</option>
             <option value="2">Module on slot 2</option>
-            <option value="3">Module on slot 3</option>
-            <option value="4">Module on slot 4</option>
-            <option value="5">Module on slot 5</option>
-            <option value="6">Module on slot 6</option>
-            <option value="7">Module on slot 7</option>
-            <option value="8">Module on slot 8</option>
+            <option class="IV Mini" value="3">Module on slot 3</option>
+            <option class="IV Mini" value="4">Module on slot 4</option>
+            <option class="IV" value="5">Module on slot 5</option>
+            <option class="IV" value="6">Module on slot 6</option>
+            <option class="IV" value="7">Module on slot 7</option>
+            <option class="IV" value="8">Module on slot 8</option>
         </select>
     </div>
 		<div class="form-row">
@@ -123,7 +148,7 @@
 <p><strong><em>Module:</em></strong></p>
 <p>Select the module slot on which the bridge module is installed to.</p>
 <h3><strong>Output channel n</strong></h3>
-<p>Each channel (1 -2) can be configured according user demands. Each Output channel has the same options.</p>
+<p>Each channel (1 - 2) can be configured according user demands. Each Output channel has the same options.</p>
 <p><strong><em>Output type:</em></strong></p>
 <p>Here, the user can select the type of output depending on the actuator that is connected.</p>
 <ul>
@@ -146,7 +171,7 @@
 <li>High side switch on &ndash; off</li>
 </ul>
 <p>In case of switching actuators on or off by switching to the rail supply, you can select the high side switch. By sending a 1 or higher, the switch will be switched on. 0 will switch off the actuator.</p>
-<h2><strong>Data format</strong></h2>
+<h3><strong>Data format</strong></h2>
 <p><em><strong>Control the module</strong></em></p>
 <p>The data to control the module can be send is as one JSON string for all channels or separate strings with key-value pairs for each channel independent. If channels are updated individually, the other outputs remain unchanged.</p>
 <p>Each channel can be controlled individually with the following JSON string:</p>
@@ -159,12 +184,14 @@
 <p>The data coming from the module is pushed out of the node in a JSON object format. This data is only pushed out of the node when an injection took place. If no output update is required but the status of the module is needed, a random message can be injected to the node to retrieve the information. The JSON string holds 2 key&rsquo;s with 2 values. Two general keys holding the groundshift and the temperature.</p>
 <p><em><strong>Groundshift</strong></em></p>
 <p>To prevent the module from influencing the controller ground, the module continuously checks if the ground from the module is ok. If the ground shift due to bad ground connections, this value will start to rise. At a certain threshold, the module will switch of the channels until a module reset takes place.</p>
-<h2><strong>Example</strong></h2>
+<h3><strong>Example</strong></h2>
 <p>This example shows the JSON data &nbsp;to inject into the output node.</p>
 <p>{&ldquo;outputChannel1&rdquo; : 688}</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>This example shows the data coming from an bridge node during operation.</p>
-<p>{&ldquo;moduleTemperature&rdquo; : 28,</p>
-<p>&ldquo;moduleGroundShift&rdquo; : 0}</p>
+<p>{<br>&ldquo;moduleTemperature&rdquo; : 28,</p>
+<p>&ldquo;moduleGroundShift&rdquo; : 0,</p>
+<p>&ldquo;outputSignal1Current&rdquo; : 1000,</p>
+<p>&ldquo;outputSignal2Current&rdquo; : 500<br>}</p>
 </script>

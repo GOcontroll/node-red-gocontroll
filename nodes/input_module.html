@@ -98,26 +98,49 @@
         },
 				/* function executed while done is clicked */
 		oneditprepare: function() {
-		$(this.moduleType).trigger("change");
-		$(this.sb1).trigger("change");
-		
-		$("#node-input-moduleType").on("change", function() {
-			var id = $("#node-input-moduleType").val();
-			if(id == 1){$("#6-channel-supply").show();}else{$("#6-channel-supply").hide();}
+			$(this.moduleType).trigger("change");
+			$(this.sb1).trigger("change");
 			
-			var x ="", i;
-				for (i=1; i<=10; i++) {
-				if(id == 1){$("#voltage"+i).show();}else{$("#voltage"+i).hide();}
-				if(id == 1){$("#pull-up-6"+i).show();}else{$("#pull-up-6"+i).hide();}
-				if(id == 1){$("#pull-down-6"+i).show();}else{$("#pull-down-6"+i).hide();}
-				if(id == 2){$("#pull-up-10"+i).show();}else{$("#pull-up-10"+i).hide();}
-				if(id == 2){$("#pull-down-10"+i).show();}else{$("#pull-down-10"+i).hide();}
-				}
+			$("#node-input-moduleType").on("change", function() {
+				var id = $("#node-input-moduleType").val();
+				if(id == 1){$("#6-channel-supply").show();}else{$("#6-channel-supply").hide();}
 				
-				for (i=7; i<=10; i++) {
-				if(id == 1){$("#channel"+i).hide();}else{$("#channel"+i).show();}
+				var x ="", i;
+					for (i=1; i<=10; i++) {
+					if(id == 1){$("#voltage"+i).show();}else{$("#voltage"+i).hide();}
+					if(id == 1){$("#pull-up-6"+i).show();}else{$("#pull-up-6"+i).hide();}
+					if(id == 1){$("#pull-down-6"+i).show();}else{$("#pull-down-6"+i).hide();}
+					if(id == 2){$("#pull-up-10"+i).show();}else{$("#pull-up-10"+i).hide();}
+					if(id == 2){$("#pull-down-10"+i).show();}else{$("#pull-down-10"+i).hide();}
+					}
+					
+					for (i=7; i<=10; i++) {
+					if(id == 1){$("#channel"+i).hide();}else{$("#channel"+i).show();}
+					}
+			});
+			$.getJSON("controllertype", function(data) {
+				if (data.includes("IV")) {
+					// console.log("IV");
+					$(".Mini").hide();
+					$(".Display").hide();
+					$(".IV").show(); //show should be the last DOM action
+				} else if (data.includes("Mini")) {
+					// console.log("Mini");
+					$(".IV").hide();
+					$(".Display").hide();
+					$(".Mini").show(); //show should be the last DOM action
+				} else if (data.includes("Display")) {
+					// console.log("Display");
+					$(".IV").hide();
+					$(".Mini").hide();
+					$(".Display").show(); //show should be the last DOM action
+				} else {
+					console.log("error getting controllertype");
+					$(".IV").hide();
+					$(".Mini").hide();
+					$(".Display").hide();
 				}
-          });
+			});
 		}
 		
     });
@@ -142,12 +165,12 @@
         <select id="node-input-moduleSlot" style="width:300px" title="Select the slot on which the module is plugged into">
             <option value="1">Module on slot 1</option>
             <option value="2">Module on slot 2</option>
-            <option value="3">Module on slot 3</option>
-            <option value="4">Module on slot 4</option>
-            <option value="5">Module on slot 5</option>
-            <option value="6">Module on slot 6</option>
-            <option value="7">Module on slot 7</option>
-            <option value="8">Module on slot 8</option>
+            <option class="IV Mini" value="3">Module on slot 3</option>
+            <option class="IV Mini" value="4">Module on slot 4</option>
+            <option class="IV" value="5">Module on slot 5</option>
+            <option class="IV" value="6">Module on slot 6</option>
+            <option class="IV" value="7">Module on slot 7</option>
+            <option class="IV" value="8">Module on slot 8</option>
         </select>
     </div>
 	

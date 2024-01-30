@@ -3,38 +3,38 @@
         category: 'GOcontroll',
         color: '#f76d11',
         defaults: {
-        name: {value:"CAN Send"},
-		canidtype: {value:"standard"},
-		canid: {value:""},
-		send: {value: 0},
-		caninterval: {value: "1000"},
-		signals: {value: 8},
-		caninterface: {value: "CAN 1"},
-		key1 : {value : ""},
-		key2 : {value : ""},
-		key3 : {value : ""},
-		key4 : {value : ""},
-		key5 : {value : ""},
-		key6 : {value : ""},
-		key7 : {value : ""},
-		key8 : {value : ""},
-		sb1 : {value : ""},
-		eb1: {value : ""},
-		sb2 : {value : ""},
-		eb2: {value : ""},
-		sb3 : {value : ""},
-		eb3: {value : ""},
-		sb4 : {value : ""},
-		eb4: {value : ""},
-		sb5 : {value : ""},
-		eb5: {value : ""},
-		sb6 : {value : ""},
-		eb6: {value : ""},
-		sb7 : {value : ""},
-		eb7: {value : ""},
-		sb8 : {value : ""},
-		eb8: {value : ""},
-		dlc: {value : ""}
+			name: {value:"CAN Send"},
+			canidtype: {value:"standard"},
+			canid: {value:""},
+			send: {value: 0},
+			caninterval: {value: "1000"},
+			signals: {value: 8},
+			caninterface: {value: "CAN 1"},
+			key1 : {value : ""},
+			key2 : {value : ""},
+			key3 : {value : ""},
+			key4 : {value : ""},
+			key5 : {value : ""},
+			key6 : {value : ""},
+			key7 : {value : ""},
+			key8 : {value : ""},
+			sb1 : {value : ""},
+			eb1: {value : ""},
+			sb2 : {value : ""},
+			eb2: {value : ""},
+			sb3 : {value : ""},
+			eb3: {value : ""},
+			sb4 : {value : ""},
+			eb4: {value : ""},
+			sb5 : {value : ""},
+			eb5: {value : ""},
+			sb6 : {value : ""},
+			eb6: {value : ""},
+			sb7 : {value : ""},
+			eb7: {value : ""},
+			sb8 : {value : ""},
+			eb8: {value : ""},
+			dlc: {value : ""}
         },
         inputs:1,
         outputs:0,
@@ -47,27 +47,50 @@
         },
 		/* function executed while done is clicked */
 		oneditprepare: function() {
-		$(this.signals).trigger("change");
-		$(this.send).trigger("change");
-		
-		$("#node-input-signals").on("change", function() {
-			var id = $("#node-input-signals").val();
-			if(id > 0){$("#can-signal-1").show();}else{$("#can-signal-1").hide();}
-			if(id > 0){$("#data-alignment").show();}else{$("#data-alignment").hide();}
-			if(id > 1){$("#can-signal-2").show();}else{$("#can-signal-2").hide();}
-			if(id > 2){$("#can-signal-3").show();}else{$("#can-signal-3").hide();}
-			if(id > 3){$("#can-signal-4").show();}else{$("#can-signal-4").hide();}
-			if(id > 4){$("#can-signal-5").show();}else{$("#can-signal-5").hide();}
-			if(id > 5){$("#can-signal-6").show();}else{$("#can-signal-6").hide();}
-			if(id > 6){$("#can-signal-7").show();}else{$("#can-signal-7").hide();}
-			if(id > 7){$("#can-signal-8").show();}else{$("#can-signal-8").hide();}
-		//	$("#node-input-dlc").value("2");}
-          });
-		  
-		$("#node-input-send").on("change", function() {
-			var send = $("#node-input-send").val();
-			if(send == 0){$("#can-interval").hide();}else{$("#can-interval").show();}
-          });
+			$(this.signals).trigger("change");
+			$(this.send).trigger("change");
+			
+			$("#node-input-signals").on("change", function() {
+				var id = $("#node-input-signals").val();
+				if(id > 0){$("#can-signal-1").show();}else{$("#can-signal-1").hide();}
+				if(id > 0){$("#data-alignment").show();}else{$("#data-alignment").hide();}
+				if(id > 1){$("#can-signal-2").show();}else{$("#can-signal-2").hide();}
+				if(id > 2){$("#can-signal-3").show();}else{$("#can-signal-3").hide();}
+				if(id > 3){$("#can-signal-4").show();}else{$("#can-signal-4").hide();}
+				if(id > 4){$("#can-signal-5").show();}else{$("#can-signal-5").hide();}
+				if(id > 5){$("#can-signal-6").show();}else{$("#can-signal-6").hide();}
+				if(id > 6){$("#can-signal-7").show();}else{$("#can-signal-7").hide();}
+				if(id > 7){$("#can-signal-8").show();}else{$("#can-signal-8").hide();}
+			//	$("#node-input-dlc").value("2");}
+			});
+			
+			$("#node-input-send").on("change", function() {
+				var send = $("#node-input-send").val();
+				if(send == 0){$("#can-interval").hide();}else{$("#can-interval").show();}
+			});
+			$.getJSON("controllertype", function(data) {
+				if (data.includes("IV")) {
+					// console.log("IV");
+					$(".IV").show();
+					$(".Mini").hide();
+					$(".Display").hide();
+				} else if (data.includes("Mini")) {
+					// console.log("Mini");
+					$(".IV").hide();
+					$(".Mini").show();
+					$(".Display").hide();
+				} else if (data.includes("Display")) {
+					// console.log("Display");
+					$(".IV").hide();
+					$(".Mini").hide();
+					$(".Display").show();
+				} else {
+					console.log("error getting controllertype");
+					$(".IV").hide();
+					$(".Mini").hide();
+					$(".Display").hide();
+				}
+			});
 		}
     });
 </script>
@@ -84,8 +107,8 @@
         <select id="node-input-caninterface" style="width:204px">
             <option value="CAN 1">CAN 1</option>
             <option value="CAN 2">CAN 2</option>
-			<option value="CAN 3">CAN 3</option>
-            <option value="CAN 4">CAN 4</option>
+			<option class="IV" value="CAN 3">CAN 3</option>
+            <option class="IV" value="CAN 4">CAN 4</option>
         </select>
  	</div>
 	
@@ -201,21 +224,33 @@
 <p>The CAN send node send a CAN message from on of the two onboard CAN busses. The node wil convert the incoming JSON object to a corresponding CAN message</p>
 <h2><strong>How to configure:</strong></h2>
 <p><strong>Config:</strong></p>
-<p>Here you select the onboard CAN bus from the controller. If used the first time, also the speed of the CAN bus needs to be set in the settings node.</p>
-<p>The two CAN busses are connected to the C connecter (middle).</p>
+<p>Here you select the onboard CAN bus from the controller.</p>
+<h3>Moduline IV</h3>
+<p>The four CAN busses are connected to the C connecter (middle).</p>
 <p>CAN1 - Connector C pin 14 (L) and pin 15 (H)</p>
 <p>CAN2 - Connector C pin 20 (L) and pin 21 (H)</p>
 <p>CAN3 - Connector C pin 19 (L) and pin 18 (H)</p>
 <p>CAN4 - Connector C pin 13 (L) and pin 12 (H)</p>
+
+<h3>Moduline Mini</h3>
+<p>The two CAN busses are connected to both connector A and B.</p>
+<p>CAN1 - Connector B pin 24 (L) and pin 25 (H)</p>
+<p>CAN2 - Connector A pin 24 (L) and pin 25 (H)</p>
+
+<h3>Moduline Display</h3>
+<p>The two CAN busses are connected to the main connector.</p>
+<p>CAN1 - Main Connector pin 16 (L) and pin 17 (H)</p>
+<p>CAN2 - Main Connector pin 24 (L) and pin 25 (H)</p>
+
 <p>&nbsp;</p>
-<p><strong>ID type:&nbsp;</strong></p>
+<h3><strong>ID type:&nbsp;</strong></h3>
 <p>The node needs to know what type of CAN message to send. Here you specify the standard identifier (11 bits) or an extended identifier (29 bits).</p>
-<p><strong>CAN ID:&nbsp;</strong></p>
+<h3><strong>CAN ID:&nbsp;</strong></h3>
 <p>The CAN ID needs to be given in hexadecimal format and can be either a 11 bit (standard) or 29 bit (extended) identifier. This identifier will be used as CAN message identifier</p>
-<p><strong>Send Trigger:</strong></p>
+<h3><strong>Send Trigger:</strong></h3>
 <p>When the CAN message is send by the node, is determined with the trigger. If the message needs to be send with an interval, simply connect an injection node configured with time interval. The output string of this node needs to be <em>send</em>.</p>
 <p>Signals can also be send when the value is changed. This prevents the CAN bus from overload.</p>
-<p><strong>Signals:&nbsp;</strong></p>
+<h3><strong>Signals:&nbsp;</strong></h3>
 <p>Here can be specified which signals are injected into the CAN send node. Data is injected by JSON objects. If a key from the injected JSON string matches one with the configured signal keys, the value of this key is converted to the specified data bytes (start and end byte) from the CAN message. The data length code (DLC) is automatically calculated.</p>
 <p>Example:</p>
 <p>A JSON object with several keys and values are injected into the CAN Send node:</p>
