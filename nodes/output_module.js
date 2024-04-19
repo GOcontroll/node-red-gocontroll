@@ -167,6 +167,7 @@ module.exports = function(RED) {
 					node.status({fill:"red",shape:"dot",text:"Selected module does not match the firmware registered in this slot."})
 				}
 			} catch (err) {
+				node.status({fill:"red",shape:"dot",text:"Some error occured checking the module, see the debug messages"});
 				node.warn("No module has been registered in slot " + moduleSlot + ", the module(s) configured for this slot will not work. If a module has been recently inserted in this slot, run go-scan-modules to register it.");
 			}
 		}

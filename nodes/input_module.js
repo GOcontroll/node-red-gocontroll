@@ -180,12 +180,13 @@ function GOcontrollInputModule(config) {
 			/*check if the selected module is okay for this slot*/
 			/*6 channel input*/
 			if((moduleType == 1 && firmware.includes("201001")) || (moduleType == 0 && firmware.includes("201002"))){
-				node.status({fill:"green",shape:"dot",text:firmware})
+				node.status({fill:"green",shape:"dot",text:firmware});
 				mod_common.SendDummyByte(moduleSlot, InputModule_Initialize); 
 			} else {
-				node.status({fill:"red",shape:"dot",text:"Selected module does not match the firmware registered in this slot."})
+				node.status({fill:"red",shape:"dot",text:"Selected module does not match the firmware registered in this slot."});
 			}
 		} catch (err) {
+			node.status({fill:"red",shape:"dot",text:"Some error occured checking the module, see the debug messages"});
 			node.warn("No module has been registered in slot " + moduleSlot + ", the module(s) configured for this slot will not work. If a module has been recently inserted in this slot, run go-scan-modules to register it.");
 		}
 	}

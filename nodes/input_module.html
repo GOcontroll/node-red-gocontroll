@@ -230,7 +230,7 @@ x += "<fieldset id=\"channel"+i+"\"> \
             <option value=5>Digital input - Duty cycle low time (0.1% resolution)</option> \
             <option value=6>Digital input - Duty cycle high time (0.1% resolution)</option> \
             <option value=7>Digital input - Rotation speed (rps)</option> \
-            <option value=8>Digital input - Pulse counter in combination with channel 1</option> \
+            <option value=8>Digital input - Pulse counter in combination with channel "+ i + (i % 2 ? 1 : -1) +"</option> \
         </select> \
     </div> \
 		<div class=\"form-row\" id=\"voltage"+i+"\"> \

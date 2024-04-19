@@ -2,6 +2,8 @@
     "name": "@gocontroll-nl/node-red-gocontroll",
     "version": "1.0.0",
     "description": "Node-RED nodes for GOcontroll Moduline controllers",
+	"homepage": "https://gocontroll.com",
+	"os": ["linux"],
     "dependencies": {
         "i2c-bus": "^5.2.2",
         "serialport": "^9.2.0",

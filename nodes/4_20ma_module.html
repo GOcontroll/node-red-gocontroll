@@ -151,6 +151,8 @@
 
 <script type="text/x-red" data-help-name="4-20mA-Module">
 <p>The 4-20mA module is used to read in 4-20mA sensors. During initialization, the settings for each input channel are send to the module.</p>
+<p>The output is in micro amperes, so the sensor range will be 4000-20000.</p>
+<p>The module will also output the status of the 5 sensor supplies, 0 means the supply is okay, 1 means a short circuit has occured on that specific supply.</p>
 <h2>Configuration</h2>
 <p><strong><em>Module:</em></strong></p>
 <p>Select the module slot on which the input module is installed to.</p>
@@ -163,10 +165,22 @@
 <p>&nbsp;</p>
 <h2><strong>Example</strong></h2>
 <p>This example shows the data from an input node during operation.</p>
-<p>{"throttlePosition" : 2766 ,</p>
-<p>"engineSpeed" : 2650 ,</p>
-<p>"engineOilPressure" : 2456 ,</p>
-<p>"engineTemperature" : 62 ,</p>
-<p>"oilTemperature" : 92 ,</p>
-<p>"ConnectorApin13" : 1002 }</p>
+<p>{"pressure1" : 6000 ,</p>
+<p>"pressure2" : 8000 ,</p>
+<p>"pressure3" : 7000 ,</p>
+<p>"inputSignal4" : 50 ,</p>
+<p>"inputSignal5" : 50 ,</p>
+<p>"inputSignal6" : 45 ,</p>
+<p>"inputSignal7" : 50 ,</p>
+<p>"inputSignal8" : 50 ,</p>
+<p>"inputSignal9" : 45 ,</p>
+<p>"inputSignal10" : 50 ,</p>
+<p>"status" : {</p>
+<p>"supply1" : 0 ,</p>
+<p>"supply2" : 0 ,</p>
+<p>"supply3" : 0 ,</p>
+<p>"supply4" : 0 ,</p>
+<p>"supply5" : 0</p>
+<p>}</p>
+<p>}</p>
 </script>

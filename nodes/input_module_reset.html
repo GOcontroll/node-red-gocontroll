@@ -124,7 +124,7 @@
 </script>
 
 <script type="text/x-red" data-help-name="Input-Module-Reset">
-  <p>The input module reset can be used to reset a pulscounter in the input module. If an input channel from the input module is configured as a pulscounter (to read in an encoder signal e.g.), the counter value can be re-assigned. In some cases during encoder callibration it is necessary to 'zero' this counter value.</p>
+  <p>The input module reset can be used to reset a pulsecounter in the input module. If an input channel from the input module is configured as a pulscounter (to read in an encoder signal e.g.), the counter value can be re-assigned. In some cases during encoder callibration it is necessary to 'zero' this counter value.</p>
 <p><strong>Configuration</strong></p>
 <p><em>Module:</em></p>
 <p>Select the module slot on which the input module is installed to.</p>
@@ -135,11 +135,11 @@
 <p>By injecting a JSON string into the node, the pulsecounter of the module will take over the injected value.</p>
 <p>&nbsp;</p>
 <p><strong>Data format</strong></p>
-<p><em>{"pulscounterValue" : n }</em></p>
-<p>The key is: <em>pulscounterValue</em></p>
+<p><em>{"pulsecounterValue" : n }</em></p>
+<p>The key is: <em>pulsecounterValue</em></p>
 <p>The value <em>n</em> can be: - 2147483640 to&nbsp;2147483640</p>
 <p>&nbsp;</p>
 <p><strong>Example</strong></p>
-<p>This example will reset the pulscounter value from the specified input channel to -243</p>
-<p><em>{"pulscounterValue" : -243 }</em></p>
+<p>This example will reset the pulsecounter value from the specified input channel to -243</p>
+<p><em>{"pulsecounterValue" : -243 }</em></p>
 </script>
