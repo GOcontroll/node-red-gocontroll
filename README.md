@@ -21,21 +21,32 @@ Note: the GOcontroll Moduline Display does not possess these leds therefore this
 Reads out the option gps antenna that can be attached when the controller is equipped with an LTE modem.
 Note: the GOcontroll Moduline Display can't be equipped with an LTE modem therefore this node has no function on that particular board.
 
+## 4-20mA module
+Reads out up to 10 4-20mA sensors.
+Note: if there is a different program (most often a compiled Simulink model) that will try to initialize the modules, it will cause strange behaviour.
+It is required that only one application claiming the modules is running.
+
 ## input module
 Reads out a 6 or 10 channel input module, output depends on how it is configured in the node.
-Note: if there is a different program (most often a compiled Simulink model) that will try to initialize the modules running, it will cause strange behaviour.
+Note: if there is a different program (most often a compiled Simulink model) that will try to initialize the modules, it will cause strange behaviour.
 It is required that only one application claiming the modules is running.
 
 ## input module reset
 (Re)sets the counter of a certain input channel on an input module, this only works when the input module is configured to provide counter functionality.
+Note: if there is a different program (most often a compiled Simulink model) that will try to initialize the modules, it will cause strange behaviour.
+It is required that only one application claiming the modules is running.
 
 ## output module
 Controls a 6 or 10 channel output module, outputs some information about the module like temperature, ground shift, status code and current.
-Note only a 6 channel module provides current per channel, the 10 channel module can only measure total current.
+Note: only a 6 channel module provides current per channel, the 10 channel module can only measure total current.
+Note: if there is a different program (most often a compiled Simulink model) that will try to initialize the modules, it will cause strange behaviour.
+It is required that only one application claiming the modules is running.
 
 ## bridge module
 Controls a 2 channel output module also called the bridge module. It is nearly identical to the regular output module in interfacing.
 This one also provides a current per channel feedback.
+Note: if there is a different program (most often a compiled Simulink model) that will try to initialize the modules, it will cause strange behaviour.
+It is required that only one application claiming the modules is running.
 
 ## can receive
 Allows for reading out the CAN busses on the GOcontroll Moduline controllers.
