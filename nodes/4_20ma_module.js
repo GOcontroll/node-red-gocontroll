@@ -181,6 +181,11 @@ function GOcontroll4_20maModule(config) {
 					for(var messagePointer = 0; messagePointer < 10; messagePointer ++) {
 						msgOut[key[messagePointer]] = receiveBuffer.readUint16LE((messagePointer*2)+6)
 					}
+					msgOut.status = {};
+					var status = receiveBuffer.readUInt8(26);
+					for (var idx = 1; idx  <= 5; idx ++) {
+						msgOut.status["supply" + idx] = (status & (1 << (idx -1))) ? 1 : 0;
+					}
 					node.send(msgOut);
 				}
 			}					
