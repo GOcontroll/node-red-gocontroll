@@ -2,6 +2,7 @@ module.exports = function(RED) {
     "use strict"
 	
 	const spi = require('spi-device');
+	const mod_common = require('./module_common');
 	
 	var MESSAGELENGTH = 0;
 	const SPISPEED = 2000000;
@@ -75,7 +76,7 @@ module.exports = function(RED) {
 				return;
 			}
 			
-			sendBuffer[MESSAGELENGTH-1] = ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
+			sendBuffer[MESSAGELENGTH-1] = mod_common.ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
 			
 				const inputModuleReset = spi.open(sL,sB, (err) => {
 
@@ -90,20 +91,5 @@ module.exports = function(RED) {
 			});
 		});
 	}
-
 	RED.nodes.registerType("Input-Module-Reset",GOcontrollInputModuleReset);
-
-	/*Function to calculate the checksum of a message that needs to be send */
-	function ChecksumCalculator(array, length)
-	{
-	var pointer = 0;
-	var checkSum = 0;
-		for (pointer = 0; pointer<length; pointer++)
-		{
-		checkSum += array[pointer];
-		}
-	return (checkSum&255);	
-	}
-	
-	
 }

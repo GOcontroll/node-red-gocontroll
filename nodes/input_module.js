@@ -3,7 +3,7 @@ module.exports = function(RED) {
 
 const spi = require('spi-device');
 const fs = require('fs');
-const fsp = require('fs/promises');
+const mod_common = require('./module_common');
 
 const BOOTMESSAGELENGTH = 46;
 /* Assigned dynamically */
@@ -109,14 +109,6 @@ function GOcontrollInputModule(config) {
 	key[7] = config.key8;
 	key[8] = config.key9;
 	key[9] = config.key10;
-
-	/* Declarations for timeout handlers */
-	var resetTimeout;
-	var initializeTimeout;
-	var sendFirmwareDataTimeout;
-	var getFirmwareStatusTimeout;
-	var checkFirmwareTimeout;
-	var firmwareUploadTimeout;
 	
 	var sL, sB;
 	
@@ -132,25 +124,11 @@ function GOcontrollInputModule(config) {
 	/*Allocate memory for receive and send buffer */
 	var sendBuffer = Buffer.alloc(MESSAGELENGTH+5); 
 	var	receiveBuffer = Buffer.alloc(MESSAGELENGTH+5);
-
-	const bootMessage = [{
-	sendBuffer, 
-	receiveBuffer,           
-	byteLength: BOOTMESSAGELENGTH+1,
-	speedHz: SPISPEED 
-	}];
 	
 	const normalMessage = [{
 	sendBuffer, 
 	receiveBuffer,           
 	byteLength: MESSAGELENGTH+1,
-	speedHz: SPISPEED 
-	}];
-
-	const dummyMessage = [{
-	sendBuffer, 
-	receiveBuffer,           
-	byteLength : 5,
 	speedHz: SPISPEED 
 	}];
 
@@ -187,9 +165,9 @@ function GOcontrollInputModule(config) {
 	});
 
 
-	async function readFile() {
+	function readFile() {
 		try {
-			const data = await fsp.readFile('/usr/module-firmware/modules.txt', 'utf8');
+			const data = fs.readFileSync('/usr/module-firmware/modules.txt', 'utf8');
 			modulesArr = data.split(":");
 			var moduleArr = modulesArr[moduleSlot-1].split("-");
 			if (moduleArr[2].length==1) {
@@ -201,111 +179,15 @@ function GOcontrollInputModule(config) {
 			firmware = "HW:V"+moduleArr[0]+moduleArr[1]+moduleArr[2]+moduleArr[3] + "  SW:V"+moduleArr[4]+"."+moduleArr[5]+"."+moduleArr[6];
 			/*check if the selected module is okay for this slot*/
 			/*6 channel input*/
-			if(moduleType == 1){
-				if (firmware.includes("201001")) {
-					node.status({fill:"green",shape:"dot",text:firmware})
-					InputModule_SendDummyByte(); 
-				} else {
-					node.status({fill:"red",shape:"dot",text:"Selected module does not match the firmware registered in this slot."})
-				}
-			/* In case 10 channel input module is selected */
-			}else{
-				if (firmware.includes("201002")) {
-					node.status({fill:"green",shape:"dot",text:firmware})
-					InputModule_SendDummyByte(); 
-				} else {
-					node.status({fill:"red",shape:"dot",text:"Selected module does not match the firmware registered in this slot."})
-				}
+			if((moduleType == 1 && firmware.includes("201001")) || (moduleType == 0 && firmware.includes("201002"))){
+				node.status({fill:"green",shape:"dot",text:firmware})
+				mod_common.SendDummyByte(moduleSlot, InputModule_Initialize); 
+			} else {
+				node.status({fill:"red",shape:"dot",text:"Selected module does not match the firmware registered in this slot."})
 			}
 		} catch (err) {
 			node.warn("No module has been registered in slot " + moduleSlot + ", the module(s) configured for this slot will not work. If a module has been recently inserted in this slot, run go-scan-modules to register it.");
 		}
-	}
-
-
-	/***************************************************************************************
-	** \brief
-	**
-	**
-	** \param
-	** \param
-	** \return
-	**
-	****************************************************************************************/
-	function InputModule_SendDummyByte(){
-		
-		/*Send dummy message to setup the SPI bus properly */
-		const dummy = spi.open(sL,sB, (err) => {
-			
-			/* Only in this scope, receive buffer is available */
-		dummy.transfer(dummyMessage, (err, dummyMessage) => {
-		dummy.close(err =>{});
-		
-		/* Here we start the reset routine */
-		//resetTimeout = setTimeout(OutputModule_StartReset, 50);
-		InputModule_StartReset();
-		});
-	
-		});
-	}
-
-	/***************************************************************************************
-	** \brief
-	**
-	**
-	** \param
-	** \param
-	** \return
-	**
-	****************************************************************************************/
-	function InputModule_StartReset (){
-	/*Start module reset */
-	InputModule_Reset(1);
-	/*Give a certain timeout so module is reset properly*/
-	resetTimeout = setTimeout(InputModule_StopReset, 200);
-	}
-		
-
-	/***************************************************************************************
-	** \brief
-	**
-	**
-	** \param
-	** \param
-	** \return
-	**
-	****************************************************************************************/
-	function InputModule_StopReset (){
-	InputModule_Reset(0);	
-	/*After reset, give the module some time to boot */
-	/*Next step is to check for new available firmware */
-	checkFirmwareTimeout = setTimeout(InputModule_CancelFirmwareUpload, 100);
-	}
-
-	/***************************************************************************************
-	** \brief
-	**
-	**
-	** \param
-	** \param
-	** \return
-	**
-	****************************************************************************************/
-	function InputModule_CancelFirmwareUpload(){
-		sendBuffer[0] = 19;
-		sendBuffer[1] = BOOTMESSAGELENGTH-1; // Messagelength from bootloader
-		sendBuffer[2] = 19;
-		
-		sendBuffer[BOOTMESSAGELENGTH-1] = InputModule_ChecksumCalculator(sendBuffer, BOOTMESSAGELENGTH-1);
-	
-		const cancel = spi.open(sL,sB, (err) => {
-	
-			cancel.transfer(bootMessage, (err, bootMessage) => {
-			cancel.close(err =>{});});
-			/* At this point, The module can be initialized */
-			initializeTimeout = setTimeout(InputModule_Initialize, 600);
-		});
-	
 	}
 
 	/***************************************************************************************
@@ -353,7 +235,7 @@ function GOcontrollInputModule(config) {
 			}
 			sendBuffer[46] = supply[0];
 		}
-		sendBuffer[MESSAGELENGTH-1] = InputModule_ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
+		sendBuffer[MESSAGELENGTH-1] = mod_common.ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
 
 		const initialize = spi.open(sL,sB, (err) => {
 
@@ -390,10 +272,10 @@ function GOcontrollInputModule(config) {
 		sendBuffer[4] = 3;
 		sendBuffer[5] = 1;
 
-		sendBuffer[MESSAGELENGTH-1] = InputModule_ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
+		sendBuffer[MESSAGELENGTH-1] = mod_common.ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
 
 		getData.transfer(normalMessage, (err, normalMessage) => {
-				if(receiveBuffer[MESSAGELENGTH-1] == InputModule_ChecksumCalculator(receiveBuffer, MESSAGELENGTH-1))
+				if(receiveBuffer[MESSAGELENGTH-1] == mod_common.ChecksumCalculator(receiveBuffer, MESSAGELENGTH-1))
 				{
 					/*In case dat is received that holds module information */
 					if(	receiveBuffer.readUInt8(2) === 2 	&& 
@@ -416,10 +298,10 @@ function GOcontrollInputModule(config) {
 		sendBuffer[4] = 3;
 		sendBuffer[5] = 1;
 
-		sendBuffer[MESSAGELENGTH-1] = InputModule_ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
+		sendBuffer[MESSAGELENGTH-1] = mod_common.ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
 
 		getData.transfer(normalMessage, (err, normalMessage) => {
-				if(receiveBuffer[MESSAGELENGTH-1] == InputModule_ChecksumCalculator(receiveBuffer, MESSAGELENGTH-1))
+				if(receiveBuffer[MESSAGELENGTH-1] == mod_common.ChecksumCalculator(receiveBuffer, MESSAGELENGTH-1))
 				{
 					/*In case dat is received that holds module information */
 					if(	receiveBuffer.readUInt8(2) === 2 	&& 
@@ -465,53 +347,8 @@ function GOcontrollInputModule(config) {
 	****************************************************************************************/
 	node.on('close', function(done) {
 		clearInterval(interval);
-		clearTimeout(resetTimeout);
-		clearTimeout(initializeTimeout);
-		clearTimeout(sendFirmwareDataTimeout);
-		clearTimeout(getFirmwareStatusTimeout);
-		clearTimeout(checkFirmwareTimeout);
-		clearTimeout(firmwareUploadTimeout);
 		done();
 	});
-
-
-
-	/***************************************************************************************
-	** \brief
-	**
-	**
-	** \param
-	** \param
-	** \return
-	**
-	****************************************************************************************/
-	function InputModule_ChecksumCalculator(array, length)
-	{
-	var pointer = 0;
-	var checkSum = 0;
-		for (pointer = 0; pointer<length; pointer++)
-		{
-		checkSum += array[pointer];
-		}
-	return (checkSum&255);	
-	}
-	/***************************************************************************************
-	** \brief	Function that controls the low level reset of the modules
-	**
-	** \param	State of the reset action
-	** \return	None
-	**
-	****************************************************************************************/
-	function InputModule_Reset(state){
-		if(state === 1)
-		{
-		fs.writeFileSync('/sys/class/leds/ResetM-' + String(moduleSlot) + '/brightness','255');
-		}
-		else
-		{
-		fs.writeFileSync('/sys/class/leds/ResetM-' + String(moduleSlot) + '/brightness','0');
-		}
-	}
 }
 
 RED.nodes.registerType("Input-Module",GOcontrollInputModule);

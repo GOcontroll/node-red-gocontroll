@@ -1,0 +1,172 @@
+<script type="text/javascript">
+    RED.nodes.registerType('4-20mA-Module',{
+        category: 'GOcontroll',
+        color: '#f76d11',
+        defaults: {
+            name: {value:""},
+			moduleSlot: {value:"0"},
+			sampleTime:{value:"1000"},
+			input1:{value:1},
+			supply1:{value:1},
+			supply2:{value:1},
+			supply3:{value:1},
+			supply4:{value:1},
+			supply5:{value:1},
+			key1: {value: "inputSignal1"},
+			key2: {value: "inputSignal2"},
+			key3: {value: "inputSignal3"},
+			key4: {value: "inputSignal4"},
+			key5: {value: "inputSignal5"},
+			key6: {value: "inputSignal6"},
+			key7: {value: "inputSignal7"},
+			key8: {value: "inputSignal8"},
+			key9: {value: "inputSignal9"},
+			key10: {value: "inputSignal10"},
+        },
+        inputs:0,
+        outputs:1,
+        icon: "arrow-in.png",
+		paletteLabel: "4-20mA Mod",
+        label: function() {
+			if(this.name != "")
+			{
+            return this.name;
+			}
+			if(this.moduleSlot == "0")
+			{
+            return "Choose 4-20mA module location";
+			}
+		return "4-20mA module on slot " + this.moduleSlot;
+        },
+		oneditprepare: function() {
+			$.getJSON("controllertype", function(data) {
+				if (data.includes("IV")) {
+					// console.log("IV");
+					$(".Mini").hide();
+					$(".Display").hide();
+					$(".IV").show(); //show should be the last DOM action
+				} else if (data.includes("Mini")) {
+					// console.log("Mini");
+					$(".IV").hide();
+					$(".Display").hide();
+					$(".Mini").show(); //show should be the last DOM action
+				} else if (data.includes("Display")) {
+					// console.log("Display");
+					$(".IV").hide();
+					$(".Mini").hide();
+					$(".Display").show(); //show should be the last DOM action
+				} else {
+					console.log("error getting controllertype");
+					$(".IV").hide();
+					$(".Mini").hide();
+					$(".Display").hide();
+				}
+			});
+		}
+		
+    });
+</script>
+
+<script type="text/x-red" data-template-name="4-20mA-Module">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+	
+    <div class="form-row">
+        <label for="node-input-moduleSlot"><i class="fa fa-microchip"></i> Module</label>
+        <select id="node-input-moduleSlot" style="width:300px">
+            <option value="1">Module on slot 1</option>
+            <option value="2">Module on slot 2</option>
+            <option class="IV Mini" value="3">Module on slot 3</option>
+            <option class="IV Mini" value="4">Module on slot 4</option>
+            <option class="IV" value="5">Module on slot 5</option>
+            <option class="IV" value="6">Module on slot 6</option>
+            <option class="IV" value="7">Module on slot 7</option>
+            <option class="IV" value="8">Module on slot 8</option>
+        </select>
+    </div>
+	
+	<div class="form-row">
+        <label for="node-input-sampleTime"><i class="fa fa-repeat"></i> Sample time</label>
+        <select id="node-input-sampleTime" style="width:300px" title="The sample time sets the period on which the signals are retrieved">
+            <option value="1000">1 s</option>
+            <option value="200">200 ms</option>
+            <option value="100">100 ms</option>
+			<option value="50">50 ms</option>
+        </select>
+    </div>
+	
+	<div class="form-row">
+        <label for="node-input-supply1"><i class="fa fa-bolt"></i> Supply out 1-2</label>
+        <select id="node-input-supply1" style="width:300px">
+            <option value=0>Sensor supply disabled</option>
+            <option value=1>Sensor supply enabled</option>
+        </select>
+    </div>			
+	<div class="form-row">
+		<label for="node-input-supply2"><i class="fa fa-bolt"></i> Supply out 3-4</label>
+		<select id="node-input-supply2" style="width:300px">
+			<option value=0>Sensor supply disabled</option>
+			<option value=1>Sensor supply enabled</option>
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-supply3"><i class="fa fa-bolt"></i> Supply out 5-6</label>
+		<select id="node-input-supply3" style="width:300px">
+			<option value=0>Sensor supply disabled</option>
+			<option value=1>Sensor supply enabled</option>
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-supply4"><i class="fa fa-bolt"></i> Supply out 7-8</label>
+		<select id="node-input-supply4" style="width:300px">
+			<option value=0>Sensor supply disabled</option>
+			<option value=1>Sensor supply enabled</option>
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-supply5"><i class="fa fa-bolt"></i> Supply out 9-10</label>
+		<select id="node-input-supply5" style="width:300px">
+			<option value=0>Sensor supply disabled</option>
+			<option value=1>Sensor supply enabled</option>
+		</select>
+	</div>
+
+	<div id="Module-Settings"></div>
+	<script>
+
+	var x ="", i;
+	for (i=1; i<=10; i++) {
+		x += "<fieldset id=\"channel"+i+"\"> \
+		<legend>Input channel "+i+"</legend> \
+		<div class=\"form-row\"> \
+			<label for=\"node-input-key"+i+"\"><i class=\"fa fa-id-card\"></i> Signal key</label> \
+			<input type=\"text\" id=\"node-input-key"+i+"\"> \
+		</div> \
+		</fieldset>";
+	}
+	document.getElementById("Module-Settings").innerHTML = x;
+</script>
+
+<script type="text/x-red" data-help-name="4-20mA-Module">
+<p>The 4-20mA module is used to read in 4-20mA sensors. During initialization, the settings for each input channel are send to the module.</p>
+<h2>Configuration</h2>
+<p><strong><em>Module:</em></strong></p>
+<p>Select the module slot on which the input module is installed to.</p>
+<p><strong><em>Sample time:</em></strong></p>
+<p>The node will output all signals with the specified sample time.</p>
+<p><strong><em>Supplies:</em></strong></p>
+<p>This determines which inputs are active, generally all of these are enabled.</p>
+<h2><strong>Data format</strong></h2>
+<p>The data coming from the module is pushed out of the node in a JSON string format holding 10 key&rsquo;s and 10 values. The keys can be customized to descriptive input signal names. This improves the readability from signals in the model.</p>
+<p>&nbsp;</p>
+<h2><strong>Example</strong></h2>
+<p>This example shows the data from an input node during operation.</p>
+<p>{"throttlePosition" : 2766 ,</p>
+<p>"engineSpeed" : 2650 ,</p>
+<p>"engineOilPressure" : 2456 ,</p>
+<p>"engineTemperature" : 62 ,</p>
+<p>"oilTemperature" : 92 ,</p>
+<p>"ConnectorApin13" : 1002 }</p>
+</script>

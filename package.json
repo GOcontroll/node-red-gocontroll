@@ -26,6 +26,7 @@
     "node-red": {
 		"version": ">=3.0.0",
         "nodes": {
+			"4_20ma_module": "nodes/4_20ma_module.js",
             "settings": "nodes/settings.js",
             "controller_active": "nodes/controller_active.js",
             "controller_supply": "nodes/controller_supply.js",
