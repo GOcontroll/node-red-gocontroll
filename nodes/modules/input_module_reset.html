@@ -48,17 +48,14 @@
 			});
 			$.getJSON("controllertype", function(data) {
 				if (data.includes("IV")) {
-					// console.log("IV");
 					$(".Mini").hide();
 					$(".Display").hide();
 					$(".IV").show(); //show should be the last DOM action
 				} else if (data.includes("Mini")) {
-					// console.log("Mini");
 					$(".IV").hide();
 					$(".Display").hide();
 					$(".Mini").show(); //show should be the last DOM action
 				} else if (data.includes("Display")) {
-					// console.log("Display");
 					$(".IV").hide();
 					$(".Mini").hide();
 					$(".Display").show(); //show should be the last DOM action

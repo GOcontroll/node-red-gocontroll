@@ -5,68 +5,45 @@
         defaults: {
             name: {value:""},
 			moduleSlot: {value:"0"},
-			moduleType:{value:1},
 			sampleTime:{value:"200"},
 			freq12: {value:"1"},
 			freq34: {value:"1"},
 			freq56: {value:"1"},
-			freq78: {value:"1"},
-			freq910: {value:"1"},
 			output1:{value:"1"},
 			output2:{value:"1"},
 			output3:{value:"1"},
 			output4:{value:"1"},
 			output5:{value:"1"},
 			output6:{value:"1"},
-			output7:{value:"1"},
-			output8:{value:"1"},
-			output9:{value:"1"},
-			output10:{value:"1"},			
 			key1: {value: "outputSignal1"},
 			key2: {value: "outputSignal2"},
 			key3: {value: "outputSignal3"},
 			key4: {value: "outputSignal4"},
 			key5: {value: "outputSignal5"},
 			key6: {value: "outputSignal6"},
-			key7: {value: "outputSignal7"},
-			key8: {value: "outputSignal8"},
-			key9: {value: "outputSignal9"},
-			key10: {value: "outputSignal10"},
 			current1 : {value: "4000"},
 			current2 : {value: "4000"},
 			current3 : {value: "4000"},
 			current4 : {value: "4000"},
 			current5 : {value: "4000"},
 			current6 : {value: "4000"},
-			current7 : {value: "4000"},
-			current8 : {value: "4000"},
-			current9 : {value: "4000"},
-			current10 : {value: "4000"},
 			peakcurrent1 : {value: "800"},
 			peakcurrent2 : {value: "800"},
 			peakcurrent3 : {value: "800"},
 			peakcurrent4 : {value: "800"},
 			peakcurrent5 : {value: "800"},
 			peakcurrent6 : {value: "800"},
-			peakcurrent7 : {value: "800"},
-			peakcurrent8 : {value: "800"},
-			peakcurrent9 : {value: "800"},
-			peakcurrent10 : {value: "800"},
 			time1 : {value: "500"},
 			time2 : {value: "500"},
 			time3 : {value: "500"},
 			time4 : {value: "500"},
 			time5 : {value: "500"},
 			time6 : {value: "500"},
-			time7 : {value: "500"},
-			time8 : {value: "500"},
-			time9 : {value: "500"},
-			time10 : {value: "500"},
         },
         inputs:1,
         outputs:1,
         icon: "arrow-in.png",
-		paletteLabel: "Output Mod",
+		paletteLabel: "6 Ch Output Mod",
         label: function() {
 			if(this.name != "")
 			{
@@ -126,52 +103,16 @@
 				if(id == 7){$("#peak-hold-10").show();}else{$("#peak-hold-10").hide();}
 			});
 
-			$("#node-input-moduleType").on("change", function() {
-				var id = $("#node-input-moduleType").val();
-				if(id == 1){$("#6-channel-supply").show();}else{$("#6-channel-supply").hide();}
-				
-				var x ="", i;
-				for (i=1; i<=10; i++) {
-					/* In case we have 6 channel output module */
-					if(id == 1){
-						$("#node-input-currentclass"+i).show();
-						$('#node-input-output'+i+' option[value=2]').show();
-						$('#node-input-output'+i+' option[value=3]').show();
-						$('#node-input-output'+i+' option[value=5]').show();
-						$('#node-input-output'+i+' option[value=8]').show();
-						$('#node-input-freq'+i+''+(i+1)+' option[value=5]').show();
-						$('#node-input-freq'+i+''+(i+1)+' option[value=6]').show();
-						$('#node-input-freq'+i+''+(i+1)+' option[value=7]').show();
-						/* In case we have 10 channel output module */
-					}else{
-						$("#node-input-currentclass"+i).hide();
-						$('#node-input-output'+i+' option[value=2]').hide();
-						$('#node-input-output'+i+' option[value=3]').hide();
-						$('#node-input-output'+i+' option[value=5]').hide();
-						$('#node-input-output'+i+' option[value=8]').hide();
-						$('#node-input-freq'+i+''+(i+1)+' option[value=5]').hide();
-						$('#node-input-freq'+i+''+(i+1)+' option[value=6]').hide();
-						$('#node-input-freq'+i+''+(i+1)+' option[value=7]').hide();
-					}
-				}
-				
-				for (i=7; i<=10; i=i+2) {
-					if(id == 1){$("#channel"+i).hide();}else{$("#channel"+i).show();}
-				}
-			});
 			$.getJSON("controllertype", function(data) {
 				if (data.includes("IV")) {
-					// console.log("IV");
 					$(".Mini").hide();
 					$(".Display").hide();
 					$(".IV").show(); //show should be the last DOM action
 				} else if (data.includes("Mini")) {
-					// console.log("Mini");
 					$(".IV").hide();
 					$(".Display").hide();
 					$(".Mini").show(); //show should be the last DOM action
 				} else if (data.includes("Display")) {
-					// console.log("Display");
 					$(".IV").hide();
 					$(".Mini").hide();
 					$(".Display").show(); //show should be the last DOM action
@@ -191,14 +132,6 @@
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name" style="width:300px">
-    </div>
-	
-    <div class="form-row">
-        <label for="node-input-moduleType"><i class="fa fa-microchip"></i> Module type</label>
-        <select id="node-input-moduleType" style="width:300px" title="Select the slot on which the module is plugged into">
-            <option value=1>6 channel output module</option>
-            <option value=2>10 channel output module</option>
-        </select>
     </div>
 	
     <div class="form-row">
@@ -227,23 +160,23 @@
 <script>
 
 var x ="", i;
-for (i=1; i<=10; i++) {
+for (i=1; i<=6; i++) {
 x += "<fieldset id=\"channel"+i+"\"> \
 	<legend>Output "+i+" and "+(i+1)+" </legend> \
-        <div class=\"form-row\"> \
-        <label for=\"node-input-freq"+i+""+(i+1)+"\"><i class=\"fa fa-signal\"></i> Frequency </label> \
-        <select id=\"node-input-freq"+i+""+(i+1)+"\" style=\"width:300px\">\
+	<div class=\"form-row\"> \
+		<label for=\"node-input-freq"+i+""+(i+1)+"\"><i class=\"fa fa-signal\"></i> Frequency </label> \
+		<select id=\"node-input-freq"+i+""+(i+1)+"\" style=\"width:300px\">\
 			<option value=1>100 Hz</option> \
 			<option value=2>200 Hz</option> \
-            <option value=3>500 Hz</option> \
-		    <option value=4>1 kHz</option> \
-            <option value=5>2 kHz</option> \
-            <option value=6>5 kHz </option> \
-            <option value=7>10 kHz</option> \
-        </select> \
-<p><strong>Output "+i+":</strong></p> \
-     </div> \
-		<div class=\"form-row\"> \
+			<option value=3>500 Hz</option> \
+			<option value=4>1 kHz</option> \
+			<option value=5>2 kHz</option> \
+			<option value=6>5 kHz </option> \
+			<option value=7>10 kHz</option> \
+		</select> \
+	</div> \
+	<p><strong>Output "+i+":</strong></p> \
+	<div class=\"form-row\"> \
         <label for=\"node-input-key"+i+"\"><i class=\"fa fa-id-card\"></i> Key</label> \
         <input type=\"text\" id=\"node-input-key"+i+"\" style=\"width:300px\"> \
     </div> \
@@ -260,13 +193,12 @@ x += "<fieldset id=\"channel"+i+"\"> \
 			<option value=8>Frequency output 0 - 500 Hz (0-500)</option> \
         </select> \
     </div> \
-	     </div> \
-		<div class=\"form-row\" id=\"node-input-currentclass"+i+"\" > \
+	<div class=\"form-row\" id=\"node-input-currentclass"+i+"\" > \
         <label for=\"node-input-current"+i+"\"><i class=\"fa fa-line-chart\"></i> Max I (mA)</label> \
         <input type=\"text\" id=\"node-input-current"+i+"\" style=\"width:300px\"> \
     </div> \
 	<div class=\"form-row\"  id=\"peak-hold-"+i+"\"> \
-	<p><I>Peak and hold parameters channel "+i+":</I></p> \
+		<p><I>Peak and hold parameters channel "+i+":</I></p> \
 		<div class=\"form-row\"> \
 			<label for=\"node-input-peakcurrent"+i+"\"><i class=\"fa fa-line-chart\"></i> Current (mA)</label> \
 			<input type=\"text\" id=\"node-input-peakcurrent"+i+"\" style=\"width:300px\"> \
@@ -276,9 +208,8 @@ x += "<fieldset id=\"channel"+i+"\"> \
 			<input type=\"text\" id=\"node-input-time"+(i++)+"\" style=\"width:300px\"> \
 		</div> \
 	</div> \
-    <p><strong>Output "+i+":</strong></p> \
-     </div> \
-		<div class=\"form-row\"> \
+	<p><strong>Output "+i+":</strong></p> \
+	<div class=\"form-row\"> \
         <label for=\"node-input-key"+i+"\"><i class=\"fa fa-id-card\"></i> Key</label> \
         <input type=\"text\" id=\"node-input-key"+i+"\" style=\"width:300px\"> \
     </div> \
@@ -295,13 +226,12 @@ x += "<fieldset id=\"channel"+i+"\"> \
 			<option value=8>Frequency output 0 - 500 Hz (0-500)</option> \
         </select> \
     </div> \
-	     </div> \
-		<div class=\"form-row\" id=\"node-input-currentclass"+i+"\" > \
+	<div class=\"form-row\" id=\"node-input-currentclass"+i+"\" > \
         <label for=\"node-input-current"+i+"\"><i class=\"fa fa-line-chart\"></i> Max I (mA)</label> \
         <input type=\"text\" id=\"node-input-current"+i+"\" style=\"width:300px\"> \
     </div> \
 	<div class=\"form-row\"  id=\"peak-hold-"+i+"\"> \
-	<p><I>Peak and hold parameters channel "+i+":</I></p> \
+		<p><I>Peak and hold parameters channel "+i+":</I></p> \
 		<div class=\"form-row\"> \
 			<label for=\"node-input-peakcurrent"+i+"\"><i class=\"fa fa-line-chart\"></i> Current (mA)</label> \
 			<input type=\"text\" id=\"node-input-peakcurrent"+i+"\" style=\"width:300px\"> \
@@ -311,7 +241,7 @@ x += "<fieldset id=\"channel"+i+"\"> \
 			<input type=\"text\" id=\"node-input-time"+i+"\" style=\"width:300px\"> \
 		</div> \
 	</div> \
-        </fieldset>";
+</fieldset>";
 }
 document.getElementById("Module-Settings").innerHTML = x;
 
@@ -321,7 +251,7 @@ document.getElementById("Module-Settings").innerHTML = x;
 </script>
 
 <script type="text/x-red" data-help-name="Output-Module">
-  <p>The output module can be used to control resistive and inductive loads with a current up to 5 Amp&egrave;re for each channel. The node will also output data with actual information from the module such as the current flow for each channel (only in high side configuration), the temperature of the module and the ground shift of the module (explained later on)</p>
+<p>The output module can be used to control resistive and inductive loads with a current up to 5 Amp&egrave;re for each channel. The node will also output data with actual information from the module such as the current flow for each channel (only in high side configuration), the temperature of the module and the ground shift of the module (explained later on)</p>
 <h2><strong>Configuration</strong></h2>
 <p><strong><em>Module:</em></strong></p>
 <p>Select the module slot on which the output module is installed to.</p>
@@ -361,7 +291,6 @@ document.getElementById("Module-Settings").innerHTML = x;
 <p>All channels can also be controlled with one JSON string:</p>
 <p>&nbsp;<em>{"outputChanneln" : y,</em></p>
 <p><em>&hellip;&hellip; }</em></p>
-<p><em>&nbsp;</em></p>
 <p><em><strong>Read data from module</strong></em></p>
 <p>The data coming from the module is pushed out of the node in a JSON string format. This data is only pushed out of the node when an injection took place. If no output update is required but the status of the module is needed, a random message can be injected to the node to retrieve the information. The JSON string holds 8 key&rsquo;s and 8 values. Two general keys holding the groundshift and the temperature. The other 6 key&rsquo;s hold the current for each channel.</p>
 <p><em><strong>Groundshift</strong></em></p>
@@ -369,15 +298,152 @@ document.getElementById("Module-Settings").innerHTML = x;
 <h2><strong>Example</strong></h2>
 <p>This example shows the JSON data &nbsp;to inject into the output node.</p>
 <p>{&ldquo;outputChannel1&rdquo; : 688}</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 <p>This example shows the data coming from an output node during operation.</p>
 <p>{&ldquo;moduleTemperature&rdquo; : 28,</p>
 <p>&ldquo;moduleGroundShift&rdquo; : 0,</p>
-<p>&ldquo;<channel1 key>Current&rdquo; : 135,</p>
-<p>&ldquo;<channel2 key>Current&rdquo; : 122,</p>
-<p>&ldquo;<channel3 key>Current&rdquo; : 254,</p>
-<p>&ldquo;<channel4 key>Current&rdquo; : 126,</p>
-<p>&ldquo;<channel5 key>Current&rdquo; : 450,</p>
-<p>&ldquo;<channel6 key>Current&rdquo; : 655}</p>
+<p>&ldquo;moduleStatus&rdquo; : 0,</p>
+<p>&ldquo;[channel1 key]Current&rdquo; : 135,</p>
+<p>&ldquo;[channel2 key]Current&rdquo; : 122,</p>
+<p>&ldquo;[channel3 key]Current&rdquo; : 254,</p>
+<p>&ldquo;[channel4 key]Current&rdquo; : 126,</p>
+<p>&ldquo;[channel5 key]Current&rdquo; : 450,</p>
+<p>&ldquo;[channel6 key]Current&rdquo; : 655}</p>
+<br>
+<h3>The module status field</h3>
+<p>The module status is a 32 bit bitfield in which the bits indicate certain error flags:</p>
+<table>
+	<tr>
+		<th>Index</th>
+		<th>Error</th>
+	</tr>
+	<tr>
+		<td>bit 0</td>
+		<td>Overcurrent channel 1</td>
+	</tr>
+	<tr>
+		<td>bit 1</td>
+		<td>Shortcircuit channel 1</td>
+	</tr>
+	<tr>
+		<td>bit 2</td>
+		<td>Reserved</td>
+	</tr>
+	<tr>
+		<td>bit 3</td>
+		<td>Reserved</td>
+	</tr>
+	<tr>
+		<td>bit 4</td>
+		<td>Overcurrent channel 2</td>
+	</tr>
+	<tr>
+		<td>bit 5</td>
+		<td>Shortcircuit channel 2</td>
+	</tr>
+	<tr>
+		<td>bit 6</td>
+		<td>Reserved</td>
+	</tr>
+	<tr>
+		<td>bit 7</td>
+		<td>Reserved</td>
+	</tr>
+	<tr>
+		<td>bit 8</td>
+		<td>Overcurrent channel 3</td>
+	</tr>
+	<tr>
+		<td>bit 9</td>
+		<td>Shortcircuit channel 3</td>
+	</tr>
+	<tr>
+		<td>bit 10</td>
+		<td>Reserved</td>
+	</tr>
+	<tr>
+		<td>bit 11</td>
+		<td>Reserved</td>
+	</tr>
+	<tr>
+		<td>bit 12</td>
+		<td>Overcurrent channel 4</td>
+	</tr>
+	<tr>
+		<td>bit 13</td>
+		<td>Shortcircuit channel 4</td>
+	</tr>
+	<tr>
+		<td>bit 14</td>
+		<td>Reserved</td>
+	</tr>
+	<tr>
+		<td>bit 15</td>
+		<td>Reserved</td>
+	</tr>
+	<tr>
+		<td>bit 16</td>
+		<td>Overcurrent channel 5</td>
+	</tr>
+	<tr>
+		<td>bit 17</td>
+		<td>Shortcircuit channel 5</td>
+	</tr>
+	<tr>
+		<td>bit 18</td>
+		<td>Reserved</td>
+	</tr>
+	<tr>
+		<td>bit 19</td>
+		<td>Reserved</td>
+	</tr>
+	<tr>
+		<td>bit 20</td>
+		<td>Overcurrent channel 6</td>
+	</tr>
+	<tr>
+		<td>bit 21</td>
+		<td>Shortcircuit channel 6</td>
+	</tr>
+	<tr>
+		<td>bit 22</td>
+		<td>Reserved</td>
+	</tr>
+	<tr>
+		<td>bit 23</td>
+		<td>Reserved</td>
+	</tr>
+	<tr>
+		<td>bit 24</td>
+		<td>Groundshift exceeded limit</td>
+	</tr>
+	<tr>
+		<td>bit 25</td>
+		<td>Temperature exceeded limit</td>
+	</tr>
+	<tr>
+		<td>bit 26</td>
+		<td>Total module current exceeded limit</td>
+	</tr>
+	<tr>
+		<td>bit 27</td>
+		<td>Module communication timeout</td>
+	</tr>
+	<tr>
+		<td>bit 28</td>
+		<td>Initialization failure</td>
+	</tr>
+	<tr>
+		<td>bit 29</td>
+		<td>Module not communicating</td>
+	</tr>
+	<tr>
+		<td>bit 30</td>
+		<td>To many checksum errors</td>
+	</tr>
+	<tr>
+		<td>bit 31</td>
+		<td>Reserved</td>
+	</tr>
+</table>
+
 </script>

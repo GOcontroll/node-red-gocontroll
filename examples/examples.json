@@ -103,6 +103,80 @@
         "h": 182
     },
     {
+        "id": "51572c78cf7afa19",
+        "type": "group",
+        "z": "b493cd8fcf6f5eef",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "8a1f4fa98bf6844d",
+            "cb1a524d41231737",
+            "45ea0e3e588eec9d",
+            "fe8248429b3c6f51",
+            "a2b3ee55c4e4f9dd",
+            "dc6aa03d26f01c3e",
+            "9c4fea7aea21c29b",
+            "3aeb497d51ef4f27",
+            "e2977e38f0c1f163",
+            "3b922676a38ad561",
+            "25481e3594c759e6",
+            "81844ce1769c3263",
+            "cfda500936391b2c",
+            "0f4986149a5f3a59",
+            "7241a2a82e17f125",
+            "3a94e564941ebb67",
+            "f389a23e2e021ad4"
+        ],
+        "x": 74,
+        "y": 999,
+        "w": 1092,
+        "h": 562
+    },
+    {
+        "id": "129c265e3f637c87",
+        "type": "group",
+        "z": "b493cd8fcf6f5eef",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "63d6ca4e33673477",
+            "1e9e8a14e4e8f1ec",
+            "1a029704b73a5060",
+            "a24cc2faa351c3c8",
+            "b5b202232447735d",
+            "1357340716d71cad",
+            "60e1f521a6598ed6",
+            "fa0baba7193599a0",
+            "c1d37c8646efb586",
+            "0cacad6574319831",
+            "5d35e968bbd58ca5",
+            "b38db88bebbbc087",
+            "ed4c204ead111170",
+            "a5a5d8ae940b7881",
+            "dc8e8bf4e343d005",
+            "bae9eb00824a1019",
+            "f7584fe2f17c1287"
+        ],
+        "x": 1294,
+        "y": 999,
+        "w": 1092,
+        "h": 562
+    },
+    {
         "id": "8dfee4306d8f0bf1",
         "type": "4-20mA-Module",
         "z": "b493cd8fcf6f5eef",
@@ -905,6 +979,852 @@
         "info": "",
         "x": 2270,
         "y": 340,
+        "wires": []
+    },
+    {
+        "id": "8a1f4fa98bf6844d",
+        "type": "Output-Module",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "",
+        "moduleSlot": "4",
+        "moduleType": "1",
+        "sampleTime": "200",
+        "freq12": "4",
+        "freq34": "4",
+        "freq56": "1",
+        "freq78": "1",
+        "freq910": "1",
+        "output1": "2",
+        "output2": "7",
+        "output3": "7",
+        "output4": "8",
+        "output5": "1",
+        "output6": "1",
+        "output7": "1",
+        "output8": "1",
+        "output9": "1",
+        "output10": "1",
+        "key1": "halfBridge",
+        "key2": "peaknhold",
+        "key3": "currentControl",
+        "key4": "freqControl",
+        "key5": "outputSignal5",
+        "key6": "outputSignal6",
+        "key7": "outputSignal7",
+        "key8": "outputSignal8",
+        "key9": "outputSignal9",
+        "key10": "outputSignal10",
+        "current1": "4000",
+        "current2": "4000",
+        "current3": "4000",
+        "current4": "4000",
+        "current5": "4000",
+        "current6": "4000",
+        "current7": "4000",
+        "current8": "4000",
+        "current9": "4000",
+        "current10": "4000",
+        "peakcurrent1": "800",
+        "peakcurrent2": "1500",
+        "peakcurrent3": "800",
+        "peakcurrent4": "800",
+        "peakcurrent5": "800",
+        "peakcurrent6": "800",
+        "peakcurrent7": "800",
+        "peakcurrent8": "800",
+        "peakcurrent9": "800",
+        "peakcurrent10": "800",
+        "time1": "500",
+        "time2": "500",
+        "time3": "0",
+        "time4": "500",
+        "time5": "500",
+        "time6": "500",
+        "time7": "500",
+        "time8": "500",
+        "time9": "500",
+        "time10": "500",
+        "x": 610,
+        "y": 1280,
+        "wires": [
+            [
+                "3b922676a38ad561",
+                "25481e3594c759e6",
+                "81844ce1769c3263",
+                "cfda500936391b2c",
+                "0f4986149a5f3a59",
+                "7241a2a82e17f125",
+                "3a94e564941ebb67"
+            ]
+        ]
+    },
+    {
+        "id": "cb1a524d41231737",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "halfbridge to 0",
+        "props": [
+            {
+                "p": "halfBridge",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 290,
+        "y": 1060,
+        "wires": [
+            [
+                "8a1f4fa98bf6844d"
+            ]
+        ]
+    },
+    {
+        "id": "45ea0e3e588eec9d",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "halfbridge to 500",
+        "props": [
+            {
+                "p": "halfBridge",
+                "v": "500",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 280,
+        "y": 1120,
+        "wires": [
+            [
+                "8a1f4fa98bf6844d"
+            ]
+        ]
+    },
+    {
+        "id": "fe8248429b3c6f51",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "peaknhold disable",
+        "props": [
+            {
+                "p": "peaknhold",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 270,
+        "y": 1180,
+        "wires": [
+            [
+                "8a1f4fa98bf6844d"
+            ]
+        ]
+    },
+    {
+        "id": "a2b3ee55c4e4f9dd",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "peaknhold hold at 1000mA",
+        "props": [
+            {
+                "p": "peaknhold",
+                "v": "1000",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 250,
+        "y": 1240,
+        "wires": [
+            [
+                "8a1f4fa98bf6844d"
+            ]
+        ]
+    },
+    {
+        "id": "dc6aa03d26f01c3e",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "currentcontrol disable",
+        "props": [
+            {
+                "p": "currentControl",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 260,
+        "y": 1320,
+        "wires": [
+            [
+                "8a1f4fa98bf6844d"
+            ]
+        ]
+    },
+    {
+        "id": "9c4fea7aea21c29b",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "currentcontrol set to 1000",
+        "props": [
+            {
+                "p": "currentControl",
+                "v": "1000",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 250,
+        "y": 1380,
+        "wires": [
+            [
+                "8a1f4fa98bf6844d"
+            ]
+        ]
+    },
+    {
+        "id": "3aeb497d51ef4f27",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "frequencycontrol disable",
+        "props": [
+            {
+                "p": "freqControl",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 250,
+        "y": 1440,
+        "wires": [
+            [
+                "8a1f4fa98bf6844d"
+            ]
+        ]
+    },
+    {
+        "id": "e2977e38f0c1f163",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "frequencycontrol set to 250Hz",
+        "props": [
+            {
+                "p": "freqControl",
+                "v": "250",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 240,
+        "y": 1500,
+        "wires": [
+            [
+                "8a1f4fa98bf6844d"
+            ]
+        ]
+    },
+    {
+        "id": "3b922676a38ad561",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "half bridge current (mA)",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "halfBridgeCurrent",
+        "targetType": "msg",
+        "statusVal": "halfBridgeCurrent",
+        "statusType": "auto",
+        "x": 970,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "25481e3594c759e6",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "peaknhold current (mA)",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "peaknholdCurrent",
+        "targetType": "msg",
+        "statusVal": "halfBridgeCurrent",
+        "statusType": "auto",
+        "x": 970,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "81844ce1769c3263",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "current control current (mA)",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "currentControlCurrent",
+        "targetType": "msg",
+        "statusVal": "halfBridgeCurrent",
+        "statusType": "auto",
+        "x": 980,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "cfda500936391b2c",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "frequency control current (mA)",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "freqControlCurrent",
+        "targetType": "msg",
+        "statusVal": "halfBridgeCurrent",
+        "statusType": "auto",
+        "x": 990,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "0f4986149a5f3a59",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "module temperature",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "moduleTemperature",
+        "targetType": "msg",
+        "statusVal": "moduleTemperature",
+        "statusType": "auto",
+        "x": 960,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "7241a2a82e17f125",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "module ground shift",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "moduleGroundShift",
+        "targetType": "msg",
+        "statusVal": "moduleGroundShift",
+        "statusType": "auto",
+        "x": 950,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "3a94e564941ebb67",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "Module status",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "moduleStatus",
+        "targetType": "msg",
+        "statusVal": "moduleStatus",
+        "statusType": "auto",
+        "x": 940,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "f389a23e2e021ad4",
+        "type": "comment",
+        "z": "b493cd8fcf6f5eef",
+        "g": "51572c78cf7afa19",
+        "name": "6 channel output module",
+        "info": "The 6 channel output is generally the best output module functionality wise, most number of functions and pretty high output current available.\nAs a safety feature, output modules need to be continuously sent up to date info, because this doesn't really line up with how NodeRED works, the input is buffered and then repeatedly sent in the background untill you update the buffer by giving the node new setpoints.\n\nTo see the pinout of the module on your specific controller, see [the hardware manual](https://gocontroll.com/wp-content/uploads/2023/12/GOcontroll_Hardware_Manual.pdf).",
+        "x": 610,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "63d6ca4e33673477",
+        "type": "Output-Module",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "",
+        "moduleSlot": "5",
+        "moduleType": "2",
+        "sampleTime": "200",
+        "freq12": "4",
+        "freq34": "4",
+        "freq56": "1",
+        "freq78": "1",
+        "freq910": "1",
+        "output1": "2",
+        "output2": "7",
+        "output3": "7",
+        "output4": "8",
+        "output5": "1",
+        "output6": "1",
+        "output7": "1",
+        "output8": "1",
+        "output9": "1",
+        "output10": "1",
+        "key1": "halfBridge",
+        "key2": "peaknhold",
+        "key3": "currentControl",
+        "key4": "freqControl",
+        "key5": "outputSignal5",
+        "key6": "outputSignal6",
+        "key7": "outputSignal7",
+        "key8": "outputSignal8",
+        "key9": "outputSignal9",
+        "key10": "outputSignal10",
+        "current1": "4000",
+        "current2": "4000",
+        "current3": "4000",
+        "current4": "4000",
+        "current5": "4000",
+        "current6": "4000",
+        "current7": "4000",
+        "current8": "4000",
+        "current9": "4000",
+        "current10": "4000",
+        "peakcurrent1": "800",
+        "peakcurrent2": "1500",
+        "peakcurrent3": "800",
+        "peakcurrent4": "800",
+        "peakcurrent5": "800",
+        "peakcurrent6": "800",
+        "peakcurrent7": "800",
+        "peakcurrent8": "800",
+        "peakcurrent9": "800",
+        "peakcurrent10": "800",
+        "time1": "500",
+        "time2": "500",
+        "time3": "0",
+        "time4": "500",
+        "time5": "500",
+        "time6": "500",
+        "time7": "500",
+        "time8": "500",
+        "time9": "500",
+        "time10": "500",
+        "x": 1830,
+        "y": 1280,
+        "wires": [
+            [
+                "0cacad6574319831",
+                "5d35e968bbd58ca5",
+                "b38db88bebbbc087",
+                "ed4c204ead111170",
+                "a5a5d8ae940b7881",
+                "dc8e8bf4e343d005",
+                "bae9eb00824a1019"
+            ]
+        ]
+    },
+    {
+        "id": "1e9e8a14e4e8f1ec",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "halfbridge to 0",
+        "props": [
+            {
+                "p": "halfBridge",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1510,
+        "y": 1060,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "1a029704b73a5060",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "halfbridge to 500",
+        "props": [
+            {
+                "p": "halfBridge",
+                "v": "500",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1500,
+        "y": 1120,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "a24cc2faa351c3c8",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "peaknhold disable",
+        "props": [
+            {
+                "p": "peaknhold",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1490,
+        "y": 1180,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "b5b202232447735d",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "peaknhold hold at 1000mA",
+        "props": [
+            {
+                "p": "peaknhold",
+                "v": "1000",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1470,
+        "y": 1240,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "1357340716d71cad",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "currentcontrol disable",
+        "props": [
+            {
+                "p": "currentControl",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1480,
+        "y": 1320,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "60e1f521a6598ed6",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "currentcontrol set to 1000",
+        "props": [
+            {
+                "p": "currentControl",
+                "v": "1000",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1470,
+        "y": 1380,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "fa0baba7193599a0",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "frequencycontrol disable",
+        "props": [
+            {
+                "p": "freqControl",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1470,
+        "y": 1440,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "c1d37c8646efb586",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "frequencycontrol set to 250Hz",
+        "props": [
+            {
+                "p": "freqControl",
+                "v": "250",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1460,
+        "y": 1500,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "0cacad6574319831",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "half bridge current (mA)",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "halfBridgeCurrent",
+        "targetType": "msg",
+        "statusVal": "halfBridgeCurrent",
+        "statusType": "auto",
+        "x": 2190,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "5d35e968bbd58ca5",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "peaknhold current (mA)",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "peaknholdCurrent",
+        "targetType": "msg",
+        "statusVal": "halfBridgeCurrent",
+        "statusType": "auto",
+        "x": 2190,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "b38db88bebbbc087",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "current control current (mA)",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "currentControlCurrent",
+        "targetType": "msg",
+        "statusVal": "halfBridgeCurrent",
+        "statusType": "auto",
+        "x": 2200,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "ed4c204ead111170",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "frequency control current (mA)",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "freqControlCurrent",
+        "targetType": "msg",
+        "statusVal": "halfBridgeCurrent",
+        "statusType": "auto",
+        "x": 2210,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "a5a5d8ae940b7881",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "module temperature",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "moduleTemperature",
+        "targetType": "msg",
+        "statusVal": "moduleTemperature",
+        "statusType": "auto",
+        "x": 2180,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "dc8e8bf4e343d005",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "module ground shift",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "moduleGroundShift",
+        "targetType": "msg",
+        "statusVal": "moduleGroundShift",
+        "statusType": "auto",
+        "x": 2170,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "bae9eb00824a1019",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "Module status",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "moduleStatus",
+        "targetType": "msg",
+        "statusVal": "moduleStatus",
+        "statusType": "auto",
+        "x": 2160,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "f7584fe2f17c1287",
+        "type": "comment",
+        "z": "b493cd8fcf6f5eef",
+        "g": "129c265e3f637c87",
+        "name": "6 channel output module",
+        "info": "The 6 channel output is generally the best output module functionality wise, most number of functions and pretty high output current available.\nAs a safety feature, output modules need to be continuously sent up to date info, because this doesn't really line up with how NodeRED works, the input is buffered and then repeatedly sent in the background untill you update the buffer by giving the node new setpoints.\n\nTo see the pinout of the module on your specific controller, see [the hardware manual](https://gocontroll.com/wp-content/uploads/2023/12/GOcontroll_Hardware_Manual.pdf).",
+        "x": 1830,
+        "y": 1160,
         "wires": []
     }
 ]

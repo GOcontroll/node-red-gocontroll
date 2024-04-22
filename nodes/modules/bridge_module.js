@@ -86,6 +86,10 @@ module.exports = function(RED) {
 				const data = fs.readFileSync('/usr/module-firmware/modules.txt', 'utf8');
 				modulesArr = data.split(":");
 				var moduleArr = modulesArr[moduleSlot-1].split("-");
+				if (moduleArr.length != 7) {
+					node.status({fill:"red",shape:"dot",text:"No module is registered in slot " + moduleSlot + ". You might have to run go-scan-modules"});
+					return;
+				}
 				if (moduleArr[2].length==1) {
 					moduleArr[2] = "0" + moduleArr[2];
 				}

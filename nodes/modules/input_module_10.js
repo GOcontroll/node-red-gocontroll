@@ -7,7 +7,7 @@ const mod_common = require('./module_common');
 
 const BOOTMESSAGELENGTH = 46;
 /* Assigned dynamically */
-var MESSAGELENGTH 	= 0;
+const MESSAGELENGTH 	= 50;
 const SPISPEED = 2000000;
 
 
@@ -22,15 +22,12 @@ function GOcontrollInputModule(config) {
 	
 	/* Get information from the Node configuration */
 	const moduleSlot 		= parseInt(config.moduleSlot);
-	const moduleType		= config.moduleType; 
 	const sampleTime 		= config.sampleTime;
 	
-	var supply	={};
-	supply[0] = config.supply1;
-	supply[1] = config.supply2;
-	supply[2] = config.supply3;
+	var supply;
+	supply = config.supply1;
 	
-	var input	={};
+	var input	= [];
 	input[0] = config.input1;
 	input[1] = config.input2;
 	input[2] = config.input3;
@@ -42,7 +39,7 @@ function GOcontrollInputModule(config) {
 	input[8] = config.input9;
 	input[9] = config.input10;
 	
-	var voltageRange = {};
+	var voltageRange = [];
 	voltageRange[0] = config.v1;
 	voltageRange[1] = config.v2;
 	voltageRange[2] = config.v3;
@@ -50,18 +47,7 @@ function GOcontrollInputModule(config) {
 	voltageRange[4] = config.v5;
 	voltageRange[5] = config.v6;
 	
-	var pullUp = {};
-	/* In case 6 channel input module is selected */
-	if(moduleType == 1){
-	pullUp[0] = config.pua1;
-	pullUp[1] = config.pua2;
-	pullUp[2] = config.pua3;
-	pullUp[3] = config.pua4;
-	pullUp[4] = config.pua5;
-	pullUp[5] = config.pua6;
-	}
-	/* In case 10 channel input module is selected */
-	else{
+	var pullUp = [];
 	pullUp[0] = config.pub1;
 	pullUp[1] = config.pub2;
 	pullUp[2] = config.pub3;
@@ -72,20 +58,8 @@ function GOcontrollInputModule(config) {
 	pullUp[7] = config.pub8;
 	pullUp[8] = config.pub9;
 	pullUp[9] = config.pub10;
-	}
 	
-	var pullDown = {};
-	/* In case 6 channel input module is selected */
-	if(moduleType == 1){
-	pullDown[0] = config.pda1;
-	pullDown[1] = config.pda2;
-	pullDown[2] = config.pda3;
-	pullDown[3] = config.pda4;
-	pullDown[4] = config.pda5;
-	pullDown[5] = config.pda6;
-	}
-	/* In case 10 channel input module is selected */
-	else{
+	var pullDown = [];
 	pullDown[0] = config.pdb1;
 	pullDown[1] = config.pdb2;
 	pullDown[2] = config.pdb3;
@@ -96,9 +70,8 @@ function GOcontrollInputModule(config) {
 	pullDown[7] = config.pdb8;
 	pullDown[8] = config.pdb9;
 	pullDown[9] = config.pdb10;
-	}
 
-	var key	={};
+	var key	=[];
 	key[0] = config.key1;
 	key[1] = config.key2;
 	key[2] = config.key3;
@@ -111,15 +84,6 @@ function GOcontrollInputModule(config) {
 	key[9] = config.key10;
 	
 	var sL, sB;
-	
-	/* Assign information according module type */
-	/* In case 6 channel input module is selected */
-	if(moduleType == 1){
-		MESSAGELENGTH 	= 55;
-	/* In case 10 channel input module is selected */
-	}else{
-		MESSAGELENGTH 	= 50;
-	}
 	
 	/*Allocate memory for receive and send buffer */
 	var sendBuffer = Buffer.alloc(MESSAGELENGTH+5); 
@@ -153,9 +117,6 @@ function GOcontrollInputModule(config) {
 	/* Send dummy byte once so the master SPI is initialized properly */
 	readFile();
 
-	/* Start module reset and initialization proces */
-	//InputModule_StartReset();
-
 	/* open SPI device for continous communication */
 	const getData = spi.open(sL,sB, (err) => {
 		if(!err)
@@ -170,6 +131,10 @@ function GOcontrollInputModule(config) {
 			const data = fs.readFileSync('/usr/module-firmware/modules.txt', 'utf8');
 			modulesArr = data.split(":");
 			var moduleArr = modulesArr[moduleSlot-1].split("-");
+			if (moduleArr.length != 7) {
+				node.status({fill:"red",shape:"dot",text:"No module is registered in slot " + moduleSlot + ". You might have to run go-scan-modules"});
+				return;
+			}
 			if (moduleArr[2].length==1) {
 				moduleArr[2] = "0" + moduleArr[2];
 			}
@@ -179,7 +144,7 @@ function GOcontrollInputModule(config) {
 			firmware = "HW:V"+moduleArr[0]+moduleArr[1]+moduleArr[2]+moduleArr[3] + "  SW:V"+moduleArr[4]+"."+moduleArr[5]+"."+moduleArr[6];
 			/*check if the selected module is okay for this slot*/
 			/*6 channel input*/
-			if((moduleType == 1 && firmware.includes("201001")) || (moduleType == 0 && firmware.includes("201002"))){
+			if(firmware.includes("201002")){
 				node.status({fill:"green",shape:"dot",text:firmware});
 				mod_common.SendDummyByte(moduleSlot, InputModule_Initialize); 
 			} else {
@@ -202,44 +167,23 @@ function GOcontrollInputModule(config) {
 	****************************************************************************************/
 	function InputModule_Initialize (){
 
-
 		sendBuffer[0] = moduleSlot;
 		sendBuffer[1] = MESSAGELENGTH-1;
 		
-		/* In case 6 channel output module is selected */
-		if(moduleType == 1){
-			sendBuffer[2] = 1;
-			sendBuffer[3] = 11;
-			sendBuffer[4] = 2;
-			sendBuffer[5] = 1;
-		
-			for(var messagePointer = 0; messagePointer < 6; messagePointer ++)
-			{
-			sendBuffer[(messagePointer+1)*6] = input[messagePointer];
-			sendBuffer[((messagePointer+1)*6)+1] = (pullUp[messagePointer]&3)|((pullDown[messagePointer]&3)<<2)|((voltageRange[messagePointer]&3)<<6);
-			}
-			
-			sendBuffer[42] = supply[0]; 
-			sendBuffer[43] = supply[1]; 
-			sendBuffer[44] = supply[2]; 
-		}
-		/* In case 10 channel output module is selected */
-		else{
-			sendBuffer[2] = 1;
-			sendBuffer[3] = 12;
-			sendBuffer[4] = 2;
-			sendBuffer[5] = 1;
-			for(var messagePointer = 0; messagePointer < 10; messagePointer ++)
-			{
+		sendBuffer[2] = 1;
+		sendBuffer[3] = 12;
+		sendBuffer[4] = 2;
+		sendBuffer[5] = 1;
+		for(var messagePointer = 0; messagePointer < 10; messagePointer ++)
+		{
 			sendBuffer[(messagePointer*4)+6] = input[messagePointer];
 			sendBuffer[((messagePointer*4)+7)] = (pullUp[messagePointer]&3)|((pullDown[messagePointer]&3)<<2);
-			}
-			sendBuffer[46] = supply[0];
 		}
+
+		sendBuffer[46] = supply[0];
 		sendBuffer[MESSAGELENGTH-1] = mod_common.ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
 
 		const initialize = spi.open(sL,sB, (err) => {
-
 			/* Only in this scope, receive buffer is available */
 			initialize.transfer(normalMessage, (err, normalMessage) => {
 				initialize.close(err =>{});
@@ -260,40 +204,12 @@ function GOcontrollInputModule(config) {
 	****************************************************************************************/
 	function InputModule_GetData (){	
 		if(!spiReady){
-		return;
+			return;
 		}
 
-	sendBuffer[0] = moduleSlot;
-	sendBuffer[1] = MESSAGELENGTH-1;
-	
-		/* In case 6 channel output module is selected */
-		if(moduleType == 1){
-		sendBuffer[2] = 1;
-		sendBuffer[3] = 11;
-		sendBuffer[4] = 3;
-		sendBuffer[5] = 1;
-
-		sendBuffer[MESSAGELENGTH-1] = mod_common.ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
-
-		getData.transfer(normalMessage, (err, normalMessage) => {
-				if(receiveBuffer[MESSAGELENGTH-1] == mod_common.ChecksumCalculator(receiveBuffer, MESSAGELENGTH-1))
-				{
-					/*In case dat is received that holds module information */
-					if(	receiveBuffer.readUInt8(2) === 2 	&& 
-						receiveBuffer.readUInt8(3) === 11 	&&
-						receiveBuffer.readUInt8(4) === 3 	&&
-						receiveBuffer.readUInt8(5) === 1){
-							
-						for(var messagePointer = 0; messagePointer < 6; messagePointer ++)
-						{
-						msgOut[key[messagePointer]] = receiveBuffer.readInt32LE((messagePointer*8)+6)
-						}
-					node.send(msgOut);
-					}
-				}					
-			});	
-		}
-		else{
+		sendBuffer[0] = moduleSlot;
+		sendBuffer[1] = MESSAGELENGTH-1;
+		
 		sendBuffer[2] = 1;
 		sendBuffer[3] = 12;
 		sendBuffer[4] = 3;
@@ -302,24 +218,22 @@ function GOcontrollInputModule(config) {
 		sendBuffer[MESSAGELENGTH-1] = mod_common.ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
 
 		getData.transfer(normalMessage, (err, normalMessage) => {
-				if(receiveBuffer[MESSAGELENGTH-1] == mod_common.ChecksumCalculator(receiveBuffer, MESSAGELENGTH-1))
-				{
-					/*In case dat is received that holds module information */
-					if(	receiveBuffer.readUInt8(2) === 2 	&& 
-						receiveBuffer.readUInt8(3) === 12 	&&
-						receiveBuffer.readUInt8(4) === 3 	&&
-						receiveBuffer.readUInt8(5) === 1){
-											
-						for(var messagePointer = 0; messagePointer < 10; messagePointer ++)
-						{
+			if(receiveBuffer[MESSAGELENGTH-1] == mod_common.ChecksumCalculator(receiveBuffer, MESSAGELENGTH-1))
+			{
+				/*In case dat is received that holds module information */
+				if(	receiveBuffer.readUInt8(2) === 2 	&& 
+					receiveBuffer.readUInt8(3) === 12 	&&
+					receiveBuffer.readUInt8(4) === 3 	&&
+					receiveBuffer.readUInt8(5) === 1){
+										
+					for(var messagePointer = 0; messagePointer < 10; messagePointer ++)
+					{
 						msgOut[key[messagePointer]] = receiveBuffer.readInt32LE((messagePointer*4)+6)
-						}
-					node.send(msgOut);
 					}
-				}					
-			});	
-		}
-	
+				node.send(msgOut);
+				}
+			}					
+		});	
 	}
 
 
@@ -352,5 +266,5 @@ function GOcontrollInputModule(config) {
 	});
 }
 
-RED.nodes.registerType("Input-Module",GOcontrollInputModule);
+RED.nodes.registerType("Input-Module-10",GOcontrollInputModule);
 }
