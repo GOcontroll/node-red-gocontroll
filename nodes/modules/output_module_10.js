@@ -2,7 +2,6 @@ module.exports = function(RED) {
     "use strict"
 
 	const spi = require('spi-device');
-	const fs = require('fs');
 	const mod_common = require('./module_common');
 
 	/* Assigned dynamically */
@@ -14,7 +13,6 @@ module.exports = function(RED) {
 
 	   	var interval = null;
 		var node = this;
-		var modulesArr;
 		var firmware;
 
 		const moduleSlot = parseInt(config.moduleSlot);
@@ -43,38 +41,6 @@ module.exports = function(RED) {
 		outputFreq[7] = config.freq78;
 		outputFreq[8] = config.freq910;
 		outputFreq[9] = config.freq910;
-
-		var outputCurrent = [];
-		outputCurrent[0] = config.current1;
-		outputCurrent[1] = config.current2;
-		outputCurrent[2] = config.current3;
-		outputCurrent[3] = config.current4;
-		outputCurrent[4] = config.current5;
-		outputCurrent[5] = config.current6;
-
-		var peakcurrent = [];
-		peakcurrent[0] = config.peakcurrent1;
-		peakcurrent[1] = config.peakcurrent2;
-		peakcurrent[2] = config.peakcurrent3;
-		peakcurrent[3] = config.peakcurrent4;
-		peakcurrent[4] = config.peakcurrent5;
-		peakcurrent[5] = config.peakcurrent6;
-		peakcurrent[6] = config.peakcurrent7;
-		peakcurrent[7] = config.peakcurrent8;
-		peakcurrent[8] = config.peakcurrent9;
-		peakcurrent[9] = config.peakcurrent10;
-
-		var outputTime = [];
-		outputTime[0] = config.time1;
-		outputTime[1] = config.time2;
-		outputTime[2] = config.time3;
-		outputTime[3] = config.time4;
-		outputTime[4] = config.time5;
-		outputTime[5] = config.time6;
-		outputTime[6] = config.time7;
-		outputTime[7] = config.time8;
-		outputTime[8] = config.time9;
-		outputTime[9] = config.time10;
 
 		var key=[];
 		key[0] = config.key1;
@@ -120,7 +86,7 @@ module.exports = function(RED) {
 		}
 
 		/* Send dummy byte once so the master SPI is initialized properly */
-		readFile();
+		mod_common.SendDummyByte(moduleSlot, OutputModule_Initialize); 
 
 		/* open SPI device for continous communication */
 		const getData = spi.open(sL,sB, (err) => {
@@ -130,35 +96,6 @@ module.exports = function(RED) {
 			} 
 		});
 
-		function readFile() {
-			try {
-				const data = fs.readFileSync('/usr/module-firmware/modules.txt', 'utf8');
-				modulesArr = data.split(":");
-				var moduleArr = modulesArr[moduleSlot-1].split("-");
-				if (moduleArr.length != 7) {
-					node.status({fill:"red",shape:"dot",text:"No module is registered in slot " + moduleSlot + ". You might have to run go-scan-modules"});
-					return;
-				}
-				if (moduleArr[2].length==1) {
-					moduleArr[2] = "0" + moduleArr[2];
-				}
-				if (moduleArr[3].length==1) {
-					moduleArr[3] = "0" + moduleArr[3];
-				}
-				firmware = "HW:V"+moduleArr[0]+moduleArr[1]+moduleArr[2]+moduleArr[3] + "  SW:V"+moduleArr[4]+"."+moduleArr[5]+"."+moduleArr[6];
-				/*check if the selected module is okay for this slot*/
-				if(firmware.includes("202003")){
-					node.status({fill:"green",shape:"dot",text:firmware})
-					mod_common.SendDummyByte(moduleSlot, OutputModule_Initialize); 
-				} else {
-					node.status({fill:"red",shape:"dot",text:"Selected module does not match the firmware registered in this slot."})
-				}
-			} catch (err) {
-				node.status({fill:"red",shape:"dot",text:"Some error occured checking the module, see the debug messages"});
-				node.warn("No module has been registered in slot " + moduleSlot + ", the module(s) configured for this slot will not work. If a module has been recently inserted in this slot, run go-scan-modules to register it.");
-			}
-		}
-
 		/***************************************************************************************
 		** \brief 	First initialisation message that is send to the output module
 		** \param
@@ -166,64 +103,40 @@ module.exports = function(RED) {
 		** \return
 		**
 		****************************************************************************************/
-		function OutputModule_Initialize() {
+		function OutputModule_Initialize(bootloader_response) {
+			firmware = "HW:V"+bootloader_response[6]+bootloader_response[7]+bootloader_response[8]+bootloader_response[9] + "  SW:V"+bootloader_response[10]+"."+bootloader_response[11]+"."+bootloader_response[12];
 
-			sendBuffer[0] = moduleSlot;
-			sendBuffer[1] = MESSAGELENGTH-1;
+			if (bootloader_response[6] == 20 && bootloader_response[7] ==  20 && bootloader_response[8] == 3) {
 
-			sendBuffer[2] = 1;
-			sendBuffer[3] = 23;
-			sendBuffer[4] = 2;
-			sendBuffer[5] = 1;
+				node.status({fill:"green",shape:"dot",text:firmware});
 
-			for(var s =0; s <10; s++) {
-				sendBuffer[6+s] = (outputFreq[s]&15)|((outputType[s]&15)<<4);
-				sendBuffer.writeUInt16LE(outputCurrent[s], 12+(s*2));
-			}
+				sendBuffer[0] = moduleSlot;
+				sendBuffer[1] = MESSAGELENGTH-1;
 
-			sendBuffer[MESSAGELENGTH-1] = mod_common.ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
+				sendBuffer[2] = 1;
+				sendBuffer[3] = 23;
+				sendBuffer[4] = 2;
+				sendBuffer[5] = 1;
 
-			const outputModule = spi.open(sL,sB, (err) => {
+				for(var s =0; s <10; s++) {
+					sendBuffer[6+s] = (outputFreq[s]&15)|((outputType[s]&15)<<4);
+				}
 
-				/* Only in this scope, receive buffer is available */
-				outputModule.transfer(normalMessage, (err, normalMessage) => {
-				setTimeout(OutputModule_Initialize_Second, 100);
+				sendBuffer[MESSAGELENGTH-1] = mod_common.ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
+
+				const outputModule = spi.open(sL,sB, (err) => {
+
+					/* Only in this scope, receive buffer is available */
+					outputModule.transfer(normalMessage, (err, normalMessage) => {
+						outputModule.close(err =>{});
+						OutputModule_clearBuffer();
+					// setTimeout(OutputModule_Initialize_Second, 100);
+					});
 				});
-			});
-		}
-
-		/***************************************************************************************
-		** \brief 	Second initialisation message that is send to the output module
-		** \param
-		** \param
-		** \return
-		**
-		****************************************************************************************/
-		function OutputModule_Initialize_Second() {
-
-			sendBuffer[0] = moduleSlot;
-			sendBuffer[1] = MESSAGELENGTH-1;
-
-			sendBuffer[2] = 1;
-			sendBuffer[3] = 23;
-			sendBuffer[4] = 2;
-			sendBuffer[5] = 2;
-
-			for(var s =0; s <10; s++)
-			{
-				sendBuffer.writeUInt16LE(peakcurrent[s], 6+(s*2));
-				sendBuffer.writeUInt16LE(outputTime[s], 18+(s*2));
+			} else {
+				node.status({fill:"red",shape:"dot",text:"Selected module does not match the module present in this slot."});
+				node.warn("Detected incompatible firmware on slot " + moduleSlot + ": " + firmware);
 			}
-
-			sendBuffer[MESSAGELENGTH-1] = mod_common.ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
-
-			const outputModule = spi.open(sL,sB, (err) => {
-
-				/* Only in this scope, receive buffer is available */
-				outputModule.transfer(normalMessage, (err, normalMessage) => {
-					OutputModule_clearBuffer();
-				});
-			});
 		}
 
 		/***************************************************************************************

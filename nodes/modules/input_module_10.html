@@ -6,7 +6,8 @@
             name: {value:""},
 			moduleSlot: {value:"0"},
 			sampleTime:{value:"1000"},
-			supply1:{value:0},
+			supply1:{value:1},
+			supply2:{value:1},
 			input1:{value:1},
 			v1:{value:0},
 			pub1: {value:0},
@@ -132,9 +133,16 @@
         </select>
     </div>
 	
-		<div class="form-row">
+	<div class="form-row">
         <label for="node-input-supply1"><i class="fa fa-bolt"></i> Supply out 1</label>
         <select id="node-input-supply1" style="width:300px">
+            <option value=0>Sensor supply disabled</option>
+            <option value=1>Sensor supply enabled</option>
+        </select>
+    </div>
+	<div class="form-row">
+        <label for="node-input-supply2"><i class="fa fa-bolt"></i> Supply out 2</label>
+        <select id="node-input-supply2" style="width:300px">
             <option value=0>Sensor supply disabled</option>
             <option value=1>Sensor supply enabled</option>
         </select>
@@ -162,7 +170,7 @@ x += "<fieldset id=\"channel"+i+"\"> \
             <option value=5>Digital input - Duty cycle low time (0.1% resolution)</option> \
             <option value=6>Digital input - Duty cycle high time (0.1% resolution)</option> \
             <option value=7>Digital input - Rotation speed (rps)</option> \
-            <option value=8>Digital input - Pulse counter in combination with channel "+ parseInt(i) + parseInt(i % 2 ? 1 : -1) +"</option> \
+            <option value=8>Digital input - Pulse counter in combination with channel "+ (i + (i % 2 ? 1 : -1)) +"</option> \
         </select> \
     </div> \
 	<div class=\"form-row\" id=\"pull-up-10"+i+"\"> \

@@ -20,7 +20,11 @@ module.exports = function(RED) {
 		**
 		****************************************************************************************/
 		function Settings_ShowVersionInformation (){
-			var PackageVersion = fs.readFileSync('/root/version.txt').toString().split(/\r?\n/);
+			try {
+				var PackageVersion = fs.readFileSync('/root/version.txt').toString().split(/\r?\n/);
+			} catch {
+				var PackageVersion = fs.readFileSync('/version.txt').toString().split(/\r?\n/);
+			}
 			node.status({fill:"green",shape:"dot",text:"GOcontroll SW: "+ PackageVersion[0] });
 		}
 	}

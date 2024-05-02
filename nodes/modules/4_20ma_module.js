@@ -2,7 +2,6 @@ module.exports = function(RED) {
 "use strict"
 
 const spi = require('spi-device');
-const fs = require('fs');
 const mod_common = require('./module_common');
 
 var MESSAGELENGTH 	= 33;
@@ -15,7 +14,6 @@ function GOcontroll4_20maModule(config) {
 
 	var interval = null;
 	var node = this;
-	var modulesArr;
 	var firmware;
 
 	/* Get information from the Node configuration */
@@ -72,7 +70,7 @@ function GOcontroll4_20maModule(config) {
 	}
 
 	/* Send dummy byte once so the master SPI is initialized properly */
-	readFile();
+	mod_common.SendDummyByte(moduleSlot, maModule_Initialize);
 
 	/* open SPI device for continous communication */
 	const getData = spi.open(sL,sB, (err) => {
@@ -81,37 +79,6 @@ function GOcontroll4_20maModule(config) {
 		spiReady = true;
 		} 
 	});
-
-
-	function readFile() {
-		try {
-			const data = fs.readFileSync('/usr/module-firmware/modules.txt', 'utf8');
-			modulesArr = data.split(":");
-			var moduleArr = modulesArr[moduleSlot-1].split("-");
-			if (moduleArr.length != 7) {
-				node.status({fill:"red",shape:"dot",text:"No module is registered in slot " + moduleSlot + ". You might have to run go-scan-modules"});
-				return;
-			}
-			if (moduleArr[2].length==1) {
-				moduleArr[2] = "0" + moduleArr[2];
-			}
-			if (moduleArr[3].length==1) {
-				moduleArr[3] = "0" + moduleArr[3];
-			}
-			firmware = "HW:V"+moduleArr[0]+moduleArr[1]+moduleArr[2]+moduleArr[3] + "  SW:V"+moduleArr[4]+"."+moduleArr[5]+"."+moduleArr[6];
-			/*check if the selected module is okay for this slot*/
-
-			if (firmware.includes("201003")) {
-				node.status({fill:"green",shape:"dot",text:firmware});
-				mod_common.SendDummyByte(moduleSlot, maModule_Initialize); 
-			} else {
-				node.status({fill:"red",shape:"dot",text:"Selected module does not match the firmware registered in this slot."});
-			}
-		} catch (err) {
-			node.status({fill:"red",shape:"dot",text:"Some error occured checking the module, see the debug messages"});
-			node.warn("No module has been registered in slot " + moduleSlot + ", the module(s) configured for this slot will not work. If a module has been recently inserted in this slot, run go-scan-modules to register it.");
-		}
-	}
 
 	/***************************************************************************************
 	** \brief
@@ -122,31 +89,40 @@ function GOcontroll4_20maModule(config) {
 	** \return
 	**
 	****************************************************************************************/
-	function maModule_Initialize (){
-		sendBuffer[0] = moduleSlot;
-		sendBuffer[1] = MESSAGELENGTH-1;
+	function maModule_Initialize (bootloader_response){
+		firmware = "HW:V"+bootloader_response[6]+bootloader_response[7]+bootloader_response[8]+bootloader_response[9] + "  SW:V"+bootloader_response[10]+"."+bootloader_response[11]+"."+bootloader_response[12];
+		if (bootloader_response[6] == 20 && bootloader_response[7] ==  10 && bootloader_response[8] == 3) {
 
-		sendBuffer[2] = 1;
-		sendBuffer[3] = 13;
-		sendBuffer[4] = 2;
-		sendBuffer[5] = 1;
+			node.status({fill:"green",shape:"dot",text:firmware});
 
-		sendBuffer[16] = supply[0];
-		sendBuffer[17] = supply[1];
-		sendBuffer[18] = supply[2];
-		sendBuffer[19] = supply[3];
-		sendBuffer[20] = supply[4];
+			sendBuffer[0] = moduleSlot;
+			sendBuffer[1] = MESSAGELENGTH-1;
 
-		sendBuffer[MESSAGELENGTH-1] = mod_common.ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
+			sendBuffer[2] = 1;
+			sendBuffer[3] = 13;
+			sendBuffer[4] = 2;
+			sendBuffer[5] = 1;
 
-		const initialize = spi.open(sL,sB, (err) => {
+			sendBuffer[16] = supply[0];
+			sendBuffer[17] = supply[1];
+			sendBuffer[18] = supply[2];
+			sendBuffer[19] = supply[3];
+			sendBuffer[20] = supply[4];
 
-			/* Only in this scope, receive buffer is available */
-			initialize.transfer(normalMessage, (err, normalMessage) => {
-				initialize.close(err =>{});
+			sendBuffer[MESSAGELENGTH-1] = mod_common.ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
+
+			const initialize = spi.open(sL,sB, (err) => {
+
+				/* Only in this scope, receive buffer is available */
+				initialize.transfer(normalMessage, (err, normalMessage) => {
+					initialize.close(err =>{});
+					interval = setInterval(maModule_GetData, parseInt(sampleTime));
+				});
 			});
-		});
-		interval = setInterval(maModule_GetData, parseInt(sampleTime));
+		} else {
+			node.status({fill:"red",shape:"dot",text:"Selected module does not match the module present in this slot."});
+			node.warn("Detected incompatible firmware on slot " + moduleSlot + ": " + firmware);
+		}
 	}
 
 

@@ -31,36 +31,6 @@
 			key8: {value: "outputSignal8"},
 			key9: {value: "outputSignal9"},
 			key10: {value: "outputSignal10"},
-			current1 : {value: "4000"},
-			current2 : {value: "4000"},
-			current3 : {value: "4000"},
-			current4 : {value: "4000"},
-			current5 : {value: "4000"},
-			current6 : {value: "4000"},
-			current7 : {value: "4000"},
-			current8 : {value: "4000"},
-			current9 : {value: "4000"},
-			current10 : {value: "4000"},
-			peakcurrent1 : {value: "800"},
-			peakcurrent2 : {value: "800"},
-			peakcurrent3 : {value: "800"},
-			peakcurrent4 : {value: "800"},
-			peakcurrent5 : {value: "800"},
-			peakcurrent6 : {value: "800"},
-			peakcurrent7 : {value: "800"},
-			peakcurrent8 : {value: "800"},
-			peakcurrent9 : {value: "800"},
-			peakcurrent10 : {value: "800"},
-			time1 : {value: "500"},
-			time2 : {value: "500"},
-			time3 : {value: "500"},
-			time4 : {value: "500"},
-			time5 : {value: "500"},
-			time6 : {value: "500"},
-			time7 : {value: "500"},
-			time8 : {value: "500"},
-			time9 : {value: "500"},
-			time10 : {value: "500"},
         },
         inputs:1,
         outputs:1,
@@ -79,52 +49,6 @@
         },
 		/* function executed while done is clicked */
 		oneditprepare: function() {
-			var x ="", i;
-			for (i=1; i<=10; i++) {
-				$("#this.output"+i).trigger("change");
-			}
-	
-			$("#node-input-output1").on("change", function() {
-				var id = $("#node-input-output1").val();
-				if(id == 7){$("#peak-hold-1").show();}else{$("#peak-hold-1").hide();}
-			});
-			$("#node-input-output2").on("change", function() {
-				var id = $("#node-input-output2").val();
-				if(id == 7){$("#peak-hold-2").show();}else{$("#peak-hold-2").hide();}
-			});
-			$("#node-input-output3").on("change", function() {
-				var id = $("#node-input-output3").val();
-				if(id == 7){$("#peak-hold-3").show();}else{$("#peak-hold-3").hide();}
-			});
-			$("#node-input-output4").on("change", function() {
-				var id = $("#node-input-output4").val();
-				if(id == 7){$("#peak-hold-4").show();}else{$("#peak-hold-4").hide();}
-			});
-			$("#node-input-output5").on("change", function() {
-				var id = $("#node-input-output5").val();
-				if(id == 7){$("#peak-hold-5").show();}else{$("#peak-hold-5").hide();}
-			});
-			$("#node-input-output6").on("change", function() {
-				var id = $("#node-input-output6").val();
-				if(id == 7){$("#peak-hold-6").show();}else{$("#peak-hold-6").hide();}
-			});
-			$("#node-input-output7").on("change", function() {
-				var id = $("#node-input-output7").val();
-				if(id == 7){$("#peak-hold-7").show();}else{$("#peak-hold-7").hide();}
-			});
-			$("#node-input-output8").on("change", function() {
-				var id = $("#node-input-output8").val();
-				if(id == 7){$("#peak-hold-8").show();}else{$("#peak-hold-8").hide();}
-			});
-			$("#node-input-output9").on("change", function() {
-				var id = $("#node-input-output9").val();
-				if(id == 7){$("#peak-hold-9").show();}else{$("#peak-hold-9").hide();}
-			});
-			$("#node-input-output10").on("change", function() {
-				var id = $("#node-input-output10").val();
-				if(id == 7){$("#peak-hold-10").show();}else{$("#peak-hold-10").hide();}
-			});
-
 			$.getJSON("controllertype", function(data) {
 				if (data.includes("IV")) {
 					$(".Mini").hide();
@@ -191,13 +115,10 @@ x += "<fieldset id=\"channel"+i+"\"> \
 			<option value=2>200 Hz</option> \
             <option value=3>500 Hz</option> \
 		    <option value=4>1 kHz</option> \
-            <option value=5>2 kHz</option> \
-            <option value=6>5 kHz </option> \
-            <option value=7>10 kHz</option> \
         </select> \
-<p><strong>Output "+i+":</strong></p> \
-     </div> \
-		<div class=\"form-row\"> \
+		<p><strong>Output "+i+":</strong></p> \
+     	</div> \
+	<div class=\"form-row\"> \
         <label for=\"node-input-key"+i+"\"><i class=\"fa fa-id-card\"></i> Key</label> \
         <input type=\"text\" id=\"node-input-key"+i+"\" style=\"width:300px\"> \
     </div> \
@@ -207,25 +128,7 @@ x += "<fieldset id=\"channel"+i+"\"> \
 		    <option value=1>Output channel disabled</option> \
             <option value=2>High side switch duty cycle controlled 0 – 100% (0-1000)</option> \
             <option value=3>High side switch on – off</option> \
-			<option value=4>Peak and hold duty cycle mode (high side)</option> \
-			<option value=5>Frequency output 0 - 500 Hz (0-500)</option> \
         </select> \
-    </div> \
-	     </div> \
-		<div class=\"form-row\" id=\"node-input-currentclass"+i+"\" > \
-        <label for=\"node-input-current"+i+"\"><i class=\"fa fa-line-chart\"></i> Max I (mA)</label> \
-        <input type=\"text\" id=\"node-input-current"+i+"\" style=\"width:300px\"> \
-    </div> \
-	<div class=\"form-row\"  id=\"peak-hold-"+i+"\"> \
-	<p><I>Peak and hold parameters channel "+i+":</I></p> \
-		<div class=\"form-row\"> \
-			<label for=\"node-input-peakcurrent"+i+"\"><i class=\"fa fa-line-chart\"></i> Peak duty cycle (&permil;)</label> \
-			<input type=\"text\" id=\"node-input-peakcurrent"+i+"\" style=\"width:300px\"> \
-		</div> \
-		<div class=\"form-row\"> \
-			<label for=\"node-input-time"+i+"\"><i class=\"fa fa-clock-o\"></i> Peak time (ms)</label> \
-			<input type=\"text\" id=\"node-input-time"+(i++)+"\" style=\"width:300px\"> \
-		</div> \
 	</div> \
     <p><strong>Output "+i+":</strong></p> \
      </div> \
@@ -239,27 +142,9 @@ x += "<fieldset id=\"channel"+i+"\"> \
 		    <option value=1>Output channel disabled</option> \
             <option value=2>High side switch duty cycle controlled 0 – 100% (0-1000)</option> \
             <option value=3>High side switch on – off</option> \
-			<option value=4>Peak and hold duty cycle mode (high side)</option> \
-			<option value=5>Frequency output 0 - 500 Hz (0-500)</option> \
         </select> \
     </div> \
-	     </div> \
-		<div class=\"form-row\" id=\"node-input-currentclass"+i+"\" > \
-        <label for=\"node-input-current"+i+"\"><i class=\"fa fa-line-chart\"></i> Max I (mA)</label> \
-        <input type=\"text\" id=\"node-input-current"+i+"\" style=\"width:300px\"> \
-    </div> \
-	<div class=\"form-row\"  id=\"peak-hold-"+i+"\"> \
-	<p><I>Peak and hold parameters channel "+i+":</I></p> \
-		<div class=\"form-row\"> \
-			<label for=\"node-input-peakcurrent"+i+"\"><i class=\"fa fa-line-chart\"></i> Peak duty cycle (&permil;mA)</label> \
-			<input type=\"text\" id=\"node-input-peakcurrent"+i+"\" style=\"width:300px\"> \
-		</div> \
-		<div class=\"form-row\"> \
-			<label for=\"node-input-time"+i+"\"><i class=\"fa fa-clock-o\"></i> Peak time (ms)</label> \
-			<input type=\"text\" id=\"node-input-time"+i+"\" style=\"width:300px\"> \
-		</div> \
-	</div> \
-        </fieldset>";
+</fieldset>";
 }
 document.getElementById("Module-Settings").innerHTML = x;
 
@@ -269,7 +154,7 @@ document.getElementById("Module-Settings").innerHTML = x;
 </script>
 
 <script type="text/x-red" data-help-name="Output-Module-10">
-  <p>The output module can be used to control resistive and inductive loads with a current up to 5 Amp&egrave;re for each channel. The node will also output data with actual information from the module such as the current flow for each channel (only in high side configuration), the temperature of the module and the ground shift of the module (explained later on)</p>
+  <p>The output module can be used to control resistive and inductive loads with a current up to 1 (nominal) Amp&egrave;re for each channel. The node will also output data with actual information from the module such as the current flow for the entire module, the temperature of the module the ground shift of the module (explained later on), and the rail voltage.</p>
 <h2><strong>Configuration</strong></h2>
 <p><strong><em>Module:</em></strong></p>
 <p>Select the module slot on which the output module is installed to.</p>
@@ -285,15 +170,7 @@ document.getElementById("Module-Settings").innerHTML = x;
 <li>High side switch on &ndash; off</li>
 </ul>
 <p>In case of switching actuators on or off by switching to the rail supply, you can select the high side switch. By sending a 1 or higher, the switch will be switched on. 0 will switch off the actuator.</p>
-<ul>
-<li>Peak and hold</li>
-</ul>
-<p>Peak and hold is used to energize an actuator with a higher duty cycle during a short period. After this period, a lower duty-cycle is able to keep the actuator energized without dissipating a lot of energy. This function implements peak and hold in a high side switch configuration.</p>
-<ul>
-<li>Frequency</li>
-</ul>
-<p>The frequency mode varies the frequency of the output signal at a duty cycle of 50%.</p>
-<h2><strong>Data format</strong></h2>
+h2><strong>Data format</strong></h2>
 <p><em><strong>Control the module</strong></em></p>
 <p>The data to control the module can be send is as one JSON string for all channels or separate strings with key-value pairs for each channel independent. If channels are updated individually, the other outputs remain unchanged.</p>
 <p>Each channel can be controlled individually with the following JSON string:</p>
@@ -302,7 +179,7 @@ document.getElementById("Module-Settings").innerHTML = x;
 <p>&nbsp;<em>{"outputChanneln" : y,</em></p>
 <p><em>&hellip;&hellip; }</em></p>
 <p><em><strong>Read data from module</strong></em></p>
-<p>The data coming from the module is pushed out of the node in a JSON string format. This data is only pushed out of the node when an injection took place. If no output update is required but the status of the module is needed, a random message can be injected to the node to retrieve the information. The JSON string holds 8 key&rsquo;s and 8 values. Two general keys holding the groundshift and the temperature. The other 6 key&rsquo;s hold the current for each channel.</p>
+<p>The data coming from the module is pushed out of the node in a JSON string format. This data is only pushed out of the node when an injection took place. If no output update is required but the status of the module is needed, a random message can be injected to the node to retrieve the information. The JSON string holds 5 key/value pairs, these are explained a bit further down.</p>
 <p><em><strong>Groundshift</strong></em></p>
 <p>To prevent the module from influencing the controller ground, the module continuously checks if the ground from the module is ok. If the ground shift due to bad ground connections, this value will start to rise. At a certain threshold, the module will switch of the channels until a module reset takes place.</p>
 <h2><strong>Example</strong></h2>

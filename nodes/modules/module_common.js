@@ -4,23 +4,6 @@ const spi = require('spi-device');
 const BOOTMESSAGELENGTH = 46;
 const SPISPEED = 2000000;
 
-var sendBuffer = Buffer.alloc(BOOTMESSAGELENGTH+5);
-var	receiveBuffer = Buffer.alloc(BOOTMESSAGELENGTH+5);
-
-const dummyMessage = [{
-	sendBuffer, 
-	receiveBuffer,           
-	byteLength : 5,
-	speedHz: SPISPEED 
-}];
-
-const bootMessage = [{
-	sendBuffer, 
-	receiveBuffer,           
-	byteLength: BOOTMESSAGELENGTH+1,
-	speedHz: SPISPEED 
-}];
-
 function ChecksumCalculator(array, length) {
 	var pointer = 0;
 	var checkSum = 0;
@@ -39,6 +22,16 @@ function Module_Reset(state, moduleSlot){
 }
 
 function SendDummyByte(moduleSlot, init) {
+	var sendBuffer = Buffer.alloc(5);
+	var	receiveBuffer = Buffer.alloc(5);
+
+	const dummyMessage = [{
+		sendBuffer, 
+		receiveBuffer,           
+		byteLength : 5,
+		speedHz: SPISPEED 
+	}];
+
 	var sL,sB;
 	switch(moduleSlot)
 	{
@@ -59,7 +52,6 @@ function SendDummyByte(moduleSlot, init) {
 			dummy.close(err =>{});
 			
 			/* Here we start the reset routine */
-			//resetTimeout = setTimeout(OutputModule_StartReset, 50);
 			StartReset(moduleSlot, init);
 		});
 
@@ -77,10 +69,20 @@ function StopReset (moduleSlot,init){
 	Module_Reset(0, moduleSlot);	
 	/*After reset, give the module some time to boot */
 	/*Next step is to check for new available firmware */
-	setTimeout(CancelFirmwareUpload, 100, moduleSlot, init);
+	setTimeout(CancelFirmwareUpload, 200, moduleSlot, init);
 }
 
 function CancelFirmwareUpload(moduleSlot, init){
+	var sendBuffer = Buffer.alloc(BOOTMESSAGELENGTH+1);
+	var	receiveBuffer = Buffer.alloc(BOOTMESSAGELENGTH+1);
+	
+	const bootMessage = [{
+		sendBuffer, 
+		receiveBuffer,           
+		byteLength: BOOTMESSAGELENGTH+1,
+		speedHz: SPISPEED 
+	}];
+
 	var sL,sB;
 	switch(moduleSlot)
 	{
@@ -101,9 +103,10 @@ function CancelFirmwareUpload(moduleSlot, init){
 	const cancel = spi.open(sL,sB, (err) => {
 		cancel.transfer(bootMessage, (err, bootMessage) => {
 			cancel.close(err =>{});
+			/* At this point, The module can be initialized */
+			setTimeout(init, 600, bootMessage[0].receiveBuffer);
 		});
-		/* At this point, The module can be initialized */
-		setTimeout(init, 600);
+		
 	});
 }
 
