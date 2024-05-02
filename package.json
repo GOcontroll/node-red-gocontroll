@@ -31,7 +31,6 @@
 			"4_20ma_module": "nodes/modules/4_20ma_module.js",
 			"input_module_10": "nodes/modules/input_module_10.js",
             "input_module": "nodes/modules/input_module_6.js",
-            "input_module_reset": "nodes/modules/input_module_reset.js",
 			"output_module_10": "nodes/modules/output_module_10.js",
             "output_module": "nodes/modules/output_module_6.js",
             "bridge_module": "nodes/modules/bridge_module.js",

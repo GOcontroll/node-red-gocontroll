@@ -59,7 +59,7 @@
 			key9: {value: "inputSignal9"},
 			key10: {value: "inputSignal10"},
         },
-        inputs:0,
+        inputs:1,
         outputs:1,
         icon: "arrow-in.png",
 		paletteLabel: "10 Ch Input Mod",
@@ -244,17 +244,13 @@ document.getElementById("Module-Settings").innerHTML = x;
 <ul>
 <li>Digital Input &ndash; pulse counter</li>
 </ul>
-<p>For positioning purposes, the module can count the number of pulses. The counter is reset to 0 during start up/ controller reset. If the counter needs to be reset for calibration purposes, the input module reset node can be used. Check the help information from this node for more information.</p>
-<p>The ability&nbsp; to retain the number of counts during reset or reboot will be released in a future update of the module.</p>
-<p>&nbsp;</p>
-<p><em><strong>Signal voltage selection</strong></em></p>
-<p>The module is able to downscale the input voltage to get the highest conversion resolution. Select the range the signal is in between. For example: If the sensor voltage is between 0 and 10V, select the 0 - 12V range for best performance.</p>
+<p>For positioning purposes, the module can count the number of pulses. The counter is reset to 0 during start up/ controller reset. If the counter needs to be reset for calibration purposes, a message can be sent on the input.</p>
 <p>&nbsp;</p>
 <p><em><strong>Pull &ndash; up / pull &ndash; down selection</strong></em></p>
 <p>If required, pull-up and pull down resistors can be enabled on the input signals.</p>
 <p>&nbsp;</p>
 <h2><strong>Data format</strong></h2>
-<p>The data coming from the module is pushed out of the node in a JSON string format holding 10 key&rsquo;s and 10 values. The keys can be customized to descriptive input signal names. This improves the readability from signals in the model.</p>
+<p>The data coming from the module is pushed out of the node in a JSON string format holding 10 key/value pairs. The keys can be customized to descriptive input signal names. This improves the readability from signals in the model.</p>
 <p>&nbsp;</p>
 <h2><strong>Example</strong></h2>
 <p>This example shows the data from an input node during operation.</p>
@@ -264,4 +260,12 @@ document.getElementById("Module-Settings").innerHTML = x;
 <p>"engineTemperature" : 62 ,</p>
 <p>"oilTemperature" : 92 ,</p>
 <p>"ConnectorApin13" : 1002 }</p>
+<p>&nbsp;</p>
+<h2><strong>Resetting the pulse counter</strong></h2>
+<p>The value of a pulse counter can be actively controlled via the input of this node.</p>
+<p>The message to do this contains the channel that needs to be reset (only 1 channel per message):</p>
+<p>{"channel1_2pulses: 0"}</p>
+<p>This message will set the shared counter of channel 1 and 2 to 0</p>
+<p>The new value of the pulse counter must be a value representable by a signed 32 bit integer.</p>
+
 </script>

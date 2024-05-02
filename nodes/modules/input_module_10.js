@@ -221,7 +221,42 @@ function GOcontrollInputModule(config) {
 	**
 	****************************************************************************************/
 	node.on('input', function(msg) {
+		for (var i = 0; i < 5; i++) {
+			var pulses = msg["channel" + (i*2 + 1)+ "_" + (i*2 + 2) + "pulses"];
+			if (pulses !== undefined) {
+				if(pulses >= -2147483640 && pulses <= 2147483640) {
+					var sendBuffer = Buffer.alloc(MESSAGELENGTH+5); 
+					var	receiveBuffer = Buffer.alloc(MESSAGELENGTH+5);
 
+					sendBuffer[0] = moduleSlot;
+					sendBuffer[1] = MESSAGELENGTH-1;
+					sendBuffer[2] = 1;
+					sendBuffer[3] = 12;
+					sendBuffer[4] = 3;
+					sendBuffer[5] = 2;
+					sendBuffer[6] = (i*2 + 1);
+					sendBuffer.writeInt32LE(pulses, 7);
+
+					sendBuffer[MESSAGELENGTH-1] = mod_common.ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
+
+					const inputModuleReset = spi.open(sL,sB, (err) => {
+
+						const message = [{
+							sendBuffer, 
+							receiveBuffer,           
+							byteLength: MESSAGELENGTH+1,
+							speedHz: SPISPEED 
+						}];
+						inputModuleReset.transfer(message, (err, message) => {
+							inputModuleReset.close(err =>{});
+						});
+					});
+				} else {
+					node.warn("Invalid counter value received, should be in the range of a signed 32 bit integer"); 
+					return;
+				}
+			}
+		}
 	});
 
 
