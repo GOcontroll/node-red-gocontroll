@@ -26,19 +26,23 @@ Reads out up to 10 4-20mA sensors.
 Note: if there is a different program (most often a compiled Simulink model) that will try to initialize the modules, it will cause strange behaviour.
 It is required that only one application claiming the modules is running.
 
-## input module
-Reads out a 6 or 10 channel input module, output depends on how it is configured in the node.
+## 6 ch input module
+Reads out a 6 channel input module, output depends on how it is configured in the node.
 Note: if there is a different program (most often a compiled Simulink model) that will try to initialize the modules, it will cause strange behaviour.
 It is required that only one application claiming the modules is running.
 
-## input module reset
-(Re)sets the counter of a certain input channel on an input module, this only works when the input module is configured to provide counter functionality.
+## 10 ch input module
+Reads out a 10 channel input module, output depends on how it is configured in the node.
 Note: if there is a different program (most often a compiled Simulink model) that will try to initialize the modules, it will cause strange behaviour.
 It is required that only one application claiming the modules is running.
 
-## output module
-Controls a 6 or 10 channel output module, outputs some information about the module like temperature, ground shift, status code and current.
-Note: only a 6 channel module provides current per channel, the 10 channel module can only measure total current.
+## 6 ch output module
+Controls a 6 or 10 channel output module, outputs some information about the module like temperature, ground shift, status code, individual channel current and for HW version 7+ the supply voltage.
+Note: if there is a different program (most often a compiled Simulink model) that will try to initialize the modules, it will cause strange behaviour.
+It is required that only one application claiming the modules is running.
+
+## 10 ch output module
+Controls a 10 channel output module, outputs some information about the module like temperature, ground shift, status code, total current and supply voltage.
 Note: if there is a different program (most often a compiled Simulink model) that will try to initialize the modules, it will cause strange behaviour.
 It is required that only one application claiming the modules is running.
 

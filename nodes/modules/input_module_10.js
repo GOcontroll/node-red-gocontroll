@@ -253,7 +253,6 @@ function GOcontrollInputModule(config) {
 					});
 				} else {
 					node.warn("Invalid counter value received, should be in the range of a signed 32 bit integer"); 
-					return;
 				}
 			}
 		}

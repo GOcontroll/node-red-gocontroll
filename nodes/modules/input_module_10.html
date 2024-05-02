@@ -263,9 +263,11 @@ document.getElementById("Module-Settings").innerHTML = x;
 <p>&nbsp;</p>
 <h2><strong>Resetting the pulse counter</strong></h2>
 <p>The value of a pulse counter can be actively controlled via the input of this node.</p>
-<p>The message to do this contains the channel that needs to be reset (only 1 channel per message):</p>
+<p>The message to do this contains the channel that needs to be resets:</p>
 <p>{"channel1_2pulses: 0"}</p>
 <p>This message will set the shared counter of channel 1 and 2 to 0</p>
+<p>Multiple channels can be reset in one message, just provide the proper key value pairs.</p>
+<p>The other channels are "channel3_4pulses", "channel5_6pulses", "channel7_8pulses" and "channel9_10pulses".</p>
 <p>The new value of the pulse counter must be a value representable by a signed 32 bit integer.</p>
 
 </script>
