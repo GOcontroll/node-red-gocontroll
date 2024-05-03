@@ -104,3 +104,17 @@ This file should contain parameter names, memory addresses, datatypes and array 
 }
 ```
 see [uiojs](https://www.npmjs.com/package/uiojs) for more info about the types for example.
+
+# Switching the npm package
+
+Older controllers come preinstalled with node-red blocks that are not managed by npm, this is very difficult to keep up to date so it is recommended to update your node-red-gocontroll install.
+
+There are two ways:
+1. NodeRED interface  
+For this method you must remove every GOcontroll node from your existing flows, I recommend downloading your flow, then clearing the current one, updating, then reuploading your flow.  
+Some modules have had major changes and can't be directly reused so they will have to be manually replaced.  
+Steps: open the menu in the top right -> Manage palette -> remove the existing node-red-gocontroll node -> install tab -> search for @gocontroll -> install @gocontroll-nl/node-red-gocontroll.
+
+2. SSH  
+SSH also allows you to remove the old, no longer required files, as this is not automatically done when uninstalling the package, you can also forcefully unistall/install without have to clear your flow  
+Steps: cd /root/.node-red/ -> npm uninstall node-red-gocontroll -> npm install @gocontroll-nl/node-red-gocontroll -> systemctl restart nodered -> (optional) rm -r /usr/node-red-gocontroll

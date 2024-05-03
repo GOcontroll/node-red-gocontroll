@@ -70,17 +70,14 @@
 			});
 			$.getJSON("controllertype", function(data) {
 				if (data.includes("IV")) {
-					// console.log("IV");
 					$(".IV").show();
 					$(".Mini").hide();
 					$(".Display").hide();
 				} else if (data.includes("Mini")) {
-					// console.log("Mini");
 					$(".IV").hide();
 					$(".Mini").show();
 					$(".Display").hide();
 				} else if (data.includes("Display")) {
-					// console.log("Display");
 					$(".IV").hide();
 					$(".Mini").hide();
 					$(".Display").show();

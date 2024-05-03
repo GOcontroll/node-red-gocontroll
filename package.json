@@ -1,14 +1,14 @@
 {
     "name": "@gocontroll-nl/node-red-gocontroll",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "Node-RED nodes for GOcontroll Moduline controllers",
 	"homepage": "https://gocontroll.com",
 	"os": ["linux"],
     "dependencies": {
-        "i2c-bus": "^5.2.2",
+        "i2c-bus": "^5.2.3",
         "serialport": "^9.2.0",
-        "shelljs": "^0.8.4",
-        "socketcan": "^3.0.0",
+        "shelljs": "^0.8.5",
+        "socketcan": "^4.0.4",
         "spi-device": "^3.1.2",
         "uiojs": "1.1.0"
     },
