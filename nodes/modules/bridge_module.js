@@ -14,7 +14,7 @@ module.exports = function(RED) {
 		var node = this;
 		var firmware;
 		
-		const moduleSlot = config.moduleSlot; 
+		const moduleSlot = parseInt(config.moduleSlot); 
 		const sampleTime = config.sampleTime;
 	
 		var outputType = {};
@@ -57,14 +57,14 @@ module.exports = function(RED) {
 		/*Define the SPI port according the chosen module */
 		switch(moduleSlot)
 		{
-			case "1": sL = 1; sB = 0;    break;
-			case "2": sL = 1; sB = 1;    break;
-			case "3": sL = 2; sB = 0;    break;
-			case "4": sL = 2; sB = 1;    break;
-			case "5": sL = 2; sB = 2;    break;
-			case "6": sL = 2; sB = 3;    break;
-			case "7": sL = 0; sB = 0;    break;
-			case "8": sL = 0; sB = 1;    break;
+			case 1: sL = 1; sB = 0;    break;
+			case 2: sL = 1; sB = 1;    break;
+			case 3: sL = 2; sB = 0;    break;
+			case 4: sL = 2; sB = 1;    break;
+			case 5: sL = 2; sB = 2;    break;
+			case 6: sL = 2; sB = 3;    break;
+			case 7: sL = 0; sB = 0;    break;
+			case 8: sL = 0; sB = 1;    break;
 		}
 
 		/* Send dummy byte once so the master SPI is initialized properly */

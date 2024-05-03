@@ -2,7 +2,15 @@
     {
         "id": "b493cd8fcf6f5eef",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "Modules",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a530381432ee1ea7",
+        "type": "tab",
+        "label": "Others",
         "disabled": false,
         "info": "",
         "env": []
@@ -35,13 +43,13 @@
             "c81be8db260ae962",
             "5ec07c62033a100f"
         ],
-        "x": 54,
-        "y": 39,
+        "x": 294,
+        "y": 139,
         "w": 672,
         "h": 682
     },
     {
-        "id": "a489e18fdd0be7ac",
+        "id": "1a094d59438eed31",
         "type": "group",
         "z": "b493cd8fcf6f5eef",
         "style": {
@@ -64,23 +72,17 @@
             "61f227ceda1dc7bc",
             "d547ec5306cf613a",
             "dcacb49178807ad8",
-            "98974e1700f90e9e",
             "ee9cf9624cacb66c",
-            "bdffafcf3b030d7b",
-            "fd0fdbe4e8cfc3b7",
-            "fb233526d9f6036b",
-            "c38eed50b1f306d0",
-            "59738def1655e818",
-            "57a3e783de1c5370",
-            "c345ce6b0972ff60"
+            "9b0fd946f83e1781",
+            "eae1bfc5d7f282a8"
         ],
-        "x": 794,
-        "y": 99,
-        "w": 1132,
+        "x": 1054,
+        "y": 159,
+        "w": 832,
         "h": 622
     },
     {
-        "id": "f75f0aa7a3faf13a",
+        "id": "dacd075cd12af0be",
         "type": "group",
         "z": "b493cd8fcf6f5eef",
         "style": {
@@ -93,14 +95,20 @@
             "color": "#a4a4a4"
         },
         "nodes": [
-            "0f57631c9b158870",
-            "b84c2edf70450acb",
-            "b5791706f3b98789"
+            "bdffafcf3b030d7b",
+            "fd0fdbe4e8cfc3b7",
+            "fb233526d9f6036b",
+            "c38eed50b1f306d0",
+            "59738def1655e818",
+            "57a3e783de1c5370",
+            "c345ce6b0972ff60",
+            "cec618c2f57a0727",
+            "ee36492e43e4faf4"
         ],
         "x": 2034,
-        "y": 299,
-        "w": 492,
-        "h": 182
+        "y": 159,
+        "w": 712,
+        "h": 622
     },
     {
         "id": "51572c78cf7afa19",
@@ -116,31 +124,25 @@
             "color": "#a4a4a4"
         },
         "nodes": [
-            "8a1f4fa98bf6844d",
             "cb1a524d41231737",
             "45ea0e3e588eec9d",
             "fe8248429b3c6f51",
             "a2b3ee55c4e4f9dd",
-            "dc6aa03d26f01c3e",
-            "9c4fea7aea21c29b",
-            "3aeb497d51ef4f27",
-            "e2977e38f0c1f163",
-            "3b922676a38ad561",
-            "25481e3594c759e6",
             "81844ce1769c3263",
             "cfda500936391b2c",
             "0f4986149a5f3a59",
             "7241a2a82e17f125",
             "3a94e564941ebb67",
-            "f389a23e2e021ad4"
+            "f389a23e2e021ad4",
+            "5f5ff579e3efad0b"
         ],
-        "x": 74,
-        "y": 999,
-        "w": 1092,
-        "h": 562
+        "x": 334,
+        "y": 899,
+        "w": 992,
+        "h": 322
     },
     {
-        "id": "129c265e3f637c87",
+        "id": "94b53ddff10d0ecb",
         "type": "group",
         "z": "b493cd8fcf6f5eef",
         "style": {
@@ -169,12 +171,216 @@
             "a5a5d8ae940b7881",
             "dc8e8bf4e343d005",
             "bae9eb00824a1019",
-            "f7584fe2f17c1287"
+            "f7584fe2f17c1287",
+            "2e7a0f32fdb9a332"
         ],
-        "x": 1294,
-        "y": 999,
+        "x": 1534,
+        "y": 859,
         "w": 1092,
-        "h": 562
+        "h": 642
+    },
+    {
+        "id": "b429b496916ea14d",
+        "type": "group",
+        "z": "b493cd8fcf6f5eef",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "2465d04e8eb58fc7",
+            "5a63eed9e19527ec",
+            "1c50d5fe3b6c06f6",
+            "9f30dc4bd6297b0c",
+            "a78c2c1df0185d6f",
+            "a5e32b3abc0b7104",
+            "e2e2793f989eb3fd",
+            "a50a6d41337ee21d",
+            "92da9a26788fc67a",
+            "5dc089965ec52ea4"
+        ],
+        "x": 334,
+        "y": 1259,
+        "w": 992,
+        "h": 282
+    },
+    {
+        "id": "e4f91341f123346e",
+        "type": "group",
+        "z": "a530381432ee1ea7",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "f6ef1a96c1d4bb91",
+            "28066f10fa28ec83"
+        ],
+        "x": 134,
+        "y": 99,
+        "w": 232,
+        "h": 142
+    },
+    {
+        "id": "39c1d66696cdcd43",
+        "type": "group",
+        "z": "a530381432ee1ea7",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "0fa62b83ea20f204",
+            "cce50cd3b90b9892",
+            "5fc12de67fe0d9da",
+            "4c4f58769f81b34a"
+        ],
+        "x": 474,
+        "y": 99,
+        "w": 572,
+        "h": 142
+    },
+    {
+        "id": "2b4e6c3fdd737d81",
+        "type": "group",
+        "z": "a530381432ee1ea7",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "068c74f2afd65e6f",
+            "c2a1d6deadc9e9ae",
+            "8060378a57007aa3",
+            "bcc1fb9d8405f3fa"
+        ],
+        "x": 1154,
+        "y": 99,
+        "w": 492,
+        "h": 142
+    },
+    {
+        "id": "2a84d6e86e2d1332",
+        "type": "group",
+        "z": "a530381432ee1ea7",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "f9ab427f3a2876ac",
+            "a367158d7242b29e",
+            "9ff1a0bd4c42145f",
+            "a18f7005c87ea0e9",
+            "ad734ba88cce31e7",
+            "4eddfddd4f730fb0"
+        ],
+        "x": 1694,
+        "y": 79,
+        "w": 372,
+        "h": 262
+    },
+    {
+        "id": "762a47d5fa16cda2",
+        "type": "group",
+        "z": "a530381432ee1ea7",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "76e2c1319dacc730",
+            "18818496e4b467de",
+            "bcc3cd5aeb78e18e",
+            "4c6925aad1539275",
+            "241df72bc01c0862",
+            "d6b0b4d0b5d7e0d2"
+        ],
+        "x": 134,
+        "y": 319,
+        "w": 552,
+        "h": 242
+    },
+    {
+        "id": "9a0439c33d61397b",
+        "type": "group",
+        "z": "a530381432ee1ea7",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "47a69aa4992302a6",
+            "3ec8959a9b608ec8",
+            "343ac9726229ed3d",
+            "99cd37fe16d85fb0",
+            "cdc783af7f277ec0",
+            "db1fef09f00cc3d2"
+        ],
+        "x": 714,
+        "y": 319,
+        "w": 492,
+        "h": 242
+    },
+    {
+        "id": "78dfc0f7f6c7aa15",
+        "type": "group",
+        "z": "a530381432ee1ea7",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "b50dc1d3c9eb4c23",
+            "a1f85ef8d0fd913b",
+            "1fb551e9337d0b0b",
+            "c785743e21ad825a",
+            "212fa3b8d0d9e6db"
+        ],
+        "x": 1274,
+        "y": 299,
+        "w": 392,
+        "h": 262
     },
     {
         "id": "8dfee4306d8f0bf1",
@@ -200,8 +406,8 @@
         "key8": "inputSignal8",
         "key9": "inputSignal9",
         "key10": "inputSignal10",
-        "x": 190,
-        "y": 380,
+        "x": 430,
+        "y": 480,
         "wires": [
             [
                 "770e63ac86f207d5",
@@ -232,8 +438,8 @@
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 600,
-        "y": 80,
+        "x": 840,
+        "y": 180,
         "wires": []
     },
     {
@@ -250,8 +456,8 @@
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 600,
-        "y": 140,
+        "x": 840,
+        "y": 240,
         "wires": []
     },
     {
@@ -268,8 +474,8 @@
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 600,
-        "y": 200,
+        "x": 840,
+        "y": 300,
         "wires": []
     },
     {
@@ -286,8 +492,8 @@
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 600,
-        "y": 260,
+        "x": 840,
+        "y": 360,
         "wires": []
     },
     {
@@ -304,8 +510,8 @@
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 600,
-        "y": 320,
+        "x": 840,
+        "y": 420,
         "wires": []
     },
     {
@@ -322,8 +528,8 @@
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 600,
-        "y": 380,
+        "x": 840,
+        "y": 480,
         "wires": []
     },
     {
@@ -340,8 +546,8 @@
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 600,
-        "y": 440,
+        "x": 840,
+        "y": 540,
         "wires": []
     },
     {
@@ -358,8 +564,8 @@
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 600,
-        "y": 500,
+        "x": 840,
+        "y": 600,
         "wires": []
     },
     {
@@ -376,8 +582,8 @@
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 600,
-        "y": 560,
+        "x": 840,
+        "y": 660,
         "wires": []
     },
     {
@@ -394,8 +600,8 @@
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 610,
-        "y": 620,
+        "x": 850,
+        "y": 720,
         "wires": []
     },
     {
@@ -412,123 +618,123 @@
         "targetType": "msg",
         "statusVal": "status",
         "statusType": "auto",
-        "x": 590,
-        "y": 680,
+        "x": 830,
+        "y": 780,
         "wires": []
     },
     {
         "id": "8bdd85b09466ddea",
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
-        "name": "channel1",
+        "g": "1a094d59438eed31",
+        "name": "pull-up",
         "active": true,
         "tosidebar": false,
         "console": false,
         "tostatus": true,
-        "complete": "inputSignal1",
+        "complete": "pull-up",
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 1320,
-        "y": 140,
+        "x": 1750,
+        "y": 200,
         "wires": []
     },
     {
         "id": "a7fdb0506a836d85",
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
-        "name": "channel2",
+        "g": "1a094d59438eed31",
+        "name": "pull-down",
         "active": true,
         "tosidebar": false,
         "console": false,
         "tostatus": true,
-        "complete": "inputSignal2",
+        "complete": "pull-down",
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 1320,
-        "y": 200,
+        "x": 1760,
+        "y": 260,
         "wires": []
     },
     {
         "id": "73e056973943473f",
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
-        "name": "channel3",
+        "g": "1a094d59438eed31",
+        "name": "pull-down-up",
         "active": true,
         "tosidebar": false,
         "console": false,
         "tostatus": true,
-        "complete": "inputSignal3",
+        "complete": "pull-down-up",
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 1320,
-        "y": 260,
+        "x": 1770,
+        "y": 320,
         "wires": []
     },
     {
         "id": "1af6f677da30648f",
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
-        "name": "channel4",
+        "g": "1a094d59438eed31",
+        "name": "no-pull",
         "active": true,
         "tosidebar": false,
         "console": false,
         "tostatus": true,
-        "complete": "inputSignal4",
+        "complete": "no-pull",
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 1320,
-        "y": 320,
+        "x": 1750,
+        "y": 380,
         "wires": []
     },
     {
         "id": "24b912ad43790829",
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
-        "name": "channel5",
+        "g": "1a094d59438eed31",
+        "name": "pulse5",
         "active": true,
         "tosidebar": false,
         "console": false,
         "tostatus": true,
-        "complete": "inputSignal5",
+        "complete": "pulse5",
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 1320,
-        "y": 380,
+        "x": 1750,
+        "y": 440,
         "wires": []
     },
     {
         "id": "3e2010ee5eecb10e",
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
-        "name": "channel6",
+        "g": "1a094d59438eed31",
+        "name": "pulse6",
         "active": true,
         "tosidebar": false,
         "console": false,
         "tostatus": true,
-        "complete": "inputSignal6",
+        "complete": "pulse6",
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 1320,
-        "y": 440,
+        "x": 1750,
+        "y": 500,
         "wires": []
     },
     {
         "id": "560282f9924cd716",
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
+        "g": "1a094d59438eed31",
         "name": "channel7",
         "active": true,
         "tosidebar": false,
@@ -538,15 +744,15 @@
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 1320,
-        "y": 500,
+        "x": 1760,
+        "y": 560,
         "wires": []
     },
     {
         "id": "61f227ceda1dc7bc",
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
+        "g": "1a094d59438eed31",
         "name": "channel8",
         "active": true,
         "tosidebar": false,
@@ -556,15 +762,15 @@
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 1320,
-        "y": 560,
+        "x": 1760,
+        "y": 620,
         "wires": []
     },
     {
         "id": "d547ec5306cf613a",
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
+        "g": "1a094d59438eed31",
         "name": "channel9",
         "active": true,
         "tosidebar": false,
@@ -574,15 +780,15 @@
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 1320,
-        "y": 620,
+        "x": 1760,
+        "y": 680,
         "wires": []
     },
     {
         "id": "dcacb49178807ad8",
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
+        "g": "1a094d59438eed31",
         "name": "channel10",
         "active": true,
         "tosidebar": false,
@@ -592,94 +798,668 @@
         "targetType": "msg",
         "statusVal": "inputSignal1",
         "statusType": "auto",
-        "x": 1330,
-        "y": 680,
+        "x": 1770,
+        "y": 740,
         "wires": []
     },
     {
-        "id": "98974e1700f90e9e",
+        "id": "5ec07c62033a100f",
+        "type": "comment",
+        "z": "b493cd8fcf6f5eef",
+        "g": "a1c7810458171ece",
+        "name": "4-20 mA module",
+        "info": "The 4-20 mA module has 10 input channels and returns a status of the sensor supplies.\n\nThis module requires almost no configuration so it is very easy to use.\n\nThe only thing that is really configurable is whether a sensor supply is enabled.\n\nThere are 5 sensor supplies available for the 10 channels. So each supply provides for 2 channels. To see the pinout of the module check [the hardware manual](https://gocontroll.com/wp-content/uploads/2023/12/GOcontroll_Hardware_Manual.pdf).",
+        "x": 460,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "ee9cf9624cacb66c",
+        "type": "comment",
+        "z": "b493cd8fcf6f5eef",
+        "g": "1a094d59438eed31",
+        "name": "10 channel input module",
+        "info": "The 10 channel input modules are used to read digital or analog (voltage) signals. These are limited by that specific modules capabilities. A 10 channel module is a bit more limitted in what it can do compared to a 6 channel module.\n\nTo see the pinout of the module on your specific controller, see [the hardware manual](https://gocontroll.com/wp-content/uploads/2023/12/GOcontroll_Hardware_Manual.pdf).",
+        "x": 1410,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "bdffafcf3b030d7b",
         "type": "Input-Module",
         "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
+        "g": "dacd075cd12af0be",
         "name": "",
-        "moduleSlot": "2",
-        "moduleType": "2",
+        "moduleSlot": "3",
         "sampleTime": "1000",
-        "input1": "2",
+        "input1": "8",
         "supply1": "1",
-        "supply2": 0,
-        "supply3": 0,
+        "supply2": "1",
+        "supply3": "1",
         "v1": 0,
-        "pua1": 0,
+        "pua1": "3",
         "pda1": 0,
-        "pub1": 0,
-        "pdb1": 0,
-        "input2": "2",
+        "input2": "8",
         "v2": 0,
-        "pua2": 0,
+        "pua2": "3",
         "pda2": 0,
-        "pub2": 0,
-        "pdb2": 0,
         "input3": "2",
         "v3": 0,
-        "pua3": 0,
+        "pua3": "3",
         "pda3": 0,
-        "pub3": 0,
-        "pdb3": 0,
         "input4": "2",
         "v4": 0,
         "pua4": 0,
-        "pda4": 0,
-        "pub4": 0,
-        "pdb4": 0,
+        "pda4": "3",
         "input5": "2",
         "v5": 0,
-        "pua5": 0,
-        "pda5": 0,
-        "pub5": 0,
-        "pdb5": 0,
+        "pua5": "3",
+        "pda5": "3",
         "input6": "2",
         "v6": 0,
         "pua6": 0,
         "pda6": 0,
-        "pub6": 0,
+        "input7": 1,
+        "key1": "pulse1",
+        "key2": "pulse2",
+        "key3": "pull-up",
+        "key4": "pull-down",
+        "key5": "pull-down-up",
+        "key6": "no-pull",
+        "x": 2380,
+        "y": 460,
+        "wires": [
+            [
+                "fd0fdbe4e8cfc3b7",
+                "fb233526d9f6036b",
+                "c38eed50b1f306d0",
+                "59738def1655e818",
+                "57a3e783de1c5370",
+                "c345ce6b0972ff60"
+            ]
+        ]
+    },
+    {
+        "id": "fd0fdbe4e8cfc3b7",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "dacd075cd12af0be",
+        "name": "pulse1",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "pulse1",
+        "targetType": "msg",
+        "statusVal": "inputSignal1",
+        "statusType": "auto",
+        "x": 2610,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "fb233526d9f6036b",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "dacd075cd12af0be",
+        "name": "pulse2",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "pulse2",
+        "targetType": "msg",
+        "statusVal": "inputSignal1",
+        "statusType": "auto",
+        "x": 2610,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "c38eed50b1f306d0",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "dacd075cd12af0be",
+        "name": "pull-up",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "pull-up",
+        "targetType": "msg",
+        "statusVal": "inputSignal1",
+        "statusType": "auto",
+        "x": 2610,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "59738def1655e818",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "dacd075cd12af0be",
+        "name": "pull-down",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "pull-down",
+        "targetType": "msg",
+        "statusVal": "inputSignal1",
+        "statusType": "auto",
+        "x": 2620,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "57a3e783de1c5370",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "dacd075cd12af0be",
+        "name": "pull-down-up",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "pull-down-up",
+        "targetType": "msg",
+        "statusVal": "inputSignal1",
+        "statusType": "auto",
+        "x": 2630,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "c345ce6b0972ff60",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "dacd075cd12af0be",
+        "name": "no-pull",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "no-pull",
+        "targetType": "msg",
+        "statusVal": "inputSignal1",
+        "statusType": "auto",
+        "x": 2610,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "7f3c0699e5fff631",
+        "type": "comment",
+        "z": "b493cd8fcf6f5eef",
+        "name": "GOcontroll Modules",
+        "info": "Usage of the modules requires a bit of attention from the user, first of all it is ill advised to have any active module nodes when there is a simulink model running on the controller. This will cause bus contention and undefined behaviour, if there is a simulink model running, control the modules from there.\n\nA configured module node will look at /usr/module-firmware/modules.txt to see the current module layout and if it matches what is configured. If modules are switched to a different position you should run the 'go-scan-modules' command in the systems terminal, this will temporarily stop the running simulink model and node-red flow so it has absolute ownership of the module busses and then update the aforementioned modules.txt.",
+        "x": 1450,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "63d6ca4e33673477",
+        "type": "Output-Module",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "",
+        "moduleSlot": "5",
+        "sampleTime": "200",
+        "freq12": "4",
+        "freq34": "4",
+        "freq56": "1",
+        "output1": "2",
+        "output2": "7",
+        "output3": "7",
+        "output4": "8",
+        "output5": "1",
+        "output6": "1",
+        "key1": "halfBridge",
+        "key2": "peaknhold",
+        "key3": "currentControl",
+        "key4": "freqControl",
+        "key5": "outputSignal5",
+        "key6": "outputSignal6",
+        "current1": "4000",
+        "current2": "4000",
+        "current3": "4000",
+        "current4": "4000",
+        "current5": "4000",
+        "current6": "4000",
+        "peakcurrent1": "800",
+        "peakcurrent2": "1500",
+        "peakcurrent3": "800",
+        "peakcurrent4": "800",
+        "peakcurrent5": "800",
+        "peakcurrent6": "800",
+        "time1": "500",
+        "time2": "500",
+        "time3": "0",
+        "time4": "500",
+        "time5": "500",
+        "time6": "500",
+        "x": 2070,
+        "y": 1140,
+        "wires": [
+            [
+                "0cacad6574319831",
+                "5d35e968bbd58ca5",
+                "b38db88bebbbc087",
+                "ed4c204ead111170",
+                "a5a5d8ae940b7881",
+                "dc8e8bf4e343d005",
+                "bae9eb00824a1019",
+                "2e7a0f32fdb9a332"
+            ]
+        ]
+    },
+    {
+        "id": "1e9e8a14e4e8f1ec",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "halfbridge to 0",
+        "props": [
+            {
+                "p": "halfBridge",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1750,
+        "y": 920,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "1a029704b73a5060",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "halfbridge to 500",
+        "props": [
+            {
+                "p": "halfBridge",
+                "v": "500",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1740,
+        "y": 980,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "a24cc2faa351c3c8",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "peaknhold disable",
+        "props": [
+            {
+                "p": "peaknhold",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1730,
+        "y": 1040,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "b5b202232447735d",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "peaknhold hold at 1000mA",
+        "props": [
+            {
+                "p": "peaknhold",
+                "v": "1000",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1710,
+        "y": 1100,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "1357340716d71cad",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "currentcontrol disable",
+        "props": [
+            {
+                "p": "currentControl",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1720,
+        "y": 1180,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "60e1f521a6598ed6",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "currentcontrol set to 1000",
+        "props": [
+            {
+                "p": "currentControl",
+                "v": "1000",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1710,
+        "y": 1240,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "fa0baba7193599a0",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "frequencycontrol disable",
+        "props": [
+            {
+                "p": "freqControl",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1710,
+        "y": 1300,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "c1d37c8646efb586",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "frequencycontrol set to 250Hz",
+        "props": [
+            {
+                "p": "freqControl",
+                "v": "250",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1700,
+        "y": 1360,
+        "wires": [
+            [
+                "63d6ca4e33673477"
+            ]
+        ]
+    },
+    {
+        "id": "0cacad6574319831",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "half bridge current (mA)",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "halfBridgeCurrent",
+        "targetType": "msg",
+        "statusVal": "halfBridgeCurrent",
+        "statusType": "auto",
+        "x": 2430,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "5d35e968bbd58ca5",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "peaknhold current (mA)",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "peaknholdCurrent",
+        "targetType": "msg",
+        "statusVal": "halfBridgeCurrent",
+        "statusType": "auto",
+        "x": 2430,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "b38db88bebbbc087",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "current control current (mA)",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "currentControlCurrent",
+        "targetType": "msg",
+        "statusVal": "halfBridgeCurrent",
+        "statusType": "auto",
+        "x": 2440,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "ed4c204ead111170",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "frequency control current (mA)",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "freqControlCurrent",
+        "targetType": "msg",
+        "statusVal": "halfBridgeCurrent",
+        "statusType": "auto",
+        "x": 2450,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "a5a5d8ae940b7881",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "module temperature",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "moduleTemperature",
+        "targetType": "msg",
+        "statusVal": "moduleTemperature",
+        "statusType": "auto",
+        "x": 2420,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "dc8e8bf4e343d005",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "module ground shift",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "moduleGroundShift",
+        "targetType": "msg",
+        "statusVal": "moduleGroundShift",
+        "statusType": "auto",
+        "x": 2410,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "bae9eb00824a1019",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "module status",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "moduleStatus",
+        "targetType": "msg",
+        "statusVal": "moduleStatus",
+        "statusType": "auto",
+        "x": 2400,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "f7584fe2f17c1287",
+        "type": "comment",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "6 channel output module",
+        "info": "The 6 channel output is generally the best output module functionality wise, most number of functions and pretty high output current available.\nAs a safety feature, output modules need to be continuously sent up to date info, because this doesn't really line up with how NodeRED works, the input is buffered and then repeatedly sent in the background untill you update the buffer by giving the node new setpoints.\n\nTo see the pinout of the module on your specific controller, see [the hardware manual](https://gocontroll.com/wp-content/uploads/2023/12/GOcontroll_Hardware_Manual.pdf).",
+        "x": 2070,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "9b0fd946f83e1781",
+        "type": "Input-Module-10",
+        "z": "b493cd8fcf6f5eef",
+        "g": "1a094d59438eed31",
+        "name": "",
+        "moduleSlot": "2",
+        "sampleTime": "1000",
+        "supply1": 1,
+        "supply2": 1,
+        "input1": "2",
+        "v1": 0,
+        "pub1": "1",
+        "pdb1": 0,
+        "input2": "2",
+        "v2": 0,
+        "pub2": 0,
+        "pdb2": "1",
+        "input3": "2",
+        "v3": 0,
+        "pub3": "1",
+        "pdb3": "1",
+        "input4": "2",
+        "v4": 0,
+        "pub4": 0,
+        "pdb4": 0,
+        "input5": "8",
+        "v5": 0,
+        "pub5": "1",
+        "pdb5": 0,
+        "input6": "8",
+        "v6": 0,
+        "pub6": "1",
         "pdb6": 0,
         "input7": "2",
         "v7": 0,
-        "pua7": 0,
-        "pda7": 0,
         "pub7": 0,
         "pdb7": 0,
         "input8": "2",
         "v8": 0,
-        "pua8": 0,
-        "pda8": 0,
         "pub8": 0,
         "pdb8": 0,
         "input9": "2",
         "v9": 0,
-        "pua9": 0,
-        "pda9": 0,
         "pub9": 0,
         "pdb9": 0,
         "input10": "2",
         "v10": 0,
-        "pua10": 0,
-        "pda10": 0,
         "pub10": 0,
         "pdb10": 0,
-        "key1": "inputSignal1",
-        "key2": "inputSignal2",
-        "key3": "inputSignal3",
-        "key4": "inputSignal4",
-        "key5": "inputSignal5",
-        "key6": "inputSignal6",
+        "key1": "pull-up",
+        "key2": "pull-down",
+        "key3": "pull-down-up",
+        "key4": "no-pull",
+        "key5": "pulse5",
+        "key6": "pulse6",
         "key7": "inputSignal7",
         "key8": "inputSignal8",
         "key9": "inputSignal9",
         "key10": "inputSignal10",
-        "x": 920,
-        "y": 420,
+        "x": 1400,
+        "y": 480,
         "wires": [
             [
                 "8bdd85b09466ddea",
@@ -696,263 +1476,25 @@
         ]
     },
     {
-        "id": "5ec07c62033a100f",
+        "id": "cec618c2f57a0727",
         "type": "comment",
         "z": "b493cd8fcf6f5eef",
-        "g": "a1c7810458171ece",
-        "name": "4-20 mA module",
-        "info": "The 4-20 mA module has 10 input channels and returns a status of the sensor supplies.\n\nThis module requires almost no configuration so it is very easy to use.\n\nThe only thing that is really configurable is whether a sensor supply is enabled.\n\nThere are 5 sensor supplies available for the 10 channels. So each supply provides for 2 channels. To see the pinout of the module check [the hardware manual](https://gocontroll.com/wp-content/uploads/2023/12/GOcontroll_Hardware_Manual.pdf).",
-        "x": 220,
-        "y": 280,
+        "g": "dacd075cd12af0be",
+        "name": "6 channel input module",
+        "info": "The 6 channel input modules are used to read digital or analog (voltage) signals. These are limited by that specific modules capabilities. A 10 channel module is a bit more limitted in what it can do compared to a 6 channel module.\n\nTo see the pinout of the module on your specific controller, see [the hardware manual](https://gocontroll.com/wp-content/uploads/2023/12/GOcontroll_Hardware_Manual.pdf).",
+        "x": 2380,
+        "y": 380,
         "wires": []
     },
     {
-        "id": "ee9cf9624cacb66c",
-        "type": "comment",
-        "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
-        "name": "generic input module",
-        "info": "The 6-10 channel input modules are used to read digital or analog (voltage) signals. These are limited by that specific modules capabilities. A 10 channel module is a bit more limitted in what it can do compared to a 6 channel module, for example a 6 channel module can read a wider range of voltages and has a larger pull up and pull down selection.\n\nTo see the pinout of the module on your specific controller, see [the hardware manual](https://gocontroll.com/wp-content/uploads/2023/12/GOcontroll_Hardware_Manual.pdf).",
-        "x": 950,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "bdffafcf3b030d7b",
-        "type": "Input-Module",
-        "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
-        "name": "",
-        "moduleSlot": "3",
-        "moduleType": 1,
-        "sampleTime": "1000",
-        "input1": "8",
-        "supply1": "1",
-        "supply2": "1",
-        "supply3": "1",
-        "v1": 0,
-        "pua1": 0,
-        "pda1": 0,
-        "pub1": 0,
-        "pdb1": 0,
-        "input2": "8",
-        "v2": 0,
-        "pua2": 0,
-        "pda2": 0,
-        "pub2": 0,
-        "pdb2": 0,
-        "input3": "2",
-        "v3": 0,
-        "pua3": 0,
-        "pda3": 0,
-        "pub3": 0,
-        "pdb3": 0,
-        "input4": "2",
-        "v4": 0,
-        "pua4": 0,
-        "pda4": 0,
-        "pub4": 0,
-        "pdb4": 0,
-        "input5": "2",
-        "v5": 0,
-        "pua5": 0,
-        "pda5": 0,
-        "pub5": 0,
-        "pdb5": 0,
-        "input6": "2",
-        "v6": 0,
-        "pua6": 0,
-        "pda6": 0,
-        "pub6": 0,
-        "pdb6": 0,
-        "input7": 1,
-        "v7": 0,
-        "pua7": 0,
-        "pda7": 0,
-        "pub7": 0,
-        "pdb7": 0,
-        "input8": 1,
-        "v8": 0,
-        "pua8": 0,
-        "pda8": 0,
-        "pub8": 0,
-        "pdb8": 0,
-        "input9": 1,
-        "v9": 0,
-        "pua9": 0,
-        "pda9": 0,
-        "pub9": 0,
-        "pdb9": 0,
-        "input10": 1,
-        "v10": 0,
-        "pua10": 0,
-        "pda10": 0,
-        "pub10": 0,
-        "pdb10": 0,
-        "key1": "inputSignal1",
-        "key2": "inputSignal2",
-        "key3": "inputSignal3",
-        "key4": "inputSignal4",
-        "key5": "inputSignal5",
-        "key6": "inputSignal6",
-        "key7": "inputSignal7",
-        "key8": "inputSignal8",
-        "key9": "inputSignal9",
-        "key10": "inputSignal10",
-        "x": 1580,
-        "y": 420,
-        "wires": [
-            [
-                "fd0fdbe4e8cfc3b7",
-                "fb233526d9f6036b",
-                "c38eed50b1f306d0",
-                "59738def1655e818",
-                "57a3e783de1c5370",
-                "c345ce6b0972ff60"
-            ]
-        ]
-    },
-    {
-        "id": "fd0fdbe4e8cfc3b7",
-        "type": "debug",
-        "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
-        "name": "channel1",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "inputSignal1",
-        "targetType": "msg",
-        "statusVal": "inputSignal1",
-        "statusType": "auto",
-        "x": 1820,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "fb233526d9f6036b",
-        "type": "debug",
-        "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
-        "name": "channel2",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "inputSignal2",
-        "targetType": "msg",
-        "statusVal": "inputSignal1",
-        "statusType": "auto",
-        "x": 1820,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "c38eed50b1f306d0",
-        "type": "debug",
-        "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
-        "name": "channel3",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "inputSignal3",
-        "targetType": "msg",
-        "statusVal": "inputSignal1",
-        "statusType": "auto",
-        "x": 1820,
-        "y": 400,
-        "wires": []
-    },
-    {
-        "id": "59738def1655e818",
-        "type": "debug",
-        "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
-        "name": "channel4",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "inputSignal4",
-        "targetType": "msg",
-        "statusVal": "inputSignal1",
-        "statusType": "auto",
-        "x": 1820,
-        "y": 460,
-        "wires": []
-    },
-    {
-        "id": "57a3e783de1c5370",
-        "type": "debug",
-        "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
-        "name": "channel5",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "inputSignal5",
-        "targetType": "msg",
-        "statusVal": "inputSignal1",
-        "statusType": "auto",
-        "x": 1820,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "c345ce6b0972ff60",
-        "type": "debug",
-        "z": "b493cd8fcf6f5eef",
-        "g": "a489e18fdd0be7ac",
-        "name": "channel6",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "inputSignal6",
-        "targetType": "msg",
-        "statusVal": "inputSignal1",
-        "statusType": "auto",
-        "x": 1820,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "7f3c0699e5fff631",
-        "type": "comment",
-        "z": "b493cd8fcf6f5eef",
-        "name": "GOcontroll Modules",
-        "info": "Usage of the modules requires a bit of attention from the user, first of all it is ill advised to have any active module nodes when there is a simulink model running on the controller. This will cause bus contention and undefined behaviour, if there is a simulink model running, control the modules from there.\n\nA configured module node will look at /usr/module-firmware/modules.txt to see the current module layout and if it matches what is configured. If modules are switched to a different position you should run the 'go-scan-modules' command in the systems terminal, this will temporarily stop the running simulink model and node-red flow so it has absolute ownership of the module busses and then update the aforementioned modules.txt.",
-        "x": 1030,
-        "y": 40,
-        "wires": []
-    },
-    {
-        "id": "0f57631c9b158870",
-        "type": "Input-Module-Reset",
-        "z": "b493cd8fcf6f5eef",
-        "g": "f75f0aa7a3faf13a",
-        "name": "",
-        "moduleSlot": "3",
-        "moduleType": 1,
-        "channel6": "1",
-        "channel10": "",
-        "x": 2390,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "b84c2edf70450acb",
+        "id": "eae1bfc5d7f282a8",
         "type": "inject",
         "z": "b493cd8fcf6f5eef",
-        "g": "f75f0aa7a3faf13a",
-        "name": "zero pulse counter",
+        "g": "1a094d59438eed31",
+        "name": "Reset pulses 5-6",
         "props": [
             {
-                "p": "pulsecounterValue",
+                "p": "channel5_6pulses",
                 "v": "0",
                 "vt": "num"
             }
@@ -962,100 +1504,37 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 2170,
-        "y": 440,
+        "x": 1180,
+        "y": 480,
         "wires": [
             [
-                "0f57631c9b158870"
+                "9b0fd946f83e1781"
             ]
         ]
     },
     {
-        "id": "b5791706f3b98789",
-        "type": "comment",
+        "id": "ee36492e43e4faf4",
+        "type": "inject",
         "z": "b493cd8fcf6f5eef",
-        "g": "f75f0aa7a3faf13a",
-        "name": "pulsecounter reset",
-        "info": "",
-        "x": 2270,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "8a1f4fa98bf6844d",
-        "type": "Output-Module",
-        "z": "b493cd8fcf6f5eef",
-        "g": "51572c78cf7afa19",
-        "name": "",
-        "moduleSlot": "4",
-        "moduleType": "1",
-        "sampleTime": "200",
-        "freq12": "4",
-        "freq34": "4",
-        "freq56": "1",
-        "freq78": "1",
-        "freq910": "1",
-        "output1": "2",
-        "output2": "7",
-        "output3": "7",
-        "output4": "8",
-        "output5": "1",
-        "output6": "1",
-        "output7": "1",
-        "output8": "1",
-        "output9": "1",
-        "output10": "1",
-        "key1": "halfBridge",
-        "key2": "peaknhold",
-        "key3": "currentControl",
-        "key4": "freqControl",
-        "key5": "outputSignal5",
-        "key6": "outputSignal6",
-        "key7": "outputSignal7",
-        "key8": "outputSignal8",
-        "key9": "outputSignal9",
-        "key10": "outputSignal10",
-        "current1": "4000",
-        "current2": "4000",
-        "current3": "4000",
-        "current4": "4000",
-        "current5": "4000",
-        "current6": "4000",
-        "current7": "4000",
-        "current8": "4000",
-        "current9": "4000",
-        "current10": "4000",
-        "peakcurrent1": "800",
-        "peakcurrent2": "1500",
-        "peakcurrent3": "800",
-        "peakcurrent4": "800",
-        "peakcurrent5": "800",
-        "peakcurrent6": "800",
-        "peakcurrent7": "800",
-        "peakcurrent8": "800",
-        "peakcurrent9": "800",
-        "peakcurrent10": "800",
-        "time1": "500",
-        "time2": "500",
-        "time3": "0",
-        "time4": "500",
-        "time5": "500",
-        "time6": "500",
-        "time7": "500",
-        "time8": "500",
-        "time9": "500",
-        "time10": "500",
-        "x": 610,
-        "y": 1280,
+        "g": "dacd075cd12af0be",
+        "name": "Reset pulses 5-6",
+        "props": [
+            {
+                "p": "channel5_6pulses",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 2160,
+        "y": 460,
         "wires": [
             [
-                "3b922676a38ad561",
-                "25481e3594c759e6",
-                "81844ce1769c3263",
-                "cfda500936391b2c",
-                "0f4986149a5f3a59",
-                "7241a2a82e17f125",
-                "3a94e564941ebb67"
+                "bdffafcf3b030d7b"
             ]
         ]
     },
@@ -1064,10 +1543,10 @@
         "type": "inject",
         "z": "b493cd8fcf6f5eef",
         "g": "51572c78cf7afa19",
-        "name": "halfbridge to 0",
+        "name": "high side duty to 0",
         "props": [
             {
-                "p": "halfBridge",
+                "p": "highsideduty",
                 "v": "0",
                 "vt": "num"
             }
@@ -1077,11 +1556,11 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 290,
-        "y": 1060,
+        "x": 490,
+        "y": 960,
         "wires": [
             [
-                "8a1f4fa98bf6844d"
+                "5f5ff579e3efad0b"
             ]
         ]
     },
@@ -1090,10 +1569,10 @@
         "type": "inject",
         "z": "b493cd8fcf6f5eef",
         "g": "51572c78cf7afa19",
-        "name": "halfbridge to 500",
+        "name": "high side duty to 500",
         "props": [
             {
-                "p": "halfBridge",
+                "p": "highsideduty",
                 "v": "500",
                 "vt": "num"
             }
@@ -1103,11 +1582,11 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 280,
-        "y": 1120,
+        "x": 490,
+        "y": 1020,
         "wires": [
             [
-                "8a1f4fa98bf6844d"
+                "5f5ff579e3efad0b"
             ]
         ]
     },
@@ -1116,10 +1595,10 @@
         "type": "inject",
         "z": "b493cd8fcf6f5eef",
         "g": "51572c78cf7afa19",
-        "name": "peaknhold disable",
+        "name": "high side digital disable",
         "props": [
             {
-                "p": "peaknhold",
+                "p": "highsidedig",
                 "v": "0",
                 "vt": "num"
             }
@@ -1129,11 +1608,11 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 270,
-        "y": 1180,
+        "x": 480,
+        "y": 1100,
         "wires": [
             [
-                "8a1f4fa98bf6844d"
+                "5f5ff579e3efad0b"
             ]
         ]
     },
@@ -1142,11 +1621,11 @@
         "type": "inject",
         "z": "b493cd8fcf6f5eef",
         "g": "51572c78cf7afa19",
-        "name": "peaknhold hold at 1000mA",
+        "name": "high side digital enable",
         "props": [
             {
-                "p": "peaknhold",
-                "v": "1000",
+                "p": "highsidedig",
+                "v": "1",
                 "vt": "num"
             }
         ],
@@ -1155,170 +1634,30 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 250,
-        "y": 1240,
+        "x": 480,
+        "y": 1160,
         "wires": [
             [
-                "8a1f4fa98bf6844d"
+                "5f5ff579e3efad0b"
             ]
         ]
-    },
-    {
-        "id": "dc6aa03d26f01c3e",
-        "type": "inject",
-        "z": "b493cd8fcf6f5eef",
-        "g": "51572c78cf7afa19",
-        "name": "currentcontrol disable",
-        "props": [
-            {
-                "p": "currentControl",
-                "v": "0",
-                "vt": "num"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 260,
-        "y": 1320,
-        "wires": [
-            [
-                "8a1f4fa98bf6844d"
-            ]
-        ]
-    },
-    {
-        "id": "9c4fea7aea21c29b",
-        "type": "inject",
-        "z": "b493cd8fcf6f5eef",
-        "g": "51572c78cf7afa19",
-        "name": "currentcontrol set to 1000",
-        "props": [
-            {
-                "p": "currentControl",
-                "v": "1000",
-                "vt": "num"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 250,
-        "y": 1380,
-        "wires": [
-            [
-                "8a1f4fa98bf6844d"
-            ]
-        ]
-    },
-    {
-        "id": "3aeb497d51ef4f27",
-        "type": "inject",
-        "z": "b493cd8fcf6f5eef",
-        "g": "51572c78cf7afa19",
-        "name": "frequencycontrol disable",
-        "props": [
-            {
-                "p": "freqControl",
-                "v": "0",
-                "vt": "num"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 250,
-        "y": 1440,
-        "wires": [
-            [
-                "8a1f4fa98bf6844d"
-            ]
-        ]
-    },
-    {
-        "id": "e2977e38f0c1f163",
-        "type": "inject",
-        "z": "b493cd8fcf6f5eef",
-        "g": "51572c78cf7afa19",
-        "name": "frequencycontrol set to 250Hz",
-        "props": [
-            {
-                "p": "freqControl",
-                "v": "250",
-                "vt": "num"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 240,
-        "y": 1500,
-        "wires": [
-            [
-                "8a1f4fa98bf6844d"
-            ]
-        ]
-    },
-    {
-        "id": "3b922676a38ad561",
-        "type": "debug",
-        "z": "b493cd8fcf6f5eef",
-        "g": "51572c78cf7afa19",
-        "name": "half bridge current (mA)",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "halfBridgeCurrent",
-        "targetType": "msg",
-        "statusVal": "halfBridgeCurrent",
-        "statusType": "auto",
-        "x": 970,
-        "y": 1040,
-        "wires": []
-    },
-    {
-        "id": "25481e3594c759e6",
-        "type": "debug",
-        "z": "b493cd8fcf6f5eef",
-        "g": "51572c78cf7afa19",
-        "name": "peaknhold current (mA)",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "peaknholdCurrent",
-        "targetType": "msg",
-        "statusVal": "halfBridgeCurrent",
-        "statusType": "auto",
-        "x": 970,
-        "y": 1120,
-        "wires": []
     },
     {
         "id": "81844ce1769c3263",
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
         "g": "51572c78cf7afa19",
-        "name": "current control current (mA)",
+        "name": "module voltage",
         "active": true,
         "tosidebar": false,
         "console": false,
         "tostatus": true,
-        "complete": "currentControlCurrent",
+        "complete": "moduleVoltage",
         "targetType": "msg",
         "statusVal": "halfBridgeCurrent",
         "statusType": "auto",
-        "x": 980,
-        "y": 1200,
+        "x": 1160,
+        "y": 940,
         "wires": []
     },
     {
@@ -1326,17 +1665,17 @@
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
         "g": "51572c78cf7afa19",
-        "name": "frequency control current (mA)",
+        "name": "module current",
         "active": true,
         "tosidebar": false,
         "console": false,
         "tostatus": true,
-        "complete": "freqControlCurrent",
+        "complete": "moduleCurrent",
         "targetType": "msg",
         "statusVal": "halfBridgeCurrent",
         "statusType": "auto",
-        "x": 990,
-        "y": 1280,
+        "x": 1160,
+        "y": 1000,
         "wires": []
     },
     {
@@ -1353,8 +1692,8 @@
         "targetType": "msg",
         "statusVal": "moduleTemperature",
         "statusType": "auto",
-        "x": 960,
-        "y": 1360,
+        "x": 1180,
+        "y": 1060,
         "wires": []
     },
     {
@@ -1371,8 +1710,8 @@
         "targetType": "msg",
         "statusVal": "moduleGroundShift",
         "statusType": "auto",
-        "x": 950,
-        "y": 1440,
+        "x": 1170,
+        "y": 1120,
         "wires": []
     },
     {
@@ -1389,8 +1728,8 @@
         "targetType": "msg",
         "statusVal": "moduleStatus",
         "statusType": "auto",
-        "x": 940,
-        "y": 1520,
+        "x": 1160,
+        "y": 1180,
         "wires": []
     },
     {
@@ -1398,125 +1737,108 @@
         "type": "comment",
         "z": "b493cd8fcf6f5eef",
         "g": "51572c78cf7afa19",
-        "name": "6 channel output module",
-        "info": "The 6 channel output is generally the best output module functionality wise, most number of functions and pretty high output current available.\nAs a safety feature, output modules need to be continuously sent up to date info, because this doesn't really line up with how NodeRED works, the input is buffered and then repeatedly sent in the background untill you update the buffer by giving the node new setpoints.\n\nTo see the pinout of the module on your specific controller, see [the hardware manual](https://gocontroll.com/wp-content/uploads/2023/12/GOcontroll_Hardware_Manual.pdf).",
-        "x": 610,
-        "y": 1160,
+        "name": "10 channel output module",
+        "info": "The 10 channel output module provides a larger number of less powerfull outputs, they are only rated for a nominal voltage of 1A.\n\nAs a safety feature, output modules need to be continuously sent up to date info, because this doesn't really line up with how NodeRED works, the input is buffered and then repeatedly sent in the background untill you update the buffer by giving the node new setpoints.\n\nTo see the pinout of the module on your specific controller, see [the hardware manual](https://gocontroll.com/wp-content/uploads/2023/12/GOcontroll_Hardware_Manual.pdf).",
+        "x": 830,
+        "y": 960,
         "wires": []
     },
     {
-        "id": "63d6ca4e33673477",
-        "type": "Output-Module",
+        "id": "5f5ff579e3efad0b",
+        "type": "Output-Module-10",
         "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
+        "g": "51572c78cf7afa19",
         "name": "",
-        "moduleSlot": "5",
-        "moduleType": "2",
+        "moduleSlot": "4",
         "sampleTime": "200",
         "freq12": "4",
-        "freq34": "4",
+        "freq34": "1",
         "freq56": "1",
         "freq78": "1",
         "freq910": "1",
         "output1": "2",
-        "output2": "7",
-        "output3": "7",
-        "output4": "8",
+        "output2": "3",
+        "output3": "1",
+        "output4": "1",
         "output5": "1",
         "output6": "1",
         "output7": "1",
         "output8": "1",
         "output9": "1",
         "output10": "1",
-        "key1": "halfBridge",
-        "key2": "peaknhold",
-        "key3": "currentControl",
-        "key4": "freqControl",
+        "key1": "highsideduty",
+        "key2": "highsidedig2",
+        "key3": "outputSignal3",
+        "key4": "outputSignal4",
         "key5": "outputSignal5",
         "key6": "outputSignal6",
         "key7": "outputSignal7",
         "key8": "outputSignal8",
         "key9": "outputSignal9",
         "key10": "outputSignal10",
-        "current1": "4000",
-        "current2": "4000",
-        "current3": "4000",
-        "current4": "4000",
-        "current5": "4000",
-        "current6": "4000",
-        "current7": "4000",
-        "current8": "4000",
-        "current9": "4000",
-        "current10": "4000",
-        "peakcurrent1": "800",
-        "peakcurrent2": "1500",
-        "peakcurrent3": "800",
-        "peakcurrent4": "800",
-        "peakcurrent5": "800",
-        "peakcurrent6": "800",
-        "peakcurrent7": "800",
-        "peakcurrent8": "800",
-        "peakcurrent9": "800",
-        "peakcurrent10": "800",
-        "time1": "500",
-        "time2": "500",
-        "time3": "0",
-        "time4": "500",
-        "time5": "500",
-        "time6": "500",
-        "time7": "500",
-        "time8": "500",
-        "time9": "500",
-        "time10": "500",
-        "x": 1830,
-        "y": 1280,
-        "wires": [
-            [
-                "0cacad6574319831",
-                "5d35e968bbd58ca5",
-                "b38db88bebbbc087",
-                "ed4c204ead111170",
-                "a5a5d8ae940b7881",
-                "dc8e8bf4e343d005",
-                "bae9eb00824a1019"
-            ]
-        ]
-    },
-    {
-        "id": "1e9e8a14e4e8f1ec",
-        "type": "inject",
-        "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
-        "name": "halfbridge to 0",
-        "props": [
-            {
-                "p": "halfBridge",
-                "v": "0",
-                "vt": "num"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1510,
+        "x": 830,
         "y": 1060,
         "wires": [
             [
-                "63d6ca4e33673477"
+                "0f4986149a5f3a59",
+                "7241a2a82e17f125",
+                "3a94e564941ebb67",
+                "cfda500936391b2c",
+                "81844ce1769c3263"
             ]
         ]
     },
     {
-        "id": "1a029704b73a5060",
+        "id": "2e7a0f32fdb9a332",
+        "type": "debug",
+        "z": "b493cd8fcf6f5eef",
+        "g": "94b53ddff10d0ecb",
+        "name": "module voltage (HW version 7+)",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "moduleVoltage",
+        "targetType": "msg",
+        "statusVal": "moduleStatus",
+        "statusType": "auto",
+        "x": 2450,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "2465d04e8eb58fc7",
+        "type": "Bridge-Module",
+        "z": "b493cd8fcf6f5eef",
+        "g": "b429b496916ea14d",
+        "name": "",
+        "moduleSlot": "6",
+        "sampleTime": "200",
+        "output1": "2",
+        "freq12": "3",
+        "output2": "2",
+        "key1": "halfbridge1",
+        "key2": "halfbridge2",
+        "x": 830,
+        "y": 1400,
+        "wires": [
+            [
+                "92da9a26788fc67a",
+                "a50a6d41337ee21d",
+                "e2e2793f989eb3fd",
+                "a5e32b3abc0b7104"
+            ]
+        ]
+    },
+    {
+        "id": "5a63eed9e19527ec",
         "type": "inject",
         "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
-        "name": "halfbridge to 500",
+        "g": "b429b496916ea14d",
+        "name": "halfbridge 1 to 500",
         "props": [
             {
-                "p": "halfBridge",
+                "p": "halfBridge1",
                 "v": "500",
                 "vt": "num"
             }
@@ -1526,23 +1848,23 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 1500,
-        "y": 1120,
+        "x": 470,
+        "y": 1360,
         "wires": [
             [
-                "63d6ca4e33673477"
+                "2465d04e8eb58fc7"
             ]
         ]
     },
     {
-        "id": "a24cc2faa351c3c8",
+        "id": "1c50d5fe3b6c06f6",
         "type": "inject",
         "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
-        "name": "peaknhold disable",
+        "g": "b429b496916ea14d",
+        "name": "halfbridge 1 to 0",
         "props": [
             {
-                "p": "peaknhold",
+                "p": "halfBridge1",
                 "v": "0",
                 "vt": "num"
             }
@@ -1552,24 +1874,24 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 1490,
-        "y": 1180,
+        "x": 480,
+        "y": 1300,
         "wires": [
             [
-                "63d6ca4e33673477"
+                "2465d04e8eb58fc7"
             ]
         ]
     },
     {
-        "id": "b5b202232447735d",
+        "id": "9f30dc4bd6297b0c",
         "type": "inject",
         "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
-        "name": "peaknhold hold at 1000mA",
+        "g": "b429b496916ea14d",
+        "name": "halfbridge 2 to 500",
         "props": [
             {
-                "p": "peaknhold",
-                "v": "1000",
+                "p": "halfBridge1",
+                "v": "500",
                 "vt": "num"
             }
         ],
@@ -1578,213 +1900,81 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 1470,
-        "y": 1240,
-        "wires": [
-            [
-                "63d6ca4e33673477"
-            ]
-        ]
-    },
-    {
-        "id": "1357340716d71cad",
-        "type": "inject",
-        "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
-        "name": "currentcontrol disable",
-        "props": [
-            {
-                "p": "currentControl",
-                "v": "0",
-                "vt": "num"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1480,
-        "y": 1320,
-        "wires": [
-            [
-                "63d6ca4e33673477"
-            ]
-        ]
-    },
-    {
-        "id": "60e1f521a6598ed6",
-        "type": "inject",
-        "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
-        "name": "currentcontrol set to 1000",
-        "props": [
-            {
-                "p": "currentControl",
-                "v": "1000",
-                "vt": "num"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1470,
-        "y": 1380,
-        "wires": [
-            [
-                "63d6ca4e33673477"
-            ]
-        ]
-    },
-    {
-        "id": "fa0baba7193599a0",
-        "type": "inject",
-        "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
-        "name": "frequencycontrol disable",
-        "props": [
-            {
-                "p": "freqControl",
-                "v": "0",
-                "vt": "num"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1470,
-        "y": 1440,
-        "wires": [
-            [
-                "63d6ca4e33673477"
-            ]
-        ]
-    },
-    {
-        "id": "c1d37c8646efb586",
-        "type": "inject",
-        "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
-        "name": "frequencycontrol set to 250Hz",
-        "props": [
-            {
-                "p": "freqControl",
-                "v": "250",
-                "vt": "num"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1460,
+        "x": 470,
         "y": 1500,
         "wires": [
             [
-                "63d6ca4e33673477"
+                "2465d04e8eb58fc7"
             ]
         ]
     },
     {
-        "id": "0cacad6574319831",
+        "id": "a78c2c1df0185d6f",
+        "type": "inject",
+        "z": "b493cd8fcf6f5eef",
+        "g": "b429b496916ea14d",
+        "name": "halfbridge 2 to 0",
+        "props": [
+            {
+                "p": "halfBridge2",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 480,
+        "y": 1440,
+        "wires": [
+            [
+                "2465d04e8eb58fc7"
+            ]
+        ]
+    },
+    {
+        "id": "a5e32b3abc0b7104",
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
-        "name": "half bridge current (mA)",
+        "g": "b429b496916ea14d",
+        "name": "half bridge 1 current (mA)",
         "active": true,
         "tosidebar": false,
         "console": false,
         "tostatus": true,
-        "complete": "halfBridgeCurrent",
+        "complete": "halfbridge1Current",
         "targetType": "msg",
         "statusVal": "halfBridgeCurrent",
         "statusType": "auto",
-        "x": 2190,
-        "y": 1040,
+        "x": 1170,
+        "y": 1300,
         "wires": []
     },
     {
-        "id": "5d35e968bbd58ca5",
+        "id": "e2e2793f989eb3fd",
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
-        "name": "peaknhold current (mA)",
+        "g": "b429b496916ea14d",
+        "name": "half bridge 2 current (mA)",
         "active": true,
         "tosidebar": false,
         "console": false,
         "tostatus": true,
-        "complete": "peaknholdCurrent",
+        "complete": "halfbridge2Current",
         "targetType": "msg",
         "statusVal": "halfBridgeCurrent",
         "statusType": "auto",
-        "x": 2190,
-        "y": 1120,
-        "wires": []
-    },
-    {
-        "id": "b38db88bebbbc087",
-        "type": "debug",
-        "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
-        "name": "current control current (mA)",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "currentControlCurrent",
-        "targetType": "msg",
-        "statusVal": "halfBridgeCurrent",
-        "statusType": "auto",
-        "x": 2200,
-        "y": 1200,
-        "wires": []
-    },
-    {
-        "id": "ed4c204ead111170",
-        "type": "debug",
-        "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
-        "name": "frequency control current (mA)",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "freqControlCurrent",
-        "targetType": "msg",
-        "statusVal": "halfBridgeCurrent",
-        "statusType": "auto",
-        "x": 2210,
-        "y": 1280,
-        "wires": []
-    },
-    {
-        "id": "a5a5d8ae940b7881",
-        "type": "debug",
-        "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
-        "name": "module temperature",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "moduleTemperature",
-        "targetType": "msg",
-        "statusVal": "moduleTemperature",
-        "statusType": "auto",
-        "x": 2180,
+        "x": 1170,
         "y": 1360,
         "wires": []
     },
     {
-        "id": "dc8e8bf4e343d005",
+        "id": "a50a6d41337ee21d",
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
+        "g": "b429b496916ea14d",
         "name": "module ground shift",
         "active": true,
         "tosidebar": false,
@@ -1794,37 +1984,637 @@
         "targetType": "msg",
         "statusVal": "moduleGroundShift",
         "statusType": "auto",
-        "x": 2170,
+        "x": 1150,
         "y": 1440,
         "wires": []
     },
     {
-        "id": "bae9eb00824a1019",
+        "id": "92da9a26788fc67a",
         "type": "debug",
         "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
-        "name": "Module status",
+        "g": "b429b496916ea14d",
+        "name": "module temperature",
         "active": true,
         "tosidebar": false,
         "console": false,
         "tostatus": true,
-        "complete": "moduleStatus",
+        "complete": "moduleTemperature",
         "targetType": "msg",
-        "statusVal": "moduleStatus",
+        "statusVal": "moduleTemperature",
         "statusType": "auto",
-        "x": 2160,
-        "y": 1520,
+        "x": 1160,
+        "y": 1500,
         "wires": []
     },
     {
-        "id": "f7584fe2f17c1287",
+        "id": "5dc089965ec52ea4",
         "type": "comment",
         "z": "b493cd8fcf6f5eef",
-        "g": "129c265e3f637c87",
-        "name": "6 channel output module",
-        "info": "The 6 channel output is generally the best output module functionality wise, most number of functions and pretty high output current available.\nAs a safety feature, output modules need to be continuously sent up to date info, because this doesn't really line up with how NodeRED works, the input is buffered and then repeatedly sent in the background untill you update the buffer by giving the node new setpoints.\n\nTo see the pinout of the module on your specific controller, see [the hardware manual](https://gocontroll.com/wp-content/uploads/2023/12/GOcontroll_Hardware_Manual.pdf).",
-        "x": 1830,
-        "y": 1160,
+        "g": "b429b496916ea14d",
+        "name": "Bridge module",
+        "info": "The bridge module is the most powerfull output module, but only has 2 channels to control.\n\nTo see the pinout of the module on your specific controller, see [the hardware manual](https://gocontroll.com/wp-content/uploads/2023/12/GOcontroll_Hardware_Manual.pdf).",
+        "x": 830,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "f6ef1a96c1d4bb91",
+        "type": "Settings",
+        "z": "a530381432ee1ea7",
+        "g": "e4f91341f123346e",
+        "name": "GOcontroll Settings",
+        "x": 250,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "28066f10fa28ec83",
+        "type": "comment",
+        "z": "a530381432ee1ea7",
+        "g": "e4f91341f123346e",
+        "name": "Settings node",
+        "info": "Its name is a bit deprecated, it will display the GOcontroll software version present on the controller and provides interfaces for uploading your Matlab/Simulink generated binaries and a2ls.",
+        "x": 250,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "0fa62b83ea20f204",
+        "type": "Controller-Active",
+        "z": "a530381432ee1ea7",
+        "g": "39c1d66696cdcd43",
+        "name": "",
+        "x": 940,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "cce50cd3b90b9892",
+        "type": "comment",
+        "z": "a530381432ee1ea7",
+        "g": "39c1d66696cdcd43",
+        "name": "Supply and Active",
+        "info": "The Controller supply node provides the values from the 4 channel ADC present in the controller.\nThis can be used to make the controller turn off if all the K15s are low for example.\nTo turn off the controller the Controller active node can be used.\nIt can turn off a GPIO pin that keeps the controller alive when all K15s are gone, therefore taking down the controller with it.\n\nThis is a very hard reset and can cause data corruption in the ext4 file system so use with care.",
+        "x": 770,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "5fc12de67fe0d9da",
+        "type": "Controller-Supply",
+        "z": "a530381432ee1ea7",
+        "g": "39c1d66696cdcd43",
+        "name": "",
+        "sampleTime": "1000",
+        "x": 580,
+        "y": 200,
+        "wires": [
+            [
+                "4c4f58769f81b34a"
+            ]
+        ]
+    },
+    {
+        "id": "4c4f58769f81b34a",
+        "type": "function",
+        "z": "a530381432ee1ea7",
+        "g": "39c1d66696cdcd43",
+        "name": "Auto shutdown",
+        "func": "if (msg.K15A < 1000 && msg.K15B < 1000 && msg.K15C < 1000) {\n    var msgOut = {};\n    msgOut.controllerActive = 0;\n    return msgOut;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 200,
+        "wires": [
+            [
+                "0fa62b83ea20f204"
+            ]
+        ]
+    },
+    {
+        "id": "068c74f2afd65e6f",
+        "type": "CPU-Temperature",
+        "z": "a530381432ee1ea7",
+        "g": "2b4e6c3fdd737d81",
+        "name": "",
+        "x": 1270,
+        "y": 200,
+        "wires": [
+            [
+                "8060378a57007aa3"
+            ]
+        ]
+    },
+    {
+        "id": "c2a1d6deadc9e9ae",
+        "type": "Status-Led",
+        "z": "a530381432ee1ea7",
+        "g": "2b4e6c3fdd737d81",
+        "name": "",
+        "led": "LED 4",
+        "x": 1570,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "8060378a57007aa3",
+        "type": "function",
+        "z": "a530381432ee1ea7",
+        "g": "2b4e6c3fdd737d81",
+        "name": "convert",
+        "func": "msg.red = msg.temperature * 3;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1440,
+        "y": 200,
+        "wires": [
+            [
+                "c2a1d6deadc9e9ae"
+            ]
+        ]
+    },
+    {
+        "id": "bcc1fb9d8405f3fa",
+        "type": "comment",
+        "z": "a530381432ee1ea7",
+        "g": "2b4e6c3fdd737d81",
+        "name": "Temperature and leds",
+        "info": "The CPU Temperature will send out the CPU temperature every 5 seconds with the key \"temperature\".\nThe LED node allows you to control one of the enclosure leds, this can lead to conflicting behaviour when multiple pieces of software try to address the LEDs.",
+        "x": 1440,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "f9ab427f3a2876ac",
+        "type": "GPS",
+        "z": "a530381432ee1ea7",
+        "g": "2a84d6e86e2d1332",
+        "name": "GPS",
+        "x": 1770,
+        "y": 200,
+        "wires": [
+            [
+                "a367158d7242b29e",
+                "9ff1a0bd4c42145f",
+                "a18f7005c87ea0e9",
+                "ad734ba88cce31e7"
+            ]
+        ]
+    },
+    {
+        "id": "a367158d7242b29e",
+        "type": "debug",
+        "z": "a530381432ee1ea7",
+        "g": "2a84d6e86e2d1332",
+        "name": "speed",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "speed",
+        "targetType": "msg",
+        "statusVal": "speed",
+        "statusType": "auto",
+        "x": 1950,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "9ff1a0bd4c42145f",
+        "type": "debug",
+        "z": "a530381432ee1ea7",
+        "g": "2a84d6e86e2d1332",
+        "name": "altitude",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "altitude",
+        "targetType": "msg",
+        "statusVal": "speed",
+        "statusType": "auto",
+        "x": 1960,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "a18f7005c87ea0e9",
+        "type": "debug",
+        "z": "a530381432ee1ea7",
+        "g": "2a84d6e86e2d1332",
+        "name": "longitude",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "longitude",
+        "targetType": "msg",
+        "statusVal": "speed",
+        "statusType": "auto",
+        "x": 1960,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "ad734ba88cce31e7",
+        "type": "debug",
+        "z": "a530381432ee1ea7",
+        "g": "2a84d6e86e2d1332",
+        "name": "latitude",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "latitude",
+        "targetType": "msg",
+        "statusVal": "speed",
+        "statusType": "auto",
+        "x": 1960,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "4eddfddd4f730fb0",
+        "type": "comment",
+        "z": "a530381432ee1ea7",
+        "g": "2a84d6e86e2d1332",
+        "name": "GPS",
+        "info": "The GPS node can be used to read location, altitude and velocity data from the 4G/GPS modem that is optionally available in the Moduline IV and Mini.",
+        "x": 1770,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "76e2c1319dacc730",
+        "type": "CAN-Receive",
+        "z": "a530381432ee1ea7",
+        "g": "762a47d5fa16cda2",
+        "name": "CAN Receive",
+        "caninterface": "CAN 2",
+        "canid": "10",
+        "signals": "1",
+        "key1": "byte1",
+        "key2": "",
+        "key3": "",
+        "key4": "",
+        "key5": "",
+        "key6": "",
+        "key7": "",
+        "key8": "",
+        "sb1": "1",
+        "eb1": "1",
+        "sb2": "",
+        "eb2": "",
+        "sb3": "",
+        "eb3": "",
+        "sb4": "",
+        "eb4": "",
+        "sb5": "",
+        "eb5": "",
+        "sb6": "",
+        "eb6": "",
+        "sb7": "",
+        "eb7": "",
+        "sb8": "",
+        "eb8": "",
+        "x": 260,
+        "y": 520,
+        "wires": [
+            [
+                "4c6925aad1539275"
+            ]
+        ]
+    },
+    {
+        "id": "18818496e4b467de",
+        "type": "CAN-Send",
+        "z": "a530381432ee1ea7",
+        "g": "762a47d5fa16cda2",
+        "name": "CAN Send",
+        "canidtype": "standard",
+        "canid": "10",
+        "send": 0,
+        "caninterval": "1000",
+        "signals": "1",
+        "caninterface": "CAN 1",
+        "key1": "byte1",
+        "key2": "",
+        "key3": "",
+        "key4": "",
+        "key5": "",
+        "key6": "",
+        "key7": "",
+        "key8": "",
+        "sb1": "1",
+        "eb1": "1",
+        "sb2": "",
+        "eb2": "",
+        "sb3": "",
+        "eb3": "",
+        "sb4": "",
+        "eb4": "",
+        "sb5": "",
+        "eb5": "",
+        "sb6": "",
+        "eb6": "",
+        "sb7": "",
+        "eb7": "",
+        "sb8": "",
+        "eb8": "",
+        "dlc": "",
+        "x": 540,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "bcc3cd5aeb78e18e",
+        "type": "inject",
+        "z": "a530381432ee1ea7",
+        "g": "762a47d5fa16cda2",
+        "name": "send 1",
+        "props": [
+            {
+                "p": "byte1",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 230,
+        "y": 420,
+        "wires": [
+            [
+                "18818496e4b467de"
+            ]
+        ]
+    },
+    {
+        "id": "4c6925aad1539275",
+        "type": "debug",
+        "z": "a530381432ee1ea7",
+        "g": "762a47d5fa16cda2",
+        "name": "byte1",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "byte1",
+        "targetType": "msg",
+        "statusVal": "byte1",
+        "statusType": "auto",
+        "x": 590,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "241df72bc01c0862",
+        "type": "inject",
+        "z": "a530381432ee1ea7",
+        "g": "762a47d5fa16cda2",
+        "name": "send 0",
+        "props": [
+            {
+                "p": "byte1",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 230,
+        "y": 460,
+        "wires": [
+            [
+                "18818496e4b467de"
+            ]
+        ]
+    },
+    {
+        "id": "d6b0b4d0b5d7e0d2",
+        "type": "comment",
+        "z": "a530381432ee1ea7",
+        "g": "762a47d5fa16cda2",
+        "name": "CAN",
+        "info": "These two nodes allow you to use the CAN busses present on your controller. Connect can 1 to can 2 and this demo will work.",
+        "x": 410,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "47a69aa4992302a6",
+        "type": "Read-Memory",
+        "z": "a530381432ee1ea7",
+        "g": "9a0439c33d61397b",
+        "name": "Read memory",
+        "key": "storedValue",
+        "memtype": "ram",
+        "outputtype": "object",
+        "interval": "1000",
+        "x": 810,
+        "y": 520,
+        "wires": [
+            [
+                "cdc783af7f277ec0"
+            ]
+        ]
+    },
+    {
+        "id": "3ec8959a9b608ec8",
+        "type": "inject",
+        "z": "a530381432ee1ea7",
+        "g": "9a0439c33d61397b",
+        "name": "send 0",
+        "props": [
+            {
+                "p": "storedValue",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 810,
+        "y": 480,
+        "wires": [
+            [
+                "99cd37fe16d85fb0"
+            ]
+        ]
+    },
+    {
+        "id": "343ac9726229ed3d",
+        "type": "inject",
+        "z": "a530381432ee1ea7",
+        "g": "9a0439c33d61397b",
+        "name": "send 1",
+        "props": [
+            {
+                "p": "storedValue",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 810,
+        "y": 440,
+        "wires": [
+            [
+                "99cd37fe16d85fb0"
+            ]
+        ]
+    },
+    {
+        "id": "99cd37fe16d85fb0",
+        "type": "Write-Memory",
+        "z": "a530381432ee1ea7",
+        "g": "9a0439c33d61397b",
+        "name": "Write memory",
+        "key": "storedValue",
+        "memtype": "ram",
+        "inputtype": "object",
+        "decimal": "0",
+        "x": 1080,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "cdc783af7f277ec0",
+        "type": "debug",
+        "z": "a530381432ee1ea7",
+        "g": "9a0439c33d61397b",
+        "name": "value",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "storedValue",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1110,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "db1fef09f00cc3d2",
+        "type": "comment",
+        "z": "a530381432ee1ea7",
+        "g": "9a0439c33d61397b",
+        "name": "Memory",
+        "info": "These two blocks allow you to use the file system as a key value store. You can use this as configuration blocks or IPC.",
+        "x": 940,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "b50dc1d3c9eb4c23",
+        "type": "Read-Simulink-Signal",
+        "z": "a530381432ee1ea7",
+        "g": "78dfc0f7f6c7aa15",
+        "name": "",
+        "sampleTime": "1000",
+        "signals": "",
+        "xcpIdCheck": false,
+        "x": 1390,
+        "y": 420,
+        "wires": [
+            [
+                "1fb551e9337d0b0b"
+            ]
+        ]
+    },
+    {
+        "id": "a1f85ef8d0fd913b",
+        "type": "Write-Simulink-Parameter",
+        "z": "a530381432ee1ea7",
+        "g": "78dfc0f7f6c7aa15",
+        "name": "",
+        "sampleTime": "1000",
+        "parameter": "",
+        "keyIn": "param",
+        "data": "",
+        "inputMode": false,
+        "outputMode": "0",
+        "xcpIdCheck": "0",
+        "x": 1550,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1fb551e9337d0b0b",
+        "type": "debug",
+        "z": "a530381432ee1ea7",
+        "g": "78dfc0f7f6c7aa15",
+        "name": "out",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1570,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "c785743e21ad825a",
+        "type": "inject",
+        "z": "a530381432ee1ea7",
+        "g": "78dfc0f7f6c7aa15",
+        "name": "",
+        "props": [
+            {
+                "p": "param",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1370,
+        "y": 520,
+        "wires": [
+            [
+                "a1f85ef8d0fd913b"
+            ]
+        ]
+    },
+    {
+        "id": "212fa3b8d0d9e6db",
+        "type": "comment",
+        "z": "a530381432ee1ea7",
+        "g": "78dfc0f7f6c7aa15",
+        "name": "Simulink",
+        "info": "These two nodes allow for direct IPC to a running simulink model.\nThis is not thread safe! Especially reading an array from virtual memory can cause corruption, use with care.",
+        "x": 1480,
+        "y": 340,
         "wires": []
     }
 ]
