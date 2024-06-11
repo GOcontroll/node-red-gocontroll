@@ -1,17 +1,13 @@
-const { asap_element } = require("uiojs");
-
 module.exports = function(RED) {
 "use strict"
 
+const uiojs = require("uiojs");
 const shell = require("shelljs");
 const fs = require("fs");
 
 function GOcontrollReadSimulink(config) {
     RED.nodes.createNode(this,config);
     var node = this;
-
-    //import like this to catch the error if it is not installed on the controller.
-    import("uiojs").then(uiojs=>{
 
     let simulink = false;
     let header;
@@ -167,10 +163,6 @@ function GOcontrollReadSimulink(config) {
         clearInterval(intervalCheck);
         done();
     })
-    }).catch(err=>{
-        node.status({fill:"red",shape:"dot",text:"could not load uiojs, module missing"});
-        return;
-    });
 }
 
 RED.nodes.registerType("Read-Simulink-Signal",GOcontrollReadSimulink);
