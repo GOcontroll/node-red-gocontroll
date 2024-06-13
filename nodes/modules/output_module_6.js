@@ -15,6 +15,7 @@ module.exports = function(RED) {
 	   	var interval = null;
 		var node = this;
 		var firmware;
+		var hw_version;
 		
 		
 		const moduleSlot = parseInt(config.moduleSlot);
@@ -123,6 +124,8 @@ module.exports = function(RED) {
 			if (bootloader_response[6] == 20 && bootloader_response[7] ==  20 && bootloader_response[8] == 2) {
 
 				node.status({fill:"green",shape:"dot",text:firmware});
+
+				hw_version = bootloader_response[9];
 
 				sendBuffer[0] = moduleSlot;
 				sendBuffer[1] = MESSAGELENGTH-1;
@@ -247,6 +250,9 @@ module.exports = function(RED) {
 						msgOut["moduleTemperature"] = receiveBuffer.readInt16LE(6),
 						msgOut["moduleGroundShift"] = receiveBuffer.readUInt16LE(8),
 						msgOut["moduleStatus"] = receiveBuffer.readUInt32LE(22),
+						if (hw_version >== 7) {
+							msgOut["moduleSupply"] = receiveBuffer.readUInt16LE(41);
+						}
 						msgOut[key[0]+"Current"]= receiveBuffer.readInt16LE(10),
 						msgOut[key[1]+"Current"]= receiveBuffer.readInt16LE(12),
 						msgOut[key[2]+"Current"]= receiveBuffer.readInt16LE(14),
