@@ -105,7 +105,7 @@ This file should contain parameter names, memory addresses, datatypes and array 
 ```
 see [uiojs](https://www.npmjs.com/package/uiojs) for more info about the types for example.
 
-# Switching the npm package
+# Switching to the npm package
 
 Older controllers come preinstalled with node-red blocks that are not managed by npm, this is very difficult to keep up to date so it is recommended to update your node-red-gocontroll install.
 The controller needs to have an active internet connection to do this.
