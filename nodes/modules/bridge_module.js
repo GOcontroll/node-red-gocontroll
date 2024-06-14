@@ -68,7 +68,7 @@ module.exports = function(RED) {
 		}
 
 		/* Send dummy byte once so the master SPI is initialized properly */
-		mod_common.SendDummyByte(moduleSlot, BridgeModule_Initialize); 
+		mod_common.PrepareForInit(moduleSlot, BridgeModule_Initialize); 
 	
 		
 		/* open SPI device for continous communication */
@@ -90,7 +90,7 @@ module.exports = function(RED) {
 		**
 		****************************************************************************************/
 		function BridgeModule_Initialize(bootloader_response){
-			firmware = "HW:V"+bootloader_response[6]+bootloader_response[7]+bootloader_response[8]+bootloader_response[9] + "  SW:V"+bootloader_response[10]+"."+bootloader_response[11]+"."+bootloader_response[12];
+			firmware = mod_common.FormatFirmware(bootloader_response);
 			if (bootloader_response[6] == 20 && bootloader_response[7] ==  20 && bootloader_response[8] == 1) {
 
 				node.status({fill:"green",shape:"dot",text:firmware});

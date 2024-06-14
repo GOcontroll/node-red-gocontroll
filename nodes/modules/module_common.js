@@ -21,7 +21,7 @@ function Module_Reset(state, moduleSlot){
 	}
 }
 
-function SendDummyByte(moduleSlot, init) {
+function PrepareForInit(moduleSlot, init) {
 	var sendBuffer = Buffer.alloc(5);
 	var	receiveBuffer = Buffer.alloc(5);
 
@@ -110,5 +110,14 @@ function CancelFirmwareUpload(moduleSlot, init){
 	});
 }
 
+function FormatFirmware(bootloader_response) {
+	return "HW:V"+bootloader_response[6].toString().padStart(2,"0")+
+		bootloader_response[7].toString().padStart(2,"0")+
+		bootloader_response[8].toString().padStart(2,"0")+
+		bootloader_response[9].toString().padStart(2,"0") +
+		"  SW:V"+bootloader_response[10]+"."+bootloader_response[11]+"."+bootloader_response[12];
+}
+
 module.exports.ChecksumCalculator = ChecksumCalculator;
-module.exports.SendDummyByte = SendDummyByte;
+module.exports.PrepareForInit = PrepareForInit;
+module.exports.FormatFirmware = FormatFirmware;

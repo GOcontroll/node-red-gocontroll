@@ -102,7 +102,7 @@ module.exports = function(RED) {
 		}
 
 		/* Send dummy byte once so the master SPI is initialized properly */
-		mod_common.SendDummyByte(moduleSlot, OutputModule_Initialize); 
+		mod_common.PrepareForInit(moduleSlot, OutputModule_Initialize); 
 
 		/* open SPI device for continous communication */
 		const getData = spi.open(sL,sB, (err) => {
@@ -120,7 +120,7 @@ module.exports = function(RED) {
 		**
 		****************************************************************************************/
 		function OutputModule_Initialize(bootloader_response) {
-			firmware = "HW:V"+bootloader_response[6]+bootloader_response[7]+bootloader_response[8]+bootloader_response[9] + "  SW:V"+bootloader_response[10]+"."+bootloader_response[11]+"."+bootloader_response[12];
+			firmware = mod_common.FormatFirmware(bootloader_response);
 			if (bootloader_response[6] == 20 && bootloader_response[7] ==  20 && bootloader_response[8] == 2) {
 
 				node.status({fill:"green",shape:"dot",text:firmware});
@@ -247,18 +247,18 @@ module.exports = function(RED) {
 							receiveBuffer.readUInt8(4) === 4 	&&
 							receiveBuffer.readUInt8(5) === 1){
 									
-						msgOut["moduleTemperature"] = receiveBuffer.readInt16LE(6),
-						msgOut["moduleGroundShift"] = receiveBuffer.readUInt16LE(8),
-						msgOut["moduleStatus"] = receiveBuffer.readUInt32LE(22),
-						if (hw_version >== 7) {
+						msgOut["moduleTemperature"] = receiveBuffer.readInt16LE(6);
+						msgOut["moduleGroundShift"] = receiveBuffer.readUInt16LE(8);
+						msgOut["moduleStatus"] = receiveBuffer.readUInt32LE(22);
+						if (hw_version >= 7) {
 							msgOut["moduleSupply"] = receiveBuffer.readUInt16LE(41);
 						}
-						msgOut[key[0]+"Current"]= receiveBuffer.readInt16LE(10),
-						msgOut[key[1]+"Current"]= receiveBuffer.readInt16LE(12),
-						msgOut[key[2]+"Current"]= receiveBuffer.readInt16LE(14),
-						msgOut[key[3]+"Current"]= receiveBuffer.readInt16LE(16),
-						msgOut[key[4]+"Current"]= receiveBuffer.readInt16LE(18),
-						msgOut[key[5]+"Current"]= receiveBuffer.readInt16LE(20)	
+						msgOut[key[0]+"Current"]= receiveBuffer.readInt16LE(10);
+						msgOut[key[1]+"Current"]= receiveBuffer.readInt16LE(12);
+						msgOut[key[2]+"Current"]= receiveBuffer.readInt16LE(14);
+						msgOut[key[3]+"Current"]= receiveBuffer.readInt16LE(16);
+						msgOut[key[4]+"Current"]= receiveBuffer.readInt16LE(18);
+						msgOut[key[5]+"Current"]= receiveBuffer.readInt16LE(20);
 						node.send(msgOut);								
 					}
 				}
