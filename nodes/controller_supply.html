@@ -37,11 +37,12 @@
 </script>
 
 <script type="text/x-red" data-help-name="Controller-Supply">
-<p>The controller supply node measures the battery voltage and the K15 pin(s) voltage from the system connector (C). These voltages can be used to monitor battery state or to detect a shutdown action.</p>
+<p>The controller supply node measures the battery voltage and the K15 pin(s) voltage or two other analog inputs on the Moduline Display. These voltages can be used to monitor battery state or to detect a shutdown action.</p>
 <p>The battery voltage is measured from pin 5 - 7</p>
 <p>The K15 pin on the <strong>Moduline III</strong> is: pin 3</p>
 <p>The K15 pins on the <strong>Moduline IV</strong> are: pin 2-3-4</p>
 <p>The K15 pins on the <strong>Moduline Mini I</strong> are: pin 17 on the B connector, pin 16&17 on the A connector</p>
+<p>The Moduline Display only has 1 K15 on pin 8, the other two values are from the 6 pin header and the adapter print.
 <p>&nbsp;</p>
 <p><strong>Data format</strong></p>
 <p>The supply information is pushed out of the node in a JSON object.</p>

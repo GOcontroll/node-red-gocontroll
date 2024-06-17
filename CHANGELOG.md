@@ -2,7 +2,7 @@
 
 #### V2.1.0
 - Added module supply field for output modules with the correct hardware version
-
+- Small documentation improvement for the controller supply node
 
 #### V2.0.0
 - Removed seperate input module reset node, this is now part of the input module which has now gained an input port
