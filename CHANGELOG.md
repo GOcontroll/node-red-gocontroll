@@ -1,5 +1,8 @@
 # V2.1.0
 
+#### V2.1.1
+- added a version check to the second supply enable on the 10 channel input module
+
 #### V2.1.0
 - Added module supply field for output modules with the correct hardware version
 - Small documentation improvement for the controller supply node
