@@ -133,7 +133,7 @@ function GOcontrollInputModule(config) {
 	function InputModule_Initialize (bootloader_response){
 		firmware = mod_common.FormatFirmware(bootloader_response);
 		if (bootloader_response[6] == 20 && bootloader_response[7] ==  10 && bootloader_response[8] == 2) {
-			const sw_version = bootloader_response[10] << 16 + bootloader_response[11] << 8 + bootloader_response[12];
+			const sw_version = (bootloader_response[10] << 16) + (bootloader_response[11] << 8) + bootloader_response[12];
 
 			node.status({fill:"green",shape:"dot",text:firmware});
 
