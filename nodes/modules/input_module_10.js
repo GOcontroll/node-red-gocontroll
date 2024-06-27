@@ -7,7 +7,7 @@ const mod_common = require('./module_common');
 const MESSAGELENGTH 	= 50;
 const SPISPEED = 2000000;
 
-
+const VERSIONSECONDSUPPLY_10CHANNEL = 4;
 
 function GOcontrollInputModule(config) { 	 
 	RED.nodes.createNode(this,config);
@@ -133,6 +133,7 @@ function GOcontrollInputModule(config) {
 	function InputModule_Initialize (bootloader_response){
 		firmware = mod_common.FormatFirmware(bootloader_response);
 		if (bootloader_response[6] == 20 && bootloader_response[7] ==  10 && bootloader_response[8] == 2) {
+			const sw_version = bootloader_response[10] << 16 + bootloader_response[11] << 8 + bootloader_response[12];
 
 			node.status({fill:"green",shape:"dot",text:firmware});
 
@@ -150,7 +151,9 @@ function GOcontrollInputModule(config) {
 			}
 
 			sendBuffer[46] = supply1;
-			sendBuffer[47] = supply2;
+			if (sw_version >= VERSIONSECONDSUPPLY_10CHANNEL) {
+				sendBuffer[47] = supply2;
+			}
 			sendBuffer[MESSAGELENGTH-1] = mod_common.ChecksumCalculator(sendBuffer, MESSAGELENGTH-1);
 
 			const initialize = spi.open(sL,sB, (err) => {
