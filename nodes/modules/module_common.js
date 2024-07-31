@@ -7,50 +7,54 @@ const SPISPEED = 2000000;
 function ChecksumCalculator(array, length) {
 	var pointer = 0;
 	var checkSum = 0;
-		for (pointer = 0; pointer<length; pointer++) {
-			checkSum += array[pointer];
-		}
-	return (checkSum&255);	
+	for (pointer = 0; pointer < length; pointer++) {
+		checkSum += array[pointer];
+	}
+	return (checkSum & 255);
 }
 
-function Module_Reset(state, moduleSlot){
-	if(state === 1) {
-		fs.writeFileSync('/sys/class/leds/ResetM-' + String(moduleSlot) + '/brightness','255');
+function Module_Reset(state, moduleSlot) {
+	if (state === 1) {
+		fs.writeFileSync('/sys/class/leds/ResetM-' + String(moduleSlot) + '/brightness', '255');
 	} else {
-		fs.writeFileSync('/sys/class/leds/ResetM-' + String(moduleSlot) + '/brightness','0');
+		fs.writeFileSync('/sys/class/leds/ResetM-' + String(moduleSlot) + '/brightness', '0');
 	}
 }
 
 function PrepareForInit(moduleSlot, init) {
 	var sendBuffer = Buffer.alloc(5);
-	var	receiveBuffer = Buffer.alloc(5);
+	var receiveBuffer = Buffer.alloc(5);
 
 	const dummyMessage = [{
-		sendBuffer, 
-		receiveBuffer,           
-		byteLength : 5,
-		speedHz: SPISPEED 
+		sendBuffer,
+		receiveBuffer,
+		byteLength: 5,
+		speedHz: SPISPEED
 	}];
 
-	var sL,sB;
-	switch(moduleSlot)
-	{
-		case 1: sL = 1; sB = 0;    break;
-		case 2: sL = 1; sB = 1;    break;
-		case 3: sL = 2; sB = 0;    break;
-		case 4: sL = 2; sB = 1;    break;
-		case 5: sL = 2; sB = 2;    break;
-		case 6: sL = 2; sB = 3;    break;
-		case 7: sL = 0; sB = 0;    break;
-		case 8: sL = 0; sB = 1;    break;
+	var sL, sB;
+	switch (moduleSlot) {
+		case 1: sL = 1; sB = 0; break;
+		case 2: sL = 1; sB = 1; break;
+		case 3: sL = 2; sB = 0; break;
+		case 4: sL = 2; sB = 1; break;
+		case 5: sL = 2; sB = 2; break;
+		case 6: sL = 2; sB = 3; break;
+		case 7: sL = 0; sB = 0; break;
+		case 8: sL = 0; sB = 1; break;
 	}
 	/*Send dummy message to setup the SPI bus properly */
-	const dummy = spi.open(sL,sB, (err) => {
-		
+	const dummy = spi.open(sL, sB, (err) => {
+		/* Sometimes a flow is put on a controller with more configured modules than slots, this causes this error */
+		if (err) {
+			console.log("Could not open spi device " + sL + "." + sB);
+			init(Buffer.alloc(BOOTMESSAGELENGTH))
+			return;
+		}
 		/* Only in this scope, receive buffer is available */
 		dummy.transfer(dummyMessage, (err, dummyMessage) => {
-			dummy.close(err =>{});
-			
+			dummy.close(err => { });
+
 			/* Here we start the reset routine */
 			StartReset(moduleSlot, init);
 		});
@@ -58,64 +62,63 @@ function PrepareForInit(moduleSlot, init) {
 	});
 }
 
-function StartReset(moduleSlot, init){
+function StartReset(moduleSlot, init) {
 	/*Start module reset */
 	Module_Reset(1, moduleSlot);
 	/*Give a certain timeout so module is reset properly*/
 	resetTimeout = setTimeout(StopReset, 200, moduleSlot, init);
 }
 
-function StopReset (moduleSlot,init){
-	Module_Reset(0, moduleSlot);	
+function StopReset(moduleSlot, init) {
+	Module_Reset(0, moduleSlot);
 	/*After reset, give the module some time to boot */
 	/*Next step is to check for new available firmware */
 	setTimeout(CancelFirmwareUpload, 200, moduleSlot, init);
 }
 
-function CancelFirmwareUpload(moduleSlot, init){
-	var sendBuffer = Buffer.alloc(BOOTMESSAGELENGTH+1);
-	var	receiveBuffer = Buffer.alloc(BOOTMESSAGELENGTH+1);
-	
+function CancelFirmwareUpload(moduleSlot, init) {
+	var sendBuffer = Buffer.alloc(BOOTMESSAGELENGTH + 1);
+	var receiveBuffer = Buffer.alloc(BOOTMESSAGELENGTH + 1);
+
 	const bootMessage = [{
-		sendBuffer, 
-		receiveBuffer,           
-		byteLength: BOOTMESSAGELENGTH+1,
-		speedHz: SPISPEED 
+		sendBuffer,
+		receiveBuffer,
+		byteLength: BOOTMESSAGELENGTH + 1,
+		speedHz: SPISPEED
 	}];
 
-	var sL,sB;
-	switch(moduleSlot)
-	{
-		case 1: sL = 1; sB = 0;    break;
-		case 2: sL = 1; sB = 1;    break;
-		case 3: sL = 2; sB = 0;    break;
-		case 4: sL = 2; sB = 1;    break;
-		case 5: sL = 2; sB = 2;    break;
-		case 6: sL = 2; sB = 3;    break;
-		case 7: sL = 0; sB = 0;    break;
-		case 8: sL = 0; sB = 1;    break;
+	var sL, sB;
+	switch (moduleSlot) {
+		case 1: sL = 1; sB = 0; break;
+		case 2: sL = 1; sB = 1; break;
+		case 3: sL = 2; sB = 0; break;
+		case 4: sL = 2; sB = 1; break;
+		case 5: sL = 2; sB = 2; break;
+		case 6: sL = 2; sB = 3; break;
+		case 7: sL = 0; sB = 0; break;
+		case 8: sL = 0; sB = 1; break;
 	}
 	sendBuffer[0] = 19;
-	sendBuffer[1] = BOOTMESSAGELENGTH-1; // Messagelength from bootloader
+	sendBuffer[1] = BOOTMESSAGELENGTH - 1; // Messagelength from bootloader
 	sendBuffer[2] = 19;
-	
-	sendBuffer[BOOTMESSAGELENGTH-1] = ChecksumCalculator(sendBuffer, BOOTMESSAGELENGTH-1);
-	const cancel = spi.open(sL,sB, (err) => {
+
+	sendBuffer[BOOTMESSAGELENGTH - 1] = ChecksumCalculator(sendBuffer, BOOTMESSAGELENGTH - 1);
+	const cancel = spi.open(sL, sB, (err) => {
 		cancel.transfer(bootMessage, (err, bootMessage) => {
-			cancel.close(err =>{});
+			cancel.close(err => { });
 			/* At this point, The module can be initialized */
 			setTimeout(init, 600, bootMessage[0].receiveBuffer);
 		});
-		
+
 	});
 }
 
 function FormatFirmware(bootloader_response) {
-	return "HW:V"+bootloader_response[6].toString().padStart(2,"0")+
-		bootloader_response[7].toString().padStart(2,"0")+
-		bootloader_response[8].toString().padStart(2,"0")+
-		bootloader_response[9].toString().padStart(2,"0") +
-		"  SW:V"+bootloader_response[10]+"."+bootloader_response[11]+"."+bootloader_response[12];
+	return "HW:V" + bootloader_response[6].toString().padStart(2, "0") +
+		bootloader_response[7].toString().padStart(2, "0") +
+		bootloader_response[8].toString().padStart(2, "0") +
+		bootloader_response[9].toString().padStart(2, "0") +
+		"  SW:V" + bootloader_response[10] + "." + bootloader_response[11] + "." + bootloader_response[12];
 }
 
 module.exports.ChecksumCalculator = ChecksumCalculator;

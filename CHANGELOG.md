@@ -1,4 +1,7 @@
-# V2.1.0
+# V2.1.2
+
+#### V2.1.2
+- Fixed potential crash in module_common.js when a module node was present with an invalid slot configuration
 
 #### V2.1.1
 - Added a version check to the second supply enable on the 10 channel input module
