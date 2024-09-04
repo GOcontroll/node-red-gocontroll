@@ -248,7 +248,7 @@ module.exports = function(RED) {
 							receiveBuffer.readUInt8(5) === 1){
 									
 						msgOut["moduleTemperature"] = receiveBuffer.readInt16LE(6);
-						msgOut["moduleGroundShift"] = receiveBuffer.readUInt16LE(8);
+						msgOut["moduleGroundShift"] = receiveBuffer.readInt16LE(8);
 						msgOut["moduleStatus"] = receiveBuffer.readUInt32LE(22);
 						if (hw_version >= 7) {
 							msgOut["moduleSupply"] = receiveBuffer.readUInt16LE(41);

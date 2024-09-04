@@ -1,4 +1,7 @@
-# V2.1.2
+# V2.1.3
+
+#### V2.1.3
+- Fixed datatype conversion (unsigned to signed) from groundshift on 6 channel output module
 
 #### V2.1.2
 - Fixed potential crash in module_common.js when a module node was present with an invalid slot configuration
