@@ -256,6 +256,11 @@ module.exports = function (RED) {
 						msgOut[key[3] + "Current"] = receiveBuffer.readInt16LE(16);
 						msgOut[key[4] + "Current"] = receiveBuffer.readInt16LE(18);
 						msgOut[key[5] + "Current"] = receiveBuffer.readInt16LE(20);
+						for (var i = 0; i < 6; i++) {
+							if (outputType[i] == 7) { //output is peak and hold ie current control
+								msgOut[key[i] + "DutyCycle"] = receiveBuffer.readUint16LE(26 + i * 2);
+							}
+						}
 						node.send(msgOut);
 					}
 				}
