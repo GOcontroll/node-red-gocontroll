@@ -1,6 +1,6 @@
 {
 	"name": "@gocontroll-nl/node-red-gocontroll",
-	"version": "2.1.2",
+	"version": "2.1.3",
 	"description": "Node-RED nodes for GOcontroll Moduline controllers",
 	"homepage": "https://gocontroll.com",
 	"os": [
@@ -10,9 +10,12 @@
 		"i2c-bus": "^5.2.3",
 		"serialport": "^9.2.0",
 		"shelljs": "^0.8.5",
-		"socketcan": "^4.0.4",
+		"socketcan": "^4.0.5",
 		"spi-device": "^3.1.2",
 		"uiojs": "1.1.0"
+	},
+	"devDependencies": {
+		"@types/node-red": "1.3.5"
 	},
 	"repository": {
 		"type": "git",

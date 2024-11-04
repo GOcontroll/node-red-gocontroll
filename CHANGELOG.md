@@ -1,5 +1,9 @@
 # V2.1.2
 
+#### V2.1.3
+- Fixed incorrect ground shift datatype in the 6 channel output module
+- Add node-red types to dev depencies for type hints during development
+
 #### V2.1.2
 - Fixed potential crash in module_common.js when a module node was present with an invalid slot configuration
 
