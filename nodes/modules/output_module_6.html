@@ -1,109 +1,107 @@
 <script type="text/javascript">
-    RED.nodes.registerType('Output-Module',{
-        category: 'GOcontroll',
-        color: '#f76d11',
-        defaults: {
-            name: {value:""},
-			moduleSlot: {value:"0"},
-			sampleTime:{value:"200"},
-			freq12: {value:"1"},
-			freq34: {value:"1"},
-			freq56: {value:"1"},
-			output1:{value:"1"},
-			output2:{value:"1"},
-			output3:{value:"1"},
-			output4:{value:"1"},
-			output5:{value:"1"},
-			output6:{value:"1"},
-			key1: {value: "outputSignal1"},
-			key2: {value: "outputSignal2"},
-			key3: {value: "outputSignal3"},
-			key4: {value: "outputSignal4"},
-			key5: {value: "outputSignal5"},
-			key6: {value: "outputSignal6"},
-			current1 : {value: "4000"},
-			current2 : {value: "4000"},
-			current3 : {value: "4000"},
-			current4 : {value: "4000"},
-			current5 : {value: "4000"},
-			current6 : {value: "4000"},
-			peakcurrent1 : {value: "800"},
-			peakcurrent2 : {value: "800"},
-			peakcurrent3 : {value: "800"},
-			peakcurrent4 : {value: "800"},
-			peakcurrent5 : {value: "800"},
-			peakcurrent6 : {value: "800"},
-			time1 : {value: "500"},
-			time2 : {value: "500"},
-			time3 : {value: "500"},
-			time4 : {value: "500"},
-			time5 : {value: "500"},
-			time6 : {value: "500"},
-        },
-        inputs:1,
-        outputs:1,
-        icon: "arrow-in.png",
+	RED.nodes.registerType('Output-Module', {
+		category: 'GOcontroll',
+		color: '#f76d11',
+		defaults: {
+			name: { value: "" },
+			moduleSlot: { value: "0" },
+			sampleTime: { value: "200" },
+			freq12: { value: "1" },
+			freq34: { value: "1" },
+			freq56: { value: "1" },
+			output1: { value: "1" },
+			output2: { value: "1" },
+			output3: { value: "1" },
+			output4: { value: "1" },
+			output5: { value: "1" },
+			output6: { value: "1" },
+			key1: { value: "outputSignal1" },
+			key2: { value: "outputSignal2" },
+			key3: { value: "outputSignal3" },
+			key4: { value: "outputSignal4" },
+			key5: { value: "outputSignal5" },
+			key6: { value: "outputSignal6" },
+			current1: { value: "4000" },
+			current2: { value: "4000" },
+			current3: { value: "4000" },
+			current4: { value: "4000" },
+			current5: { value: "4000" },
+			current6: { value: "4000" },
+			peakcurrent1: { value: "800" },
+			peakcurrent2: { value: "800" },
+			peakcurrent3: { value: "800" },
+			peakcurrent4: { value: "800" },
+			peakcurrent5: { value: "800" },
+			peakcurrent6: { value: "800" },
+			time1: { value: "500" },
+			time2: { value: "500" },
+			time3: { value: "500" },
+			time4: { value: "500" },
+			time5: { value: "500" },
+			time6: { value: "500" },
+		},
+		inputs: 1,
+		outputs: 1,
+		icon: "arrow-in.png",
 		paletteLabel: "6 Ch Output Mod",
-        label: function() {
-			if(this.name != "")
-			{
-            	return this.name;
+		label: function () {
+			if (this.name != "") {
+				return this.name;
 			}
-				if(this.moduleSlot == "0")
-			{
-            	return "Choose output module location";
+			if (this.moduleSlot == "0") {
+				return "Choose output module location";
 			}
 			return "Output module on slot " + this.moduleSlot;
-        },
+		},
 		/* function executed while done is clicked */
-		oneditprepare: function() {
-			var x ="", i;
-			for (i=1; i<=10; i++) {
-				$("#this.output"+i).trigger("change");
+		oneditprepare: function () {
+			var x = "", i;
+			for (i = 1; i <= 10; i++) {
+				$("#this.output" + i).trigger("change");
 			}
-	
-			$("#node-input-output1").on("change", function() {
+
+			$("#node-input-output1").on("change", function () {
 				var id = $("#node-input-output1").val();
-				if(id == 7){$("#peak-hold-1").show();}else{$("#peak-hold-1").hide();}
+				if (id == 7) { $("#peak-hold-1").show(); } else { $("#peak-hold-1").hide(); }
 			});
-			$("#node-input-output2").on("change", function() {
+			$("#node-input-output2").on("change", function () {
 				var id = $("#node-input-output2").val();
-				if(id == 7){$("#peak-hold-2").show();}else{$("#peak-hold-2").hide();}
+				if (id == 7) { $("#peak-hold-2").show(); } else { $("#peak-hold-2").hide(); }
 			});
-			$("#node-input-output3").on("change", function() {
+			$("#node-input-output3").on("change", function () {
 				var id = $("#node-input-output3").val();
-				if(id == 7){$("#peak-hold-3").show();}else{$("#peak-hold-3").hide();}
+				if (id == 7) { $("#peak-hold-3").show(); } else { $("#peak-hold-3").hide(); }
 			});
-			$("#node-input-output4").on("change", function() {
+			$("#node-input-output4").on("change", function () {
 				var id = $("#node-input-output4").val();
-				if(id == 7){$("#peak-hold-4").show();}else{$("#peak-hold-4").hide();}
+				if (id == 7) { $("#peak-hold-4").show(); } else { $("#peak-hold-4").hide(); }
 			});
-			$("#node-input-output5").on("change", function() {
+			$("#node-input-output5").on("change", function () {
 				var id = $("#node-input-output5").val();
-				if(id == 7){$("#peak-hold-5").show();}else{$("#peak-hold-5").hide();}
+				if (id == 7) { $("#peak-hold-5").show(); } else { $("#peak-hold-5").hide(); }
 			});
-			$("#node-input-output6").on("change", function() {
+			$("#node-input-output6").on("change", function () {
 				var id = $("#node-input-output6").val();
-				if(id == 7){$("#peak-hold-6").show();}else{$("#peak-hold-6").hide();}
+				if (id == 7) { $("#peak-hold-6").show(); } else { $("#peak-hold-6").hide(); }
 			});
-			$("#node-input-output7").on("change", function() {
+			$("#node-input-output7").on("change", function () {
 				var id = $("#node-input-output7").val();
-				if(id == 7){$("#peak-hold-7").show();}else{$("#peak-hold-7").hide();}
+				if (id == 7) { $("#peak-hold-7").show(); } else { $("#peak-hold-7").hide(); }
 			});
-			$("#node-input-output8").on("change", function() {
+			$("#node-input-output8").on("change", function () {
 				var id = $("#node-input-output8").val();
-				if(id == 7){$("#peak-hold-8").show();}else{$("#peak-hold-8").hide();}
+				if (id == 7) { $("#peak-hold-8").show(); } else { $("#peak-hold-8").hide(); }
 			});
-			$("#node-input-output9").on("change", function() {
+			$("#node-input-output9").on("change", function () {
 				var id = $("#node-input-output9").val();
-				if(id == 7){$("#peak-hold-9").show();}else{$("#peak-hold-9").hide();}
+				if (id == 7) { $("#peak-hold-9").show(); } else { $("#peak-hold-9").hide(); }
 			});
-			$("#node-input-output10").on("change", function() {
+			$("#node-input-output10").on("change", function () {
 				var id = $("#node-input-output10").val();
-				if(id == 7){$("#peak-hold-10").show();}else{$("#peak-hold-10").hide();}
+				if (id == 7) { $("#peak-hold-10").show(); } else { $("#peak-hold-10").hide(); }
 			});
 
-			$.getJSON("controllertype", function(data) {
+			$.getJSON("controllertype", function (data) {
 				if (data.includes("IV")) {
 					$(".Mini").hide();
 					$(".Display").hide();
@@ -123,9 +121,9 @@
 					$(".Display").hide();
 				}
 			});
-		  
+
 		}
-    });
+	});
 </script>
 
 <script type="text/x-red" data-template-name="Output-Module">
@@ -308,6 +306,9 @@ document.getElementById("Module-Settings").innerHTML = x;
 <p>&ldquo;[channel4 key]Current&rdquo; : 126,</p>
 <p>&ldquo;[channel5 key]Current&rdquo; : 450,</p>
 <p>&ldquo;[channel6 key]Current&rdquo; : 655}</p>
+<br>
+<p>If a channel is using the Peak and Hold mechanism, it also outputs the dutycycle (in promille) which is currently used with the key:</p>
+<p>&ldquo;[channel key]DutyCycle&rdquo;
 <br>
 <p>If the module hardware version is 7+ it will also output the "moduleSupply" key, this key contains the module supply voltage in mV.</p>
 <br>
