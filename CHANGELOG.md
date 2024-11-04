@@ -2,6 +2,7 @@
 
 #### V2.1.3
 - Fixed datatype conversion (unsigned to signed) from groundshift on 6 channel output module
+- Added dutycycle output to 6 channel output module when peak and hold is selected
 
 #### V2.1.3
 - Fixed incorrect ground shift datatype in the 6 channel output module
