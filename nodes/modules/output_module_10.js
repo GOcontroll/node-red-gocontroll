@@ -195,9 +195,9 @@ module.exports = function(RED) {
 							receiveBuffer.readUInt8(5) === 1){
 										
 							msgOut["moduleTemperature"] = receiveBuffer.readInt16LE(6),
-							msgOut["moduleGroundShift"] = receiveBuffer.readUInt16LE(8),
+							msgOut["moduleGroundShift"] = receiveBuffer.readInt16LE(8),
 							msgOut["moduleVoltage"] = receiveBuffer.readInt16LE(10),
-							msgOut["moduleCurrent"] = receiveBuffer.readUInt16LE(12),
+							msgOut["moduleCurrent"] = receiveBuffer.readInt16LE(12),
 							msgOut["moduleStatus"] = receiveBuffer.readUInt32LE(22),
 							node.send(msgOut);
 						}	
