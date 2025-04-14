@@ -1,4 +1,7 @@
-# V2.1.5
+# V2.1.6
+
+#### V2.1.6
+- Fixed the version of uiojs to actually fix new packaging
 
 #### V2.1.5
 - Fixed some datatypes for the 10 channel output module
