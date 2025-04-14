@@ -1,4 +1,8 @@
-# V2.1.4
+# V2.1.5
+
+#### V2.1.5
+- Fixed some datatypes for the 10 channel output module
+- Fixed some simulink related functions to work with new deb packaging
 
 #### V2.1.4
 - Added dutycycle output to 6 channel output module when peak and hold is selected
