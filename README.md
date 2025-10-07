@@ -1,7 +1,8 @@
 # node-red-gocontroll
 A package for the GOcontroll node red nodes
-
 provides access to some of the GOcontroll peripherals through node red
+
+More information about the compatible hardware can be found on our [website](https://gocontroll.com/products/)
 
 ## controller active
 This node can be used to shut down the controller when all kl15s are low, this is a hard shutdown as it works by removing the voltage from the cpu enable pin.
