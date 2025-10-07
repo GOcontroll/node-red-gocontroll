@@ -120,3 +120,9 @@ Steps: open the menu in the top right -> Manage palette -> remove the existing n
 2. SSH  
 SSH also allows you to remove the old, no longer required files, as this is not automatically done when uninstalling the package, you can also forcefully unistall/install without have to clear your flow  
 Steps: cd /root/.node-red/ -> npm uninstall node-red-gocontroll -> npm install @gocontroll-nl/node-red-gocontroll -> systemctl restart nodered -> (optional) rm -r /usr/node-red-gocontroll
+
+# Publishing a new version
+
+1. run `npm publish` and complete the steps
+2. go to https://flows.nodered.org/node/@gocontroll-nl/node-red-gocontroll and click "check for update" in the Actions menu
+
