@@ -1,4 +1,10 @@
-# V2.1.6
+# V2.1.8
+
+#### V2.1.8
+- Small addition to README
+
+#### V2.1.7
+- Fixed the ADC node on the Moduline Mini
 
 #### V2.1.6
 - Fixed the version of uiojs to actually fix new packaging
