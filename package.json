@@ -1,6 +1,6 @@
 {
 	"name": "@gocontroll-nl/node-red-gocontroll",
-	"version": "2.1.8",
+	"version": "2.1.9",
 	"description": "Node-RED nodes for GOcontroll Moduline controllers",
 	"homepage": "https://gocontroll.com",
 	"os": [

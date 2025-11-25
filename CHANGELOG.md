@@ -1,4 +1,8 @@
-# V2.1.8
+# V2.1.9
+
+#### V2.1.9
+- Fix the pull up value of the 10 channel input module
+- Slightly tune up the output module docs, no actual content changes
 
 #### V2.1.8
 - Small addition to README

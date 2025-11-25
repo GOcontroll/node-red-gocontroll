@@ -285,9 +285,9 @@ document.getElementById("Module-Settings").innerHTML = x;
 <p><em><strong>Control the module</strong></em></p>
 <p>The data to control the module can be send is as one JSON string for all channels or separate strings with key-value pairs for each channel independent. If channels are updated individually, the other outputs remain unchanged.</p>
 <p>Each channel can be controlled individually with the following JSON string:</p>
-<p>&nbsp;<em>{"outputChanneln" : y}</em></p>
+<p>&nbsp;<em>{&ldquo;outputChanneln&rdquo; : y}</em></p>
 <p>All channels can also be controlled with one JSON string:</p>
-<p>&nbsp;<em>{"outputChanneln" : y,</em></p>
+<p>&nbsp;<em>{&ldquo;outputChanneln&rdquo; : y,</em></p>
 <p><em>&hellip;&hellip; }</em></p>
 <p><em><strong>Read data from module</strong></em></p>
 <p>The data coming from the module is pushed out of the node in a JSON string format. This data is only pushed out of the node when an injection took place. If no output update is required but the status of the module is needed, a random message can be injected to the node to retrieve the information. The JSON string holds 8 key&rsquo;s and 8 values. Two general keys holding the groundshift and the temperature. The other 6 key&rsquo;s hold the current for each channel.</p>
@@ -310,7 +310,7 @@ document.getElementById("Module-Settings").innerHTML = x;
 <p>If a channel is using the Peak and Hold mechanism, it also outputs the dutycycle (in promille) which is currently used with the key:</p>
 <p>&ldquo;[channel key]DutyCycle&rdquo;
 <br>
-<p>If the module hardware version is 7+ it will also output the "moduleSupply" key, this key contains the module supply voltage in mV.</p>
+<p>If the module hardware version is 7+ it will also output the &ldquo;moduleSupply&rdquo; key, this key contains the module supply voltage in mV.</p>
 <br>
 <h3>The module status field</h3>
 <p>The module status is a 32 bit bitfield in which the bits indicate certain error flags:</p>
