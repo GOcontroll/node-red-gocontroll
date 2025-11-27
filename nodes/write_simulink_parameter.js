@@ -157,6 +157,8 @@ module.exports = function (RED) {
                             uiojs.process_write(pid, localParameters[inputParameter]["asap_parameter"], msg[inputKey][inputParameter]);
                             if (outputMode == OUTPUTMODEONCE) {
                                 payload[inputParameter] = uiojs.process_read(pid, localParameters[inputParameter]["asap_parameter"]);
+                                msgOut["payload"] = payload;
+                                node.send(msgOut);
                             }
                         } catch (err) {
                             // simulink=false;
@@ -165,8 +167,6 @@ module.exports = function (RED) {
                         }
                     }
                 }
-                msgOut["payload"] = payload;
-                node.send(msgOut);
             } else {
                 node.error("No simulink model running right now, unable to write the parameter(s).")
                 intervalCheck = setInterval(check_model, 2000);
