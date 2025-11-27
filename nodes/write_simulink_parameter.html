@@ -47,8 +47,8 @@
                     var keys = Object.keys(json);
                     var options = $('#node-input-parameter').typedInput({
                         type: "Parameter", types: [{
-                        value: "Parameter",
-                        options: getOptions(keys)
+                            value: "Parameter",
+                            options: getOptions(keys)
                         }]
                     })
                     options.typedInput('value', node.parameter);
@@ -157,13 +157,13 @@
     <p>&nbsp;</p>
     <h2><strong>Example for output</strong></h2>
     <p>This example shows the output data from a write simulink parameter node during operation:</p>
-    <p>{payload:paramaterName: 2766 }</p>
+    <p>{payload: {parameterName: 2766} }</p>
     <p>&nbsp;</p>
     <p>or in case the parameter is an array</p>
-    <p>{payload: parameterName: [100, 65, 300]}</p>
+    <p>{payload: {parameterName: [100, 65, 300]}}</p>
     <p>&nbsp;</p>
     <p>If the parameter is not set from the list it can output multiple values:</p>
-    <p>{payload:paramaterName: 2766 , parameterName2: 500 ... }</p>
+    <p>{payload: {parameterName: 2766 , parameterName2: 500 ...} }</p>
     <p>&nbsp;</p>
     <h2><strong>Example for input</strong></h2>
     <p>Input example with selection from list:</p>
@@ -172,6 +172,6 @@
     <p>or in case the parameter is an array</p>
     <p>{InputKey : [300, 400, 500]}</p>
     <p>&nbsp;</p>
-    <p>Input example with selection from list:</p>
-    <p>{InputKey: ParameterName: 100 , ParameterName2: 200 ...}</p>
+    <p>Input example when parameter is not selected from list:</p>
+    <p>{InputKey: {ParameterName: 100 , ParameterName2: 200 ...}}</p>
 </script>
