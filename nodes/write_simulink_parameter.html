@@ -3,31 +3,31 @@
         category: 'GOcontroll',
         color: '#f76d11',
         defaults: {
-            name: {value:""},
-            sampleTime: {value:"1000"},
-            parameter: {value:""},
-            keyIn: {value:""},
-            data: {value:""},
-            inputMode: {value:"0"},
-            outputMode: {value:"0"},
-            xcpIdCheck: {value:"0"},
+            name: { value: "" },
+            sampleTime: { value: "1000" },
+            parameter: { value: "" },
+            keyIn: { value: "" },
+            data: { value: "" },
+            inputMode: { value: "0" },
+            outputMode: { value: "0" },
+            xcpIdCheck: { value: "0" },
         },
-        inputs:1,
-        outputs:1,
+        inputs: 1,
+        outputs: 1,
         icon: "arrow-in.png",
         paletteLabel: "Simulink Parameter",
-        label: function() {
-            if(this.name != ""){
+        label: function () {
+            if (this.name != "") {
                 return this.name;
             } else {
                 return "Write to Simulink";
             }
         },
 
-        oneditprepare: function() {
+        oneditprepare: function () {
             var node = this;
             //display the desired selection interfaces.
-            if (node.outputMode != "2"){
+            if (node.outputMode != "2") {
                 $("#sampleTime-div").hide()
             }
             if (node.inputMode == false) {
@@ -45,26 +45,29 @@
                 })
                 .then((json) => {
                     var keys = Object.keys(json);
-                    var options = $('#node-input-parameter').typedInput({type:"Parameter", types:[{
+                    var options = $('#node-input-parameter').typedInput({
+                        type: "Parameter", types: [{
                         value: "Parameter",
                         options: getOptions(keys)
-                    }]})
-                    options.typedInput('value',node.parameter);
-                    var keyin = $('#node-input-keyIn').typedInput({type:'str', types: ["str"]})
+                        }]
+                    })
+                    options.typedInput('value', node.parameter);
+                    var keyin = $('#node-input-keyIn').typedInput({ type: 'str', types: ["str"] })
                     keyin.typedInput('value', node.keyIn);
                 })
-                .catch((err) => {node.error('Fetch problem: ' + err.message);
-                node.status({fill:"red", shape:"dot", text:"An error occured fetching parameters.json"});
+                .catch((err) => {
+                    node.error('Fetch problem: ' + err.message);
+                    node.status({ fill: "red", shape: "dot", text: "An error occured fetching parameters.json" });
                 });
 
             //register the listener for the outputmode (never, on input or interval)
-            $("#node-input-outputMode").on("change", function() {
+            $("#node-input-outputMode").on("change", function () {
                 var mode = $("#node-input-outputMode").val();
-                if (mode == "2") {$("#sampleTime-div").show()} else {$("#sampleTime-div").hide()}
+                if (mode == "2") { $("#sampleTime-div").show() } else { $("#sampleTime-div").hide() }
             })
 
             //register the listener for the inputmode (select from list, or input contains the parameter name)
-            $("#node-input-inputMode").change(function() {
+            $("#node-input-inputMode").change(function () {
                 var mode = this.checked;
                 if (mode == true) {
                     $('#parameter-select-div').show();
@@ -77,7 +80,7 @@
                 }
             })
         },
-        oneditsave: function() {
+        oneditsave: function () {
             this.parameter = $('#node-input-parameter').typedInput("value")
             this.keyIn = $('#node-input-keyIn').typedInput("value")
             //this.inputMode = $("#node-input-inputMode").checked;
@@ -87,7 +90,7 @@
     function getOptions(keys) {
         var result = []
         for (const key in keys) {
-            result.push({value: keys[key], label: keys[key]})
+            result.push({ value: keys[key], label: keys[key] })
         }
         return result;
     }
