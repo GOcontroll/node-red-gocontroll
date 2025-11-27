@@ -47,9 +47,13 @@ module.exports = function (RED) {
                     header = getHeader();
                     if (header) {
                         if (!checkXCPidentifierMatch(pid, header)) {
-                            node.status({ fill: "red", shape: "dot", text: "The XCP ID in the parsed a2l file does not match that of the running model!" })
+                            node.status({ fill: "red", shape: "dot", text: "The XCP ID in the parsed a2l file does not match that of the running model!" });
                             return;
                         }
+                    } else {
+                        clearInterval(intervalCheck);
+                        node.status({ fill: "red", shape: "dot", text: "Could not get header.json to validify the xcp identifier" });
+                        return;
                     }
                 }
 
