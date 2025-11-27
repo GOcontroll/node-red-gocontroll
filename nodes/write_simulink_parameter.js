@@ -97,7 +97,7 @@ module.exports = function (RED) {
             if (simulink == true) {
                 try {
                     res = uiojs.process_read(pid, asap_parameter);
-                    msgOut = { [parameterName]: res };
+                    msgOut = { "payload": { [parameterName]: res } };
                     node.send(msgOut);
                 } catch (err) {
                     simulink = false;
