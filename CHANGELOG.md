@@ -1,4 +1,7 @@
-# V2.1.9
+# V2.1.10
+
+#### V2.1.10
+- Fix some documentation and beviour of the write_simulink_parameter node
 
 #### V2.1.9
 - Fix the pull up value of the 10 channel input module
