@@ -1,4 +1,5 @@
-# V2.1.10
+#### V2.1.11
+- re-ad moduleType to the config of 6 channel in/ouput modules
 
 #### V2.1.10
 - Fix some documentation and beviour of the write_simulink_parameter node
