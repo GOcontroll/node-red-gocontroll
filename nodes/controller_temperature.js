@@ -34,7 +34,7 @@ module.exports = function(RED) {
 			if(data != NaN)
 			{
 			msgOut["temperature"]= (parseInt(data))/1000;
-			node.send(msgOut);
+			node.send({payload: msgOut});
 			}
 			
 			if (err)

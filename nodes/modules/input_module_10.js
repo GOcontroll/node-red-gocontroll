@@ -207,7 +207,7 @@ function GOcontrollInputModule(config) {
 					{
 						msgOut[key[messagePointer]] = receiveBuffer.readInt32LE((messagePointer*4)+6)
 					}
-				node.send(msgOut);
+				node.send({payload: msgOut});
 				}
 			}					
 		});	

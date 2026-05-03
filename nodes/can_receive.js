@@ -158,8 +158,8 @@ module.exports = function(RED) {
 					}
 					
 				msgOut[key[s]]= value[s];
-				}			
-			node.send(msgOut);
+				}
+			node.send({payload: msgOut});
 		});
 
         

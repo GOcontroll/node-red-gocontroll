@@ -247,11 +247,11 @@ module.exports = function(RED) {
 			msgOut["longitude"] = longitude;
 			msgOut["altitude"] = altitude;
 			msgOut["speed"] = speed;
-			
+
 			/* Cleanup the dataSTring for new parsing */
 			dataString = "";
-			
-			node.send(msgOut);
+
+			node.send({payload: msgOut});
 		});
 		
 		

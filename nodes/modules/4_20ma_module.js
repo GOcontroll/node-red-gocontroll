@@ -167,7 +167,7 @@ function GOcontroll4_20maModule(config) {
 					for (var idx = 1; idx  <= 5; idx ++) {
 						msgOut.status["supply" + idx] = (status & (1 << (idx -1))) ? 1 : 0;
 					}
-					node.send(msgOut);
+					node.send({payload: msgOut});
 				}
 			}					
 		});	

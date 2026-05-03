@@ -5,7 +5,6 @@
 		defaults: {
 			name: { value: "" },
 			moduleSlot: { value: "0" },
-			moduleType: { value: "1" },
 			sampleTime: { value: "200" },
 			freq12: { value: "1" },
 			freq34: { value: "1" },
@@ -56,51 +55,13 @@
 		},
 		/* function executed while done is clicked */
 		oneditprepare: function () {
-			var x = "", i;
-			for (i = 1; i <= 10; i++) {
-				$("#this.output" + i).trigger("change");
+			for (var i = 1; i <= 6; i++) {
+				(function(ch) {
+					$("#node-input-output" + ch).on("change", function () {
+						if ($(this).val() == 7) { $("#peak-hold-" + ch).show(); } else { $("#peak-hold-" + ch).hide(); }
+					}).trigger("change");
+				})(i);
 			}
-
-			$("#node-input-output1").on("change", function () {
-				var id = $("#node-input-output1").val();
-				if (id == 7) { $("#peak-hold-1").show(); } else { $("#peak-hold-1").hide(); }
-			});
-			$("#node-input-output2").on("change", function () {
-				var id = $("#node-input-output2").val();
-				if (id == 7) { $("#peak-hold-2").show(); } else { $("#peak-hold-2").hide(); }
-			});
-			$("#node-input-output3").on("change", function () {
-				var id = $("#node-input-output3").val();
-				if (id == 7) { $("#peak-hold-3").show(); } else { $("#peak-hold-3").hide(); }
-			});
-			$("#node-input-output4").on("change", function () {
-				var id = $("#node-input-output4").val();
-				if (id == 7) { $("#peak-hold-4").show(); } else { $("#peak-hold-4").hide(); }
-			});
-			$("#node-input-output5").on("change", function () {
-				var id = $("#node-input-output5").val();
-				if (id == 7) { $("#peak-hold-5").show(); } else { $("#peak-hold-5").hide(); }
-			});
-			$("#node-input-output6").on("change", function () {
-				var id = $("#node-input-output6").val();
-				if (id == 7) { $("#peak-hold-6").show(); } else { $("#peak-hold-6").hide(); }
-			});
-			$("#node-input-output7").on("change", function () {
-				var id = $("#node-input-output7").val();
-				if (id == 7) { $("#peak-hold-7").show(); } else { $("#peak-hold-7").hide(); }
-			});
-			$("#node-input-output8").on("change", function () {
-				var id = $("#node-input-output8").val();
-				if (id == 7) { $("#peak-hold-8").show(); } else { $("#peak-hold-8").hide(); }
-			});
-			$("#node-input-output9").on("change", function () {
-				var id = $("#node-input-output9").val();
-				if (id == 7) { $("#peak-hold-9").show(); } else { $("#peak-hold-9").hide(); }
-			});
-			$("#node-input-output10").on("change", function () {
-				var id = $("#node-input-output10").val();
-				if (id == 7) { $("#peak-hold-10").show(); } else { $("#peak-hold-10").hide(); }
-			});
 
 			$.getJSON("controllertype", function (data) {
 				if (data.includes("IV")) {
@@ -298,6 +259,7 @@ document.getElementById("Module-Settings").innerHTML = x;
 <p>This example shows the JSON data &nbsp;to inject into the output node.</p>
 <p>{&ldquo;outputChannel1&rdquo; : 688}</p>
 <p>This example shows the data coming from an output node during operation.</p>
+<p>msg.payload : Object</p>
 <p>{&ldquo;moduleTemperature&rdquo; : 28,</p>
 <p>&ldquo;moduleGroundShift&rdquo; : 0,</p>
 <p>&ldquo;moduleStatus&rdquo; : 0,</p>

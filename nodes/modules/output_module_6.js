@@ -261,7 +261,7 @@ module.exports = function (RED) {
 								msgOut[key[i] + "DutyCycle"] = receiveBuffer.readUint16LE(26 + i * 2);
 							}
 						}
-						node.send(msgOut);
+						node.send({payload: msgOut});
 					}
 				}
 			});

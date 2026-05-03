@@ -186,19 +186,19 @@
 <h2><strong>How to configure:</strong></h2>
 <p><strong>Config:</strong></p>
 <p>Here you select the onboard CAN bus from the controller.</p>
-<h3>Moduline IV</h3>
+<h3>Moduline L4</h3>
 <p>The four CAN busses are connected to the C connecter (middle).</p>
 <p>CAN1 - Connector C pin 14 (L) and pin 15 (H)</p>
 <p>CAN2 - Connector C pin 20 (L) and pin 21 (H)</p>
 <p>CAN3 - Connector C pin 19 (L) and pin 18 (H)</p>
 <p>CAN4 - Connector C pin 13 (L) and pin 12 (H)</p>
 
-<h3>Moduline Mini</h3>
+<h3>Moduline M1</h3>
 <p>The two CAN busses are connected to both connector A and B.</p>
 <p>CAN1 - Connector B pin 24 (L) and pin 25 (H)</p>
 <p>CAN2 - Connector A pin 24 (L) and pin 25 (H)</p>
 
-<h3>Moduline Display</h3>
+<h3>Moduline HMI1</h3>
 <p>The two CAN busses are connected to the main connector.</p>
 <p>CAN1 - Main Connector pin 16 (L) and pin 17 (H)</p>
 <p>CAN2 - Main Connector pin 24 (L) and pin 25 (H)</p>
@@ -210,6 +210,6 @@
 <h3><strong>Signals:&nbsp;</strong></h3>
 <p>Here can be specified which signals are received by CAN. This improves the readability and the traceability from messages in a flow.</p>
 <p>Example:</p>
-<p>A CAN message contains the vehicle engine speed (uint16) on data byte 5 and 6. For readability, a key can be provided in the form of <em>engineSpeed</em>. The start byte of the value is <em>5</em> and the end byte will be <em>6</em>. The node will retrieve data byte 5 and 6, convert them to a (uint16) and push the value out of the node in form of a JSON object <em>{"engineSpeed": 2560}</em>&nbsp;&nbsp;</p>
+<p>A CAN message contains the vehicle engine speed (uint16) on data byte 5 and 6. For readability, a key can be provided in the form of <em>engineSpeed</em>. The start byte of the value is <em>5</em> and the end byte will be <em>6</em>. The node will retrieve data byte 5 and 6, convert them to a (uint16) and push the value out of the node in form of a JSON object under <em>msg.payload</em>: <em>{"engineSpeed": 2560}</em>&nbsp;&nbsp;</p>
 <p>&nbsp;</p>
 </script>

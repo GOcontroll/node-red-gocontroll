@@ -33,10 +33,6 @@ function GOcontrollInputModule(config) {
 	input[3] = config.input4;
 	input[4] = config.input5;
 	input[5] = config.input6;
-	input[6] = config.input7;
-	input[7] = config.input8;
-	input[8] = config.input9;
-	input[9] = config.input10;
 	
 	var voltageRange = [];
 	voltageRange[0] = config.v1;
@@ -69,10 +65,6 @@ function GOcontrollInputModule(config) {
 	key[3] = config.key4;
 	key[4] = config.key5;
 	key[5] = config.key6;
-	key[6] = config.key7;
-	key[7] = config.key8;
-	key[8] = config.key9;
-	key[9] = config.key10;
 	
 	var sL, sB;
 	
@@ -203,7 +195,7 @@ function GOcontrollInputModule(config) {
 							{
 								msgOut[key[messagePointer]] = receiveBuffer.readInt32LE((messagePointer*8)+6)
 							}
-						node.send(msgOut);
+						node.send({payload: msgOut});
 					}
 				}					
 			});	

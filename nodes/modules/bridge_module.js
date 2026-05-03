@@ -169,7 +169,7 @@ module.exports = function (RED) {
 							msgOut[key[0] + "Current"] = receiveBuffer.readInt16LE(10),
 							msgOut[key[1] + "Current"] = receiveBuffer.readInt16LE(12),
 
-							node.send(msgOut);
+							node.send({payload: msgOut});
 					}
 				}
 			});

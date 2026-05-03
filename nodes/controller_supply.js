@@ -143,7 +143,7 @@ module.exports = function (RED) {
 				msgOut["batteryVoltage"] = batteryVoltage;
 				msgOut["K15A"] = contactVoltage;
 
-				node.send(msgOut);
+				node.send({payload: msgOut});
 			}
 
 			else if (adc == 2) {
@@ -224,7 +224,7 @@ module.exports = function (RED) {
 				msgOut["K15B"] = (((active2Voltage * decimalFactor) / 1.5) * 11700).toFixed(0);
 				msgOut["K15C"] = (((active3Voltage * decimalFactor) / 1.5) * 11700).toFixed(0);
 
-				node.send(msgOut);
+				node.send({payload: msgOut});
 			}
 			else if (adc == 3) {
 				/* Try to read the value from KL15-A */
@@ -248,7 +248,7 @@ module.exports = function (RED) {
 				} catch (err) {
 				}
 
-				node.send(msgOut);
+				node.send({payload: msgOut});
 			}
 		}
 

@@ -60,25 +60,25 @@ module.exports = function(RED) {
 					node.warn("Multiple keys found. Not able to provide one, numeric playload")
 					return;
 				}
-				
+
+				var payloadOut = {};
 				for(let k = 0; k < splittedKeys.length; k ++)
 				{
-			
+
 					var fileContents;
 					try {
 					fileContents = fs.readFileSync(path+String(splittedKeys[k]));
 					} catch (err) {
 					/* For debugging purposes otherwise to much noise on debug window */
-					//node.warn("Error during key search");	
+					//node.warn("Error during key search");
 					  // Here you get the error when the file was not found,
 					  // but you also get any other error
 					}
-								
-				msgOut[String(splittedKeys[k])] =  parseFloat(fileContents);
+
+				payloadOut[String(splittedKeys[k])] = parseFloat(fileContents);
 				}
-			
-				
-				node.send(msgOut);
+
+				node.send({payload: payloadOut});
 				return;
 			}
 	
@@ -94,9 +94,10 @@ module.exports = function(RED) {
 				}
 				else
 				{
-					msgOut[key]= parseFloat(data);
+					msgOut.payload = {};
+					msgOut.payload[key] = parseFloat(data);
 				}
-				
+
 			node.send(msgOut);
 			}
 			

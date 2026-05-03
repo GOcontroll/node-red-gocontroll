@@ -199,7 +199,7 @@ module.exports = function(RED) {
 							msgOut["moduleVoltage"] = receiveBuffer.readInt16LE(10),
 							msgOut["moduleCurrent"] = receiveBuffer.readInt16LE(12),
 							msgOut["moduleStatus"] = receiveBuffer.readUInt32LE(22),
-							node.send(msgOut);
+							node.send({payload: msgOut});
 						}	
 					}
 				});
