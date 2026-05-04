@@ -124,5 +124,5 @@ Steps: cd /root/.node-red/ -> npm uninstall node-red-gocontroll -> npm install @
 # Publishing a new version
 
 1. run `npm publish` and complete the steps
-2. go to https://flows.nodered.org/node/@gocontroll-nl/node-red-gocontroll and click "check for update" in the Actions menu
+2. go to https://flows.nodered.org/node/@gocontroll/node-red-gocontroll and click "check for update" in the Actions menu
 
