@@ -6,7 +6,49 @@ on:
       - 'v*'
 
 jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        node: ['14', '20']
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Syntax check all node files
+        run: find nodes -name '*.js' -print0 | xargs -0 -n1 node --check
+
+      - name: Smoke require check
+        run: |
+          node -e '
+            const nodes = require("./package.json")["node-red"].nodes;
+            let failed = false;
+            for (const [name, p] of Object.entries(nodes)) {
+              try {
+                const mod = require("./" + p);
+                if (typeof mod !== "function") {
+                  console.error("FAIL " + name + ": did not export a function");
+                  failed = true;
+                } else {
+                  console.log("ok  " + name);
+                }
+              } catch (err) {
+                console.error("FAIL " + name + ": " + err.message);
+                failed = true;
+              }
+            }
+            if (failed) process.exit(1);
+          '
+
   publish:
+    needs: verify
     runs-on: ubuntu-latest
     permissions:
       contents: write
