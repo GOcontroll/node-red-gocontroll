@@ -15,7 +15,6 @@ module.exports = function(RED) {
 		const objectOutput	= (config.objectOutput !== false);
 		
 		var intervalGetData;
-		var msgOut = {};
 
 		var path;
 		
@@ -89,10 +88,10 @@ module.exports = function(RED) {
 	
 	
 			fs.readFile(path+key, (err, data) => {
-			
+
 			if(!isNaN(data))
 			{
-				
+				var msgOut = {};
 				if(outputType === "payload")
 				{
 					msgOut.payload = parseFloat(data);

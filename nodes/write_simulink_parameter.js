@@ -136,7 +136,7 @@ module.exports = function (RED) {
                 //list based input
                 if (inputMode == INPUTMODELIST) {
                     if (src[inputKey] === undefined) {
-                        node.error("wrong key received on input, check your configurations.\nReceived: " + JSON.stringify(msg) + "\nExpected key: " + inputKey);
+                        node.error("wrong key received on input, check your configurations.\nReceived: " + JSON.stringify(src) + "\nExpected key: " + inputKey);
                         return;
                     }
                     try {

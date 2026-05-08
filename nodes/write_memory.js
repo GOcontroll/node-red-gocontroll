@@ -66,18 +66,16 @@ module.exports = function(RED) {
 		}
 
 		/* If key is provided, use the specific key to send data */
-		else if(src[key] != NaN && inputType === "object")
+		else if(inputType === "object" && Number.isFinite(parseFloat(src[key])))
 		{
-			fs.writeFileSync(path+key, String(parseFloat(src[key]).toFixed(decimal)), (err) => {
+			fs.writeFileSync(path+key, parseFloat(src[key]).toFixed(decimal), (err) => {
 			if (err) throw err;
-			//console.log('The file has been saved!');
 			});
 		}
-		else if (msg.payload != NaN)
+		else if (Number.isFinite(parseFloat(msg.payload)))
 		{
-			fs.writeFileSync(path+key, String(parseFloat(msg.payload).toFixed(decimal)), (err) => {
+			fs.writeFileSync(path+key, parseFloat(msg.payload).toFixed(decimal), (err) => {
 			if (err) throw err;
-			//console.log('The file has been saved!');
 			});
 		}
 
