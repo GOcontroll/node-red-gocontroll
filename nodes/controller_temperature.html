@@ -3,7 +3,8 @@
         category: 'GOcontroll',
         color: '#f76d11',
 		defaults: {
-			name: {value:""}
+			name: {value:""},
+			objectOutput: {value:true}
         },
         inputs:0,
         outputs:1,
@@ -27,7 +28,12 @@
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name" style="width:350px">
     </div>
-	
+
+    <div class="form-row">
+        <input type="checkbox" id="node-input-objectOutput" style="display:inline-block; width:auto; vertical-align:middle; margin-right:6px;">
+        <label for="node-input-objectOutput" style="width:auto;" title="When checked, signals are placed directly on msg (legacy shape, pre-v2.2.0). When unchecked, they go under msg.payload.">Object output (legacy shape)</label>
+    </div>
+
 </script>
 
 <script type="text/x-red" data-help-name="CPU-Temperature">

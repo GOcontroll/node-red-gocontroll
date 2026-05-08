@@ -7,7 +7,9 @@ module.exports = function(RED) {
 		var fs 		= require('fs');
 
 		var node 		= this;
-		
+
+		const objectOutput = (config.objectOutput !== false);
+
 		var intervalGetTemperature;
 		var msgOut = {};
 
@@ -34,7 +36,11 @@ module.exports = function(RED) {
 			if(data != NaN)
 			{
 			msgOut["temperature"]= (parseInt(data))/1000;
-			node.send({payload: msgOut});
+			if (objectOutput) {
+				node.send(msgOut);
+			} else {
+				node.send({payload: msgOut});
+			}
 			}
 			
 			if (err)
