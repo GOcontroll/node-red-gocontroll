@@ -1,15 +1,15 @@
 module.exports = function(RED) {
     "use strict"
 
-	const SerialPort = require("serialport");
+	const { SerialPort } = require("serialport");
 	/* fs is needed to set GPIO LED but that is not used now */
 	//const fs = require('fs');
 
-	function GOcontrollGPS(config) { 	 
+	function GOcontrollGPS(config) {
 	   RED.nodes.createNode(this,config);
 
 		/* Serial port used for simcom on Moduline 4 */
-		const port = new SerialPort("/dev/ttymxc1", { baudRate: 115200 , autoOpen: false });
+		const port = new SerialPort({ path: "/dev/ttymxc1", baudRate: 115200, autoOpen: false });
 
 		var interval = null;
 		var modulePowered = false;
