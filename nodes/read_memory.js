@@ -12,6 +12,7 @@ module.exports = function(RED) {
 		const memoryType 	= config.memtype;
 		const interval 		= parseInt(config.interval,10);
 		const outputType	= config.outputtype;
+		const objectOutput	= (config.objectOutput !== false);
 		
 		var intervalGetData;
 		var msgOut = {};
@@ -78,7 +79,11 @@ module.exports = function(RED) {
 				payloadOut[String(splittedKeys[k])] = parseFloat(fileContents);
 				}
 
-				node.send({payload: payloadOut});
+				if (objectOutput) {
+					node.send(payloadOut);
+				} else {
+					node.send({payload: payloadOut});
+				}
 				return;
 			}
 	
@@ -91,6 +96,10 @@ module.exports = function(RED) {
 				if(outputType === "payload")
 				{
 					msgOut.payload = parseFloat(data);
+				}
+				else if (objectOutput)
+				{
+					msgOut[key] = parseFloat(data);
 				}
 				else
 				{

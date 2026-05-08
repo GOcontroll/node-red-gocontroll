@@ -17,6 +17,7 @@ module.exports = function(RED) {
 
 		const moduleSlot = parseInt(config.moduleSlot);
 		const sampleTime = config.sampleTime;
+		const objectOutput = (config.objectOutput !== false);
 
 		var outputType = [];
 		outputType[0] = config.output1;
@@ -194,12 +195,16 @@ module.exports = function(RED) {
 							receiveBuffer.readUInt8(4) === 4 	&&
 							receiveBuffer.readUInt8(5) === 1){
 										
-							msgOut["moduleTemperature"] = receiveBuffer.readInt16LE(6),
-							msgOut["moduleGroundShift"] = receiveBuffer.readInt16LE(8),
-							msgOut["moduleVoltage"] = receiveBuffer.readInt16LE(10),
-							msgOut["moduleCurrent"] = receiveBuffer.readInt16LE(12),
-							msgOut["moduleStatus"] = receiveBuffer.readUInt32LE(22),
-							node.send({payload: msgOut});
+							msgOut["moduleTemperature"] = receiveBuffer.readInt16LE(6);
+							msgOut["moduleGroundShift"] = receiveBuffer.readInt16LE(8);
+							msgOut["moduleVoltage"] = receiveBuffer.readInt16LE(10);
+							msgOut["moduleCurrent"] = receiveBuffer.readInt16LE(12);
+							msgOut["moduleStatus"] = receiveBuffer.readUInt32LE(22);
+							if (objectOutput) {
+								node.send(msgOut);
+							} else {
+								node.send({payload: msgOut});
+							}
 						}	
 					}
 				});
@@ -217,7 +222,8 @@ module.exports = function(RED) {
 		**
 		****************************************************************************************/
 		node.on('input', function(msg) {
-			
+			var src = objectOutput ? msg : (msg.payload || {});
+
 			sendBuffer[0] = moduleSlot;
 			sendBuffer[1] = MESSAGELENGTH-1;
 
@@ -228,9 +234,9 @@ module.exports = function(RED) {
 
 			for(var s =0; s <10; s++)
 			{
-				if(msg[key[s]] <= 1000 && msg[key[s]] >= 0)
+				if(src[key[s]] <= 1000 && src[key[s]] >= 0)
 				{
-				sendBuffer.writeUInt16LE(msg[key[s]], (s*2)+6);
+				sendBuffer.writeUInt16LE(src[key[s]], (s*2)+6);
 				}
 			}
 

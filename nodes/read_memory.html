@@ -4,6 +4,7 @@
         color: '#f76d11',
 		defaults: {
 			name: {value:""},
+			objectOutput: {value:true},
 			key: {value:""},
 			memtype: {value:"ram"},
 			outputtype: {value:"object"},
@@ -31,7 +32,12 @@
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name" style="width:350px">
     </div>
-	
+
+    <div class="form-row">
+        <input type="checkbox" id="node-input-objectOutput" style="display:inline-block; width:auto; vertical-align:middle; margin-right:6px;">
+        <label for="node-input-objectOutput" style="width:auto;" title="When checked, key/value pairs are placed directly on msg (legacy shape, pre-v2.2.0). When unchecked, they go under msg.payload. Has no effect when 'Output as numeric payload' is selected below.">Object output (legacy shape)</label>
+    </div>
+
 	<div class="form-row">
     <label for="node-input-key"><i class="fa fa-id-badge"></i> Key(s)</label>
 	<textarea id="node-input-key" placeholder="exampleKey1,exampleKey2" style="width:350px" cols="200">

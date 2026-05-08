@@ -5,7 +5,8 @@ module.exports = function(RED) {
 
 	function GOcontrollControllerActive(config) {
 	   RED.nodes.createNode(this,config);
-	 
+
+	const objectInput = (config.objectInput !== false);
 
 	/***************************************************************************************
 	** \brief	Funtion called on message injection
@@ -15,14 +16,15 @@ module.exports = function(RED) {
 	**
 	****************************************************************************************/
 	this.on('input', function(msg) {
+			var src = objectInput ? msg : (msg.payload || {});
 
-			if(msg["controllerActive"] == 1)
+			if(src["controllerActive"] == 1)
 			{
 			fs.writeFileSync('/sys/class/leds/power-active/brightness','255');
 			}
 			else
 			{
-			fs.writeFileSync('/sys/class/leds/power-active/brightness','0');	
+			fs.writeFileSync('/sys/class/leds/power-active/brightness','0');
 			}
 
         });

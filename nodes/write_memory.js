@@ -12,6 +12,7 @@ module.exports = function(RED) {
 	const memoryType	= config.memtype;
 	const inputType		= config.inputtype;
 	const decimal		= parseInt(config.decimal);
+	const objectInput	= (config.objectInput !== false);
 
 	var oldValue ={};
 	
@@ -36,13 +37,16 @@ module.exports = function(RED) {
 	**
 	****************************************************************************************/
 	node.on('input', function(msg) {
-    
+
+		/* For "object" inputType, source can be msg directly (legacy) or msg.payload (modern) */
+		var src = objectInput ? msg : (msg.payload || {});
+
 		/* First check if folder is present if not, create one*/
 		if (!fs.existsSync(path)) {
 		fs.mkdirSync(path);
 		}
-					
-		/* If no key is given, the function listens to all keys and save them */ 
+
+		/* If no key is given, the function listens to all keys and save them */
 		if(key == "")
 		{
 			if(inputType === "payload")
@@ -50,21 +54,21 @@ module.exports = function(RED) {
 				node.warn("When the input is a payload, a key to store the value is manditory");
 				return;
 			}
-			
-			for(var prop in msg) {
-				if (msg.hasOwnProperty(prop)) {							
-					fs.writeFileSync(path+prop, String(parseFloat(msg[prop]).toFixed(decimal)), (err) => {
+
+			for(var prop in src) {
+				if (src.hasOwnProperty(prop)) {
+					fs.writeFileSync(path+prop, String(parseFloat(src[prop]).toFixed(decimal)), (err) => {
 						if (err) throw err;
 
 						});
 				}
 			}
 		}
-		
+
 		/* If key is provided, use the specific key to send data */
-		else if(msg[key] != NaN && inputType === "object")
+		else if(src[key] != NaN && inputType === "object")
 		{
-			fs.writeFileSync(path+key, String(parseFloat(msg[key]).toFixed(decimal)), (err) => {
+			fs.writeFileSync(path+key, String(parseFloat(src[key]).toFixed(decimal)), (err) => {
 			if (err) throw err;
 			//console.log('The file has been saved!');
 			});
@@ -76,7 +80,7 @@ module.exports = function(RED) {
 			//console.log('The file has been saved!');
 			});
 		}
-			
+
     });
 	
 	/***************************************************************************************

@@ -20,6 +20,7 @@ function GOcontrollInputModule(config) {
 	/* Get information from the Node configuration */
 	const moduleSlot 		= parseInt(config.moduleSlot);
 	const sampleTime 		= config.sampleTime;
+	const objectOutput 		= (config.objectOutput !== false);
 	
 	var supply	= [];
 	supply[0] = config.supply1;
@@ -195,7 +196,11 @@ function GOcontrollInputModule(config) {
 							{
 								msgOut[key[messagePointer]] = receiveBuffer.readInt32LE((messagePointer*8)+6)
 							}
-						node.send({payload: msgOut});
+						if (objectOutput) {
+							node.send(msgOut);
+						} else {
+							node.send({payload: msgOut});
+						}
 					}
 				}					
 			});	
@@ -212,8 +217,9 @@ function GOcontrollInputModule(config) {
 	**
 	****************************************************************************************/
 	node.on('input', function(msg) {
+		var src = objectOutput ? msg : (msg.payload || {});
 		for (var i = 0; i < 3; i++) {
-			var pulses = msg["channel" + (i*2 + 1) + (i*2 + 2) + "pulses"];
+			var pulses = src["channel" + (i*2 + 1) + (i*2 + 2) + "pulses"];
 			if (pulses !== undefined) {
 				if(pulses >= -2147483640 && pulses <= 2147483640) {
 					var sendBuffer = Buffer.alloc(MESSAGELENGTH+5); 

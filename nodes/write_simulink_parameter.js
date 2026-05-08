@@ -26,6 +26,7 @@ module.exports = function (RED) {
         const inputMode = config.inputMode;     //true == predetermined key, false == use key(s) from input
         const outputMode = config.outputMode;   //0 == never output, 1 == output once on input, 2 == output on interval
         const xcpIdCheck = config.xcpIdCheck;   //true == validate xcp station id, false == dont
+        const objectOutput = (config.objectOutput !== false);
         var msgOut = {};
         let pid = "";
         node.status({ fill: "yellow", shape: "dot", text: "Initializing node..." })
@@ -101,8 +102,11 @@ module.exports = function (RED) {
             if (simulink == true) {
                 try {
                     res = uiojs.process_read(pid, asap_parameter);
-                    msgOut = { "payload": { [parameterName]: res } };
-                    node.send(msgOut);
+                    if (objectOutput) {
+                        node.send({ [parameterName]: res });
+                    } else {
+                        node.send({ "payload": { [parameterName]: res } });
+                    }
                 } catch (err) {
                     simulink = false;
                 }
@@ -122,6 +126,7 @@ module.exports = function (RED) {
 
         node.on("input", function (msg) {
             var payload = {};
+            var src = objectOutput ? msg : (msg.payload || {});
             if (header) {
                 if (!checkXCPidentifierMatch(pid, header)) {
                     simulink = false
@@ -130,17 +135,20 @@ module.exports = function (RED) {
             if (simulink) {
                 //list based input
                 if (inputMode == INPUTMODELIST) {
-                    if (msg[inputKey] === undefined) {
+                    if (src[inputKey] === undefined) {
                         node.error("wrong key received on input, check your configurations.\nReceived: " + JSON.stringify(msg) + "\nExpected key: " + inputKey);
                         return;
                     }
                     try {
-                        uiojs.process_write(pid, asap_parameter, msg[inputKey]);
+                        uiojs.process_write(pid, asap_parameter, src[inputKey]);
                         if (outputMode == OUTPUTMODEONCE) {
                             var newVal = uiojs.process_read(pid, asap_parameter);
                             payload[parameterName] = newVal;
-                            msgOut["payload"] = payload;
-                            node.send(msgOut);
+                            if (objectOutput) {
+                                node.send(payload);
+                            } else {
+                                node.send({ payload: payload });
+                            }
                         }
 
                     } catch (err) {
@@ -154,15 +162,18 @@ module.exports = function (RED) {
                 } else {
                     // console.log("message based input on key " + inputKey);
                     //for all keys in the incoming message
-                    for (const inputParameter in msg[inputKey]) {
+                    for (const inputParameter in src[inputKey]) {
                         try {
                             //console.log("trying to find " + inputParameter);
                             //try to read the asap_parameter linked to that key
-                            uiojs.process_write(pid, localParameters[inputParameter]["asap_parameter"], msg[inputKey][inputParameter]);
+                            uiojs.process_write(pid, localParameters[inputParameter]["asap_parameter"], src[inputKey][inputParameter]);
                             if (outputMode == OUTPUTMODEONCE) {
                                 payload[inputParameter] = uiojs.process_read(pid, localParameters[inputParameter]["asap_parameter"]);
-                                msgOut["payload"] = payload;
-                                node.send(msgOut);
+                                if (objectOutput) {
+                                    node.send(payload);
+                                } else {
+                                    node.send({ payload: payload });
+                                }
                             }
                         } catch (err) {
                             // simulink=false;

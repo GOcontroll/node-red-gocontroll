@@ -19,6 +19,7 @@ function GOcontroll4_20maModule(config) {
 	/* Get information from the Node configuration */
 	const moduleSlot 		= parseInt(config.moduleSlot);
 	const sampleTime 		= config.sampleTime;
+	const objectOutput 		= (config.objectOutput !== false);
 
 	var supply	={};
 	supply[0] = config.supply1;
@@ -167,10 +168,14 @@ function GOcontroll4_20maModule(config) {
 					for (var idx = 1; idx  <= 5; idx ++) {
 						msgOut.status["supply" + idx] = (status & (1 << (idx -1))) ? 1 : 0;
 					}
-					node.send({payload: msgOut});
+					if (objectOutput) {
+						node.send(msgOut);
+					} else {
+						node.send({payload: msgOut});
+					}
 				}
-			}					
-		});	
+			}
+		});
 	}
 
 

@@ -24,6 +24,7 @@ module.exports = function (RED) {
 
 		const moduleSlot = parseInt(config.moduleSlot);
 		const sampleTime = config.sampleTime;
+		const objectOutput = (config.objectOutput !== false);
 
 		var outputType = [];
 		outputType[0] = config.output1;
@@ -261,7 +262,11 @@ module.exports = function (RED) {
 								msgOut[key[i] + "DutyCycle"] = receiveBuffer.readUint16LE(26 + i * 2);
 							}
 						}
-						node.send({payload: msgOut});
+						if (objectOutput) {
+							node.send(msgOut);
+						} else {
+							node.send({payload: msgOut});
+						}
 					}
 				}
 			});
@@ -279,6 +284,7 @@ module.exports = function (RED) {
 		**
 		****************************************************************************************/
 		node.on('input', function (msg) {
+			var src = objectOutput ? msg : (msg.payload || {});
 
 			sendBuffer[0] = moduleSlot;
 			sendBuffer[1] = MESSAGELENGTH - 1;
@@ -289,8 +295,8 @@ module.exports = function (RED) {
 			sendBuffer[5] = 1;
 
 			for (var s = 0; s < 6; s++) {
-				if (msg[key[s]] <= 1000 && msg[key[s]] >= 0) {
-					sendBuffer.writeUInt16LE(msg[key[s]], (s * 6) + 6);
+				if (src[key[s]] <= 1000 && src[key[s]] >= 0) {
+					sendBuffer.writeUInt16LE(src[key[s]], (s * 6) + 6);
 				}
 			}
 

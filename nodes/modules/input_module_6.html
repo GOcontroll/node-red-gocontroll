@@ -4,6 +4,7 @@
         color: '#f76d11',
         defaults: {
             name: {value:""},
+			objectOutput: {value:true},
 			moduleSlot: {value:"0"},
 			sampleTime:{value:"1000"},
 			input1:{value:1},
@@ -89,7 +90,12 @@
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
-		
+
+    <div class="form-row">
+        <input type="checkbox" id="node-input-objectOutput" style="display:inline-block; width:auto; vertical-align:middle; margin-right:6px;">
+        <label for="node-input-objectOutput" style="width:auto;" title="When checked, both input and output signals use msg.<key> directly (legacy shape, pre-v2.2.0). When unchecked, they use msg.payload.<key>.">Object I/O (legacy shape)</label>
+    </div>
+
     <div class="form-row">
         <label for="node-input-moduleSlot"><i class="fa fa-compress"></i> Module slot</label>
         <select id="node-input-moduleSlot" style="width:300px" title="Select the slot on which the module is plugged into">

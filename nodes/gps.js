@@ -20,6 +20,7 @@ module.exports = function(RED) {
 
 		var node = this;
 		const sampleTime = 1000;
+		const objectOutput = (config.objectOutput !== false);
 
 		/* Open serial port to control GPS modem */
 		port.open(function (err) {
@@ -251,7 +252,11 @@ module.exports = function(RED) {
 			/* Cleanup the dataSTring for new parsing */
 			dataString = "";
 
-			node.send({payload: msgOut});
+			if (objectOutput) {
+				node.send(msgOut);
+			} else {
+				node.send({payload: msgOut});
+			}
 		});
 		
 		

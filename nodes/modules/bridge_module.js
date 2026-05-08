@@ -16,6 +16,7 @@ module.exports = function (RED) {
 
 		const moduleSlot = parseInt(config.moduleSlot);
 		const sampleTime = config.sampleTime;
+		const objectOutput = (config.objectOutput !== false);
 
 		var outputType = {};
 		outputType[0] = config.output1;
@@ -164,12 +165,16 @@ module.exports = function (RED) {
 				if (receiveBuffer[MESSAGELENGTH - 1] === mod_common.ChecksumCalculator(receiveBuffer, MESSAGELENGTH - 1)) {
 					/*In case dat is received that holds module information */
 					if (receiveBuffer.readUInt16LE(2) === 303) {
-						msgOut["moduleTemperature"] = receiveBuffer.readInt16LE(6),
-							msgOut["moduleGroundShift"] = receiveBuffer.readUInt16LE(8),
-							msgOut[key[0] + "Current"] = receiveBuffer.readInt16LE(10),
-							msgOut[key[1] + "Current"] = receiveBuffer.readInt16LE(12),
+						msgOut["moduleTemperature"] = receiveBuffer.readInt16LE(6);
+						msgOut["moduleGroundShift"] = receiveBuffer.readUInt16LE(8);
+						msgOut[key[0] + "Current"] = receiveBuffer.readInt16LE(10);
+						msgOut[key[1] + "Current"] = receiveBuffer.readInt16LE(12);
 
+						if (objectOutput) {
+							node.send(msgOut);
+						} else {
 							node.send({payload: msgOut});
+						}
 					}
 				}
 			});
@@ -187,6 +192,7 @@ module.exports = function (RED) {
 		**
 		****************************************************************************************/
 		node.on('input', function (msg) {
+			var src = objectOutput ? msg : (msg.payload || {});
 
 			sendBuffer[0] = moduleSlot;
 			sendBuffer[1] = MESSAGELENGTH - 1;
@@ -194,8 +200,8 @@ module.exports = function (RED) {
 
 
 			for (var s = 0; s < 2; s++) {
-				if (msg[key[s]] <= 1000 && msg[key[s]] >= 0) {
-					sendBuffer.writeUInt16LE(msg[key[s]], (s * 6) + 6);
+				if (src[key[s]] <= 1000 && src[key[s]] >= 0) {
+					sendBuffer.writeUInt16LE(src[key[s]], (s * 6) + 6);
 				}
 			}
 

@@ -16,6 +16,7 @@ module.exports = function (RED) {
         const sampleTime = config.sampleTime;
         const Signals = config.signals.split(",");
         const xcpIdCheck = config.xcpIdCheck;   //true == validate xcp station id, false == dont
+        const objectOutput = (config.objectOutput !== false);
         var msgOut = {};
         var payload = {};
         let pid = "";
@@ -85,8 +86,12 @@ module.exports = function (RED) {
                         payload[Signals[asap_signal]] = res;
                     }
                     payload["TimeStamp"] = Date.now()
-                    msgOut["payload"] = payload;
-                    node.send(msgOut);
+                    if (objectOutput) {
+                        node.send(payload);
+                    } else {
+                        msgOut["payload"] = payload;
+                        node.send(msgOut);
+                    }
                 } catch (err) {
                     // console.log(err);
                     simulink = false;

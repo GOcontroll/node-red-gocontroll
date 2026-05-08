@@ -7,6 +7,7 @@ module.exports = function(RED) {
 	RED.nodes.createNode(this,config);
 
 	const ledConfig = config.led;
+	const objectInput = (config.objectInput !== false);
 	
 	var ledRed 		= 0x0B;
 	var ledGreen 	= 0x0C;
@@ -65,34 +66,35 @@ module.exports = function(RED) {
 	i2c1.closeSync();
 	
 	this.on('input', function(msg) {
-		
+		var src = objectInput ? msg : (msg.payload || {});
+
 		/* Open specific I2C port */
 		i2c1 = i2c.openSync(2);
-				
+
 			/* Control Red LED */
-			if(msg["red"] >= 0 && msg["red"] <= 255)
+			if(src["red"] >= 0 && src["red"] <= 255)
 			{
 			sendBuffer[0] = ledRed;
-			sendBuffer[1] = msg["red"];
-			i2c1.i2cWriteSync(ADDRESS, 2, sendBuffer);
-			}
-			
-			if (msg["green"] >= 0 && msg["green"] <= 255)
-			{
-			sendBuffer[0] = ledGreen;
-			sendBuffer[1] = msg["green"];
+			sendBuffer[1] = src["red"];
 			i2c1.i2cWriteSync(ADDRESS, 2, sendBuffer);
 			}
 
-			if (msg["blue"] >= 0 && msg["blue"] <= 255)
+			if (src["green"] >= 0 && src["green"] <= 255)
 			{
-			sendBuffer[0] = ledBlue;
-			sendBuffer[1] = msg["blue"];
+			sendBuffer[0] = ledGreen;
+			sendBuffer[1] = src["green"];
 			i2c1.i2cWriteSync(ADDRESS, 2, sendBuffer);
 			}
-			
-		/* Close the I2C port */	
-		i2c1.closeSync();	
+
+			if (src["blue"] >= 0 && src["blue"] <= 255)
+			{
+			sendBuffer[0] = ledBlue;
+			sendBuffer[1] = src["blue"];
+			i2c1.i2cWriteSync(ADDRESS, 2, sendBuffer);
+			}
+
+		/* Close the I2C port */
+		i2c1.closeSync();
         });
     }
 	RED.nodes.registerType("Status-Led",GOcontrollStatusLed);
