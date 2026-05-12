@@ -1,3 +1,34 @@
+#### V2.3.3
+- Upgraded `serialport` to `^10.5.0` for better Node 14+ compatibility
+
+#### V2.3.2
+- Pinned `node-gyp` to `^9.4.0` for Node 14 compatibility
+
+#### V2.3.1
+- Added NaN checks in `read_memory` and `write_memory` to prevent crashes on invalid input
+- Fixed `msgOut` leak in `write_simulink_parameter`
+- Improved error logging on memory and simulink nodes
+
+#### V2.3.0
+- Renewed CAN interface: simplified `can_receive` and `can_send` UI and implementation
+- Added selectable output data type on most nodes for flexible payload formatting
+- Added selectable output type to `controller_temperature`
+
+#### V2.2.0
+- All module/sensor nodes now send output under `msg.payload` (Node-RED convention)
+- `output_module_6`: removed dead event handlers for output7-10 and unused `moduleType` default
+- `input_module_6`: removed unused `moduleType`/`input7` defaults and dead key/input array entries
+- `input_module_6` help: fixed pulse counter key (`channel12pulses`) and invalid JSON example
+- `input_module_10` help: fixed malformed JSON in pulse counter example
+- `output_module_10`: fixed missing `<` on h2 tag
+- `bridge_module`: fixed mismatched h3/h2 closing tags
+- `write_simulink_parameter`: fixed stray `>` after closing script tag
+- CAN help texts: updated controller names to Moduline L4 / M1 / HMI1
+- `controller_supply`: modernised controller names (Moduline III → L3) and added `msg.payload` to examples
+- All output help texts: added `msg.payload` label to data format examples
+- Package renamed to `@gocontroll/node-red-gocontroll` scope
+- CI: added npm publish workflow with auto GitHub release on tag push, gated on a verify job
+
 #### V2.1.11
 - re-ad moduleType to the config of 6 channel in/ouput modules
 
