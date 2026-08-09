@@ -1,3 +1,12 @@
+#### V2.4.0
+- `bridge_module`: **breaking** - moved to the byte oriented SPI protocol (module type 21), matching the 6 channel output module. Requires bridge module firmware V2.0.0 or higher; the legacy 301/302/303 message ids are removed
+- `bridge_module`: refuses to configure a module with firmware below V2.0.0 and reports it as a red node status plus a warning, instead of failing silently
+- `bridge_module`: fixed the frequency list, which had been one step off since the module firmware gained 100 Hz in 2021 - the list is now 100 Hz - 10 kHz and 10 kHz is reachable again. Stored values are unchanged, only the labels now match what the module does
+- `bridge_module`: `moduleGroundShift` is now read as a signed value, the module reports both a positive and a negative shift
+- `bridge_module`: added `moduleStatus`, `moduleSupply` and per channel `DutyCycle` to the node output
+- `bridge_module`: added the peak and hold output type plus its current/time parameters (sent in a second configuration message), the frequency output type, and a configurable max current per channel (0 - 10000 mA, was hardcoded on 4000 mA)
+- `bridge_module` help: corrected the channel current rating to 10 A nominal / 14 A peak with a 15 A module total
+
 #### V2.3.3
 - Upgraded `serialport` to `^10.5.0` for better Node 14+ compatibility
 

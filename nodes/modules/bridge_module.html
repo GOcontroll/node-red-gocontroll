@@ -12,6 +12,12 @@
 			output2:{value:"1"},
 			key1: {value: "outputSignal1"},
 			key2: {value: "outputSignal2"},
+			current1: {value: "10000"},
+			current2: {value: "10000"},
+			peakcurrent1: {value: "800"},
+			peakcurrent2: {value: "800"},
+			time1: {value: "500"},
+			time2: {value: "500"},
         },
         inputs:1,
         outputs:1,
@@ -29,6 +35,15 @@
 			return "Bridge module on slot " + this.moduleSlot;
 		},
 		oneditprepare: function() {
+			/* The peak and hold parameters are only relevant for output type 7 */
+			for (var i = 1; i <= 2; i++) {
+				(function(ch) {
+					$("#node-input-output" + ch).on("change", function () {
+						if ($(this).val() == 7) { $("#peak-hold-" + ch).show(); } else { $("#peak-hold-" + ch).hide(); }
+					}).trigger("change");
+				})(i);
+			}
+
 			$.getJSON("controllertype", function(data) {
 				if (data.includes("IV")) {
 					// console.log("IV");
@@ -88,27 +103,25 @@
 			<option value="50">50 ms</option>
         </select>
     </div>
-	
-<fieldset>
 
+<fieldset>
 
 <legend>Output 1 and 2</legend>
     <div class="form-row">
         <label for="node-input-freq12"><i class="fa fa-signal"></i> Frequency </label>
         <select id="node-input-freq12" style="width:300px">
-			<option value=1>200 Hz</option>
-            <option value=2>500 Hz</option>
-		    <option value=3>1 kHz</option>
-            <option value=4>2 kHz</option>
-            <option value=5>5 kHz </option>
-            <option value=6>10 kHz</option>
+            <option value=1>100 Hz</option>
+			<option value=2>200 Hz</option>
+            <option value=3>500 Hz</option>
+		    <option value=4>1 kHz</option>
+            <option value=5>2 kHz</option>
+            <option value=6>5 kHz </option>
+            <option value=7>10 kHz</option>
         </select>
     </div>
 
-
 <p><strong>Output 1:</strong></p>
-     </div> 
-		<div class="form-row">
+	<div class="form-row">
         <label for="node-input-key1"><i class="fa fa-id-card"></i> Key</label>
         <input type="text" id="node-input-key1" style="width:300px">
     </div>
@@ -116,24 +129,42 @@
     <div class="form-row">
         <label for="node-input-output1"><i class="fa fa-sign-out"></i> Config</label>
         <select id="node-input-output1" style="width:300px">
-		    <option value="1">Output channel disabled</option>
-            <option value="2">Half bridge duty cycle controlled 0 – 100% (0-1000)</option>
-            <option value="3">Low side switch duty cycle controlled 0 – 100% (0-1000) </option>
-            <option value="4">High side switch duty cycle controlled 0 – 100% (0-1000)</option>
-            <option value="5">Low side switch on – off</option>
-            <option value="6">High side switch on – off</option>
+		    <option value=1>Output channel disabled</option>
+            <option value=2>Half bridge duty cycle controlled 0 – 100% (0-1000)</option>
+            <option value=3>Low side switch duty cycle controlled 0 – 100% (0-1000) </option>
+            <option value=4>High side switch duty cycle controlled 0 – 100% (0-1000)</option>
+            <option value=5>Low side switch on – off</option>
+            <option value=6>High side switch on – off</option>
+			<option value=7>Peak and hold current mode (half bridge)</option>
+			<option value=8>Frequency output 0 - 500 Hz (0-500)</option>
         </select>
     </div>
 
-<p><strong>Output 2:</strong></p>
-	     </div> 
+    <div class="form-row">
+        <label for="node-input-current1"><i class="fa fa-line-chart"></i> Max I (mA)</label>
+        <input type="text" id="node-input-current1" style="width:300px">
+    </div>
+
+	<div class="form-row" id="peak-hold-1">
+		<p><I>Peak and hold parameters channel 1:</I></p>
 		<div class="form-row">
-        <label for="node-input-key2"><i class="fa fa-id-card"></i> Output 2 key</label>
+			<label for="node-input-peakcurrent1"><i class="fa fa-line-chart"></i> Current (mA)</label>
+			<input type="text" id="node-input-peakcurrent1" style="width:300px">
+		</div>
+		<div class="form-row">
+			<label for="node-input-time1"><i class="fa fa-clock-o"></i> Time (ms)</label>
+			<input type="text" id="node-input-time1" style="width:300px">
+		</div>
+	</div>
+
+<p><strong>Output 2:</strong></p>
+	<div class="form-row">
+        <label for="node-input-key2"><i class="fa fa-id-card"></i> Key</label>
         <input type="text" id="node-input-key2" style="width:300px">
     </div>
- 
-     <div class="form-row">
-        <label for="node-input-output2"><i class="fa fa-sign-out"></i> Output 2</label>
+
+    <div class="form-row">
+        <label for="node-input-output2"><i class="fa fa-sign-out"></i> Config</label>
         <select id="node-input-output2" style="width:300px">
 		    <option value=1>Output channel disabled</option>
             <option value=2>Half bridge duty cycle controlled 0 – 100% (0-1000)</option>
@@ -141,18 +172,40 @@
             <option value=4>High side switch duty cycle controlled 0 – 100% (0-1000)</option>
             <option value=5>Low side switch on – off</option>
             <option value=6>High side switch on – off</option>
+			<option value=7>Peak and hold current mode (half bridge)</option>
+			<option value=8>Frequency output 0 - 500 Hz (0-500)</option>
         </select>
     </div>
+
+    <div class="form-row">
+        <label for="node-input-current2"><i class="fa fa-line-chart"></i> Max I (mA)</label>
+        <input type="text" id="node-input-current2" style="width:300px">
+    </div>
+
+	<div class="form-row" id="peak-hold-2">
+		<p><I>Peak and hold parameters channel 2:</I></p>
+		<div class="form-row">
+			<label for="node-input-peakcurrent2"><i class="fa fa-line-chart"></i> Current (mA)</label>
+			<input type="text" id="node-input-peakcurrent2" style="width:300px">
+		</div>
+		<div class="form-row">
+			<label for="node-input-time2"><i class="fa fa-clock-o"></i> Time (ms)</label>
+			<input type="text" id="node-input-time2" style="width:300px">
+		</div>
+	</div>
 
 </fieldset>
 
 </script>
 
 <script type="text/x-red" data-help-name="Bridge-Module">
-<p>The bridge module can be used to control resistive and inductive loads with a current up to 7,5 Amp&egrave;re for each channel. The node will also output data with actual information from the module such as temperature and groundshift.</p>
+<p>The 2 channel power bridge module can be used to control resistive and inductive loads with a nominal current up to 10 Amp&egrave;re per channel (14 Amp&egrave;re peak). The total current of both channels together may not exceed 15 Amp&egrave;re. The node will also output data with actual information from the module such as current, temperature, supply voltage and groundshift.</p>
+<p><strong>This node requires module firmware V2.0.0 or higher.</strong> Older firmware uses a different SPI protocol and is no longer supported. When an older module is detected, the node shows a red status and writes a warning to the debug panel.</p>
 <h2><strong>Configuration</strong></h2>
 <p><strong><em>Module:</em></strong></p>
 <p>Select the module slot on which the bridge module is installed to.</p>
+<p><strong><em>Frequency:</em></strong></p>
+<p>Both channels are driven by the same timer, so the switching frequency is shared between output 1 and output 2. The frequency has no effect on the on &ndash; off (boolean) output types.</p>
 <h3><strong>Output channel n</strong></h3>
 <p>Each channel (1 - 2) can be configured according user demands. Each Output channel has the same options.</p>
 <p><strong><em>Output type:</em></strong></p>
@@ -177,6 +230,16 @@
 <li>High side switch on &ndash; off</li>
 </ul>
 <p>In case of switching actuators on or off by switching to the rail supply, you can select the high side switch. By sending a 1 or higher, the switch will be switched on. 0 will switch off the actuator.</p>
+<ul>
+<li>Peak and hold current mode (half bridge)</li>
+</ul>
+<p>This function is meant for actuators that need a high current to open and a lower current to stay open, injectors for example. The module first regulates the current to the configured peak current for the configured time, after that it regulates to the current that is send to the node. Both the peak current (mA) and the peak time (ms) can be entered per channel and are only visible when this output type is selected.</p>
+<ul>
+<li>Frequency output 0 - 500 Hz (0-500)</li>
+</ul>
+<p>With this function the output switches with the frequency that is send to the node, from 0 to 500 Hz. A value of 0 switches the output off.</p>
+<p><strong><em>Max I (mA):</em></strong></p>
+<p>The current at which the module switches off the channel to protect itself and the load. The value can be set from 0 to 10000 mA. A value of 0 makes the module use its own maximum of 10000 mA.</p>
 <h3><strong>Data format</strong></h3>
 <p><em><strong>Control the module</strong></em></p>
 <p>The data to control the module can be send is as one JSON string for all channels or separate strings with key-value pairs for each channel independent. If channels are updated individually, the other outputs remain unchanged.</p>
@@ -187,9 +250,17 @@
 <p><em>&hellip;&hellip; }</em></p>
 <p><em>&nbsp;</em></p>
 <p><em><strong>Read data from module</strong></em></p>
-<p>The data coming from the module is pushed out of the node in a JSON object format. This data is only pushed out of the node when an injection took place. If no output update is required but the status of the module is needed, a random message can be injected to the node to retrieve the information. The JSON string holds 2 key&rsquo;s with 2 values. Two general keys holding the groundshift and the temperature.</p>
+<p>The data coming from the module is pushed out of the node in a JSON object format. This data is only pushed out of the node when an injection took place. If no output update is required but the status of the module is needed, a random message can be injected to the node to retrieve the information.</p>
+<ul>
+<li><em>moduleTemperature</em> &ndash; temperature in &deg;C of the hottest of the two output stages.</li>
+<li><em>moduleGroundShift</em> &ndash; deviation of the module ground with respect to the calibrated reference. This is a signed value, both a positive and a negative shift are reported.</li>
+<li><em>moduleSupply</em> &ndash; measured supply voltage of the module in mV.</li>
+<li><em>moduleStatus</em> &ndash; bit field with the module and channel error codes.</li>
+<li><em>&lt;key&gt;Current</em> &ndash; measured current of the channel in mA. The value is signed, a negative current means the current flows into the module.</li>
+<li><em>&lt;key&gt;DutyCycle</em> &ndash; only for channels in peak and hold mode, the duty cycle the module regulates to.</li>
+</ul>
 <p><em><strong>Groundshift</strong></em></p>
-<p>To prevent the module from influencing the controller ground, the module continuously checks if the ground from the module is ok. If the ground shift due to bad ground connections, this value will start to rise. At a certain threshold, the module will switch of the channels until a module reset takes place.</p>
+<p>To prevent the module from influencing the controller ground, the module continuously checks if the ground from the module is ok. If the ground shifts due to bad ground connections, this value will start to rise. At a certain threshold, the module will switch off the channels until the ground is within its limits again.</p>
 <h3><strong>Example</strong></h3>
 <p>This example shows the JSON data &nbsp;to inject into the output node.</p>
 <p>{&ldquo;outputChannel1&rdquo; : 688}</p>
@@ -199,6 +270,8 @@
 <p>msg.payload : Object</p>
 <p>{<br>&ldquo;moduleTemperature&rdquo; : 28,</p>
 <p>&ldquo;moduleGroundShift&rdquo; : 0,</p>
+<p>&ldquo;moduleStatus&rdquo; : 0,</p>
+<p>&ldquo;moduleSupply&rdquo; : 13800,</p>
 <p>&ldquo;outputSignal1Current&rdquo; : 1000,</p>
 <p>&ldquo;outputSignal2Current&rdquo; : 500<br>}</p>
 </script>

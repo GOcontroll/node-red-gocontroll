@@ -7,6 +7,16 @@ module.exports = function (RED) {
 	const MESSAGELENGTH = 44;
 	const SPISPEED = 2000000;
 
+	/* Module type byte of the 2 channel power bridge module in the SPI protocol */
+	const BRIDGEMODULE = 21;
+
+	/* Maximum current of one individual channel in mA. Matches MAXCURRENTCHANNELNOMINAL
+	 * in the module firmware. The module uses this value when 0 is provided. */
+	const CURRENTMAX = 10000;
+
+	/* The byte oriented SPI protocol is only spoken by module firmware 2.0.0 and higher */
+	const MINIMUMFIRMWAREMAJOR = 2;
+
 	function GOcontrollBridgeModule(config) {
 		RED.nodes.createNode(this, config);
 
@@ -18,22 +28,34 @@ module.exports = function (RED) {
 		const sampleTime = config.sampleTime;
 		const objectOutput = (config.objectOutput !== false);
 
-		var outputType = {};
-		outputType[0] = config.output1;
-		outputType[1] = config.output2;
+		/* Older flows do not hold the properties that were added together with the byte
+		 * oriented protocol, so fall back to a sane default when they are missing. */
+		function toNumber(value, fallback) {
+			const number = parseInt(value);
+			return Number.isFinite(number) ? number : fallback;
+		}
 
+		var outputType = [];
+		outputType[0] = toNumber(config.output1, 1);
+		outputType[1] = toNumber(config.output2, 1);
 
-		var outputFreq = {};
-		outputFreq[0] = config.freq12;
-		outputFreq[1] = config.freq12;
+		var outputFreq = [];
+		outputFreq[0] = toNumber(config.freq12, 1);
+		outputFreq[1] = toNumber(config.freq12, 1);
 
+		var outputCurrent = [];
+		outputCurrent[0] = toNumber(config.current1, CURRENTMAX);
+		outputCurrent[1] = toNumber(config.current2, CURRENTMAX);
 
-		var outputCurrent = {};
-		outputCurrent[0] = 4000;//config.current1;
-		outputCurrent[1] = 4000;//config.current2;
+		var peakcurrent = [];
+		peakcurrent[0] = toNumber(config.peakcurrent1, 800);
+		peakcurrent[1] = toNumber(config.peakcurrent2, 800);
 
+		var outputTime = [];
+		outputTime[0] = toNumber(config.time1, 500);
+		outputTime[1] = toNumber(config.time2, 500);
 
-		var key = {};
+		var key = [];
 		key[0] = config.key1;
 		key[1] = config.key2;
 
@@ -79,8 +101,7 @@ module.exports = function (RED) {
 		});
 
 		/***************************************************************************************
-		** \brief 	Cleanup sendbuffer for next messages otherwise it may be possible that the output
-		**			values are directly set
+		** \brief 	First initialisation message that is send to the bridge module
 		**
 		**
 		** \param
@@ -92,11 +113,22 @@ module.exports = function (RED) {
 			firmware = mod_common.FormatFirmware(bootloader_response);
 			if (bootloader_response[6] == 20 && bootloader_response[7] == 20 && bootloader_response[8] == 1) {
 
+				if (bootloader_response[10] < MINIMUMFIRMWAREMAJOR) {
+					node.status({ fill: "red", shape: "dot", text: "Module firmware too old, update to V" + MINIMUMFIRMWAREMAJOR + ".0.0 or higher." });
+					node.warn("Bridge module on slot " + moduleSlot + " runs " + firmware +
+						". This node requires module firmware V" + MINIMUMFIRMWAREMAJOR + ".0.0 or higher.");
+					return;
+				}
+
 				node.status({ fill: "green", shape: "dot", text: firmware });
 
 				sendBuffer[0] = moduleSlot;
 				sendBuffer[1] = MESSAGELENGTH - 1;
-				sendBuffer.writeUInt16LE(301, 2);
+
+				sendBuffer[2] = 1;
+				sendBuffer[3] = BRIDGEMODULE;
+				sendBuffer[4] = 2;
+				sendBuffer[5] = 1;
 
 				for (var s = 0; s < 2; s++) {
 					sendBuffer[6 + s] = (outputFreq[s] & 15) | ((outputType[s] & 15) << 4);
@@ -110,7 +142,7 @@ module.exports = function (RED) {
 					/* Only in this scope, receive buffer is available */
 					bridgeModule.transfer(normalMessage, (err, normalMessage) => {
 						bridgeModule.close(err => { });
-						BridgeModule_clearBuffer();
+						setTimeout(BridgeModule_Initialize_Second, 100);
 					});
 				});
 			} else {
@@ -119,6 +151,42 @@ module.exports = function (RED) {
 			}
 		}
 
+
+		/***************************************************************************************
+		** \brief 	Second initialisation message that holds the peak and hold parameters
+		**
+		**
+		** \param
+		** \param
+		** \return
+		**
+		****************************************************************************************/
+		function BridgeModule_Initialize_Second() {
+
+			sendBuffer[0] = moduleSlot;
+			sendBuffer[1] = MESSAGELENGTH - 1;
+
+			sendBuffer[2] = 1;
+			sendBuffer[3] = BRIDGEMODULE;
+			sendBuffer[4] = 2;
+			sendBuffer[5] = 2;
+
+			for (var s = 0; s < 2; s++) {
+				sendBuffer.writeUInt16LE(peakcurrent[s], 6 + (s * 2));
+				sendBuffer.writeUInt16LE(outputTime[s], 18 + (s * 2));
+			}
+
+			sendBuffer[MESSAGELENGTH - 1] = mod_common.ChecksumCalculator(sendBuffer, MESSAGELENGTH - 1);
+
+			const bridgeModule = spi.open(sL, sB, (err) => {
+
+				/* Only in this scope, receive buffer is available */
+				bridgeModule.transfer(normalMessage, (err, normalMessage) => {
+					bridgeModule.close(err => { });
+					BridgeModule_clearBuffer();
+				});
+			});
+		}
 
 		/***************************************************************************************
 		** \brief 	Cleanup sendbuffer for next messages otherwise it may be possible that the output
@@ -134,9 +202,14 @@ module.exports = function (RED) {
 
 			sendBuffer[0] = moduleSlot;
 			sendBuffer[1] = MESSAGELENGTH - 1;
-			sendBuffer.writeUInt16LE(302, 2);
 
-			for (var s = 4; s < MESSAGELENGTH; s++) {
+			sendBuffer[2] = 1;
+			sendBuffer[3] = BRIDGEMODULE;
+			sendBuffer[4] = 3;
+			sendBuffer[5] = 1;
+
+			/* Only clear the payload, the header bytes above must stay intact */
+			for (var s = 6; s < MESSAGELENGTH; s++) {
 				sendBuffer[s] = 0;
 			}
 
@@ -164,11 +237,22 @@ module.exports = function (RED) {
 
 				if (receiveBuffer[MESSAGELENGTH - 1] === mod_common.ChecksumCalculator(receiveBuffer, MESSAGELENGTH - 1)) {
 					/*In case dat is received that holds module information */
-					if (receiveBuffer.readUInt16LE(2) === 303) {
+					if (receiveBuffer.readUInt8(2) === 2 &&
+						receiveBuffer.readUInt8(3) === BRIDGEMODULE &&
+						receiveBuffer.readUInt8(4) === 4 &&
+						receiveBuffer.readUInt8(5) === 1) {
+
 						msgOut["moduleTemperature"] = receiveBuffer.readInt16LE(6);
-						msgOut["moduleGroundShift"] = receiveBuffer.readUInt16LE(8);
+						msgOut["moduleGroundShift"] = receiveBuffer.readInt16LE(8);
+						msgOut["moduleStatus"] = receiveBuffer.readUInt32LE(22);
+						msgOut["moduleSupply"] = receiveBuffer.readUInt16LE(41);
 						msgOut[key[0] + "Current"] = receiveBuffer.readInt16LE(10);
 						msgOut[key[1] + "Current"] = receiveBuffer.readInt16LE(12);
+						for (var i = 0; i < 2; i++) {
+							if (outputType[i] == 7) { //output is peak and hold ie current control
+								msgOut[key[i] + "DutyCycle"] = receiveBuffer.readUInt16LE(26 + i * 2);
+							}
+						}
 
 						if (objectOutput) {
 							node.send(msgOut);
@@ -196,8 +280,11 @@ module.exports = function (RED) {
 
 			sendBuffer[0] = moduleSlot;
 			sendBuffer[1] = MESSAGELENGTH - 1;
-			sendBuffer.writeUInt16LE(302, 2);
 
+			sendBuffer[2] = 1;
+			sendBuffer[3] = BRIDGEMODULE;
+			sendBuffer[4] = 3;
+			sendBuffer[5] = 1;
 
 			for (var s = 0; s < 2; s++) {
 				if (src[key[s]] <= 1000 && src[key[s]] >= 0) {
