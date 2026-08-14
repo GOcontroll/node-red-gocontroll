@@ -215,7 +215,7 @@ document.getElementById("Module-Settings").innerHTML = x;
 <ul>
 <li>Analog input &ndash; decimal (12 bit resolution)</li>
 </ul>
-<p>This setting convert the analog voltage applied to the corresponding connector pin to a decimal value from 0 to 4095. The voltage range you select is the range on which this resolution applies.</p>
+<p>This setting convert the analog voltage applied to the corresponding connector pin to a decimal value from 0 to 4095.</p>
 <p>&nbsp;</p>
 <ul>
 <li>Analog input &ndash; mV (1 mV resolution)</li>
@@ -235,7 +235,7 @@ document.getElementById("Module-Settings").innerHTML = x;
 <ul>
 <li>Digital Input &ndash; duty cycle low time (0.1% resolution)</li>
 </ul>
-<p>If a duty cycle signal is applied on the corresponding input pin, the low time percentage is calculated. For example, if the duty cycle signal is 65% (active high) the returned value is 450 (45%). The frequency of the applied signal needs to be between 1Hz and 10kHz.</p>
+<p>If a duty cycle signal is applied on the corresponding input pin, the low time percentage is calculated. For example, if the duty cycle signal is 65% (active high) the returned value is 350 (35%). The frequency of the applied signal needs to be between 1Hz and 10kHz.</p>
 <p>&nbsp;</p>
 <ul>
 <li>Digital Input &ndash; duty cycle high time (0.1% resolution)</li>
@@ -266,7 +266,11 @@ document.getElementById("Module-Settings").innerHTML = x;
 <p>"engineOilPressure" : 2456 ,</p>
 <p>"engineTemperature" : 62 ,</p>
 <p>"oilTemperature" : 92 ,</p>
-<p>"ConnectorApin13" : 1002 }</p>
+<p>"ConnectorApin13" : 1002 ,</p>
+<p>"inputSignal7" : 2048 ,</p>
+<p>"inputSignal8" : 331 ,</p>
+<p>"inputSignal9" : 4095 ,</p>
+<p>"inputSignal10" : 0 }</p>
 <p>&nbsp;</p>
 <h2><strong>Resetting the pulse counter</strong></h2>
 <p>The value of a pulse counter can be actively controlled via the input of this node.</p>

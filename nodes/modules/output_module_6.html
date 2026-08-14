@@ -217,7 +217,7 @@ document.getElementById("Module-Settings").innerHTML = x;
 </script>
 
 <script type="text/x-red" data-help-name="Output-Module">
-<p>The output module can be used to control resistive and inductive loads with a current up to 5 Amp&egrave;re for each channel. The node will also output data with actual information from the module such as the current flow for each channel (only in high side configuration), the temperature of the module and the ground shift of the module (explained later on)</p>
+<p>The output module can be used to control resistive and inductive loads with a current up to 5 Amp&egrave;re for each channel. The node will also output data with actual information from the module such as the current flow for each channel (positive when the channel is configured as high side, negative when it is configured as low side), the temperature of the module and the ground shift of the module (explained later on)</p>
 <h2><strong>Configuration</strong></h2>
 <p><strong><em>Module:</em></strong></p>
 <p>Select the module slot on which the output module is installed to.</p>
@@ -252,18 +252,19 @@ document.getElementById("Module-Settings").innerHTML = x;
 <h2><strong>Data format</strong></h2>
 <p><em><strong>Control the module</strong></em></p>
 <p>The data to control the module can be send is as one JSON string for all channels or separate strings with key-value pairs for each channel independent. If channels are updated individually, the other outputs remain unchanged.</p>
+<p>The key of a channel is the Key field of that channel in the configuration; the defaults are <em>outputSignal1</em> up to <em>outputSignal6</em>.</p>
 <p>Each channel can be controlled individually with the following JSON string:</p>
-<p>&nbsp;<em>{&ldquo;outputChanneln&rdquo; : y}</em></p>
+<p>&nbsp;<em>{&ldquo;[channel n key]&rdquo; : y}</em></p>
 <p>All channels can also be controlled with one JSON string:</p>
-<p>&nbsp;<em>{&ldquo;outputChanneln&rdquo; : y,</em></p>
+<p>&nbsp;<em>{&ldquo;[channel n key]&rdquo; : y,</em></p>
 <p><em>&hellip;&hellip; }</em></p>
 <p><em><strong>Read data from module</strong></em></p>
-<p>The data coming from the module is pushed out of the node in a JSON string format. This data is only pushed out of the node when an injection took place. If no output update is required but the status of the module is needed, a random message can be injected to the node to retrieve the information. The JSON string holds 8 key&rsquo;s and 8 values. Two general keys holding the groundshift and the temperature. The other 6 key&rsquo;s hold the current for each channel.</p>
+<p>The data coming from the module is pushed out of the node in a JSON string format. This data is pushed out of the node every sample period, whether a message was injected or not. The JSON string holds 9 key&rsquo;s and 9 values. Three general keys holding the groundshift, the temperature and the module status. The other 6 key&rsquo;s hold the current for each channel.</p>
 <p><em><strong>Groundshift</strong></em></p>
 <p>To prevent the module from influencing the controller ground, the module continuously checks if the ground from the module is ok. If the ground shift due to bad ground connections, this value will start to rise. At a certain threshold, the module will switch of the channels until a module reset takes place.</p>
 <h2><strong>Example</strong></h2>
 <p>This example shows the JSON data &nbsp;to inject into the output node.</p>
-<p>{&ldquo;outputChannel1&rdquo; : 688}</p>
+<p>{&ldquo;outputSignal1&rdquo; : 688}</p>
 <p>This example shows the data coming from an output node during operation.</p>
 <p>msg.payload : Object</p>
 <p>{&ldquo;moduleTemperature&rdquo; : 28,</p>
@@ -410,7 +411,7 @@ document.getElementById("Module-Settings").innerHTML = x;
 	</tr>
 	<tr>
 		<td>bit 30</td>
-		<td>To many checksum errors</td>
+		<td>Too many checksum errors</td>
 	</tr>
 	<tr>
 		<td>bit 31</td>
