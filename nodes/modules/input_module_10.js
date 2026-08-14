@@ -36,14 +36,6 @@ function GOcontrollInputModule(config) {
 	input[8] = config.input9;
 	input[9] = config.input10;
 	
-	var voltageRange = [];
-	voltageRange[0] = config.v1;
-	voltageRange[1] = config.v2;
-	voltageRange[2] = config.v3;
-	voltageRange[3] = config.v4;
-	voltageRange[4] = config.v5;
-	voltageRange[5] = config.v6;
-	
 	var pullUp = [];
 	pullUp[0] = config.pub1;
 	pullUp[1] = config.pub2;

@@ -197,7 +197,7 @@ module.exports = function(RED) {
 										
 							msgOut["moduleTemperature"] = receiveBuffer.readInt16LE(6);
 							msgOut["moduleGroundShift"] = receiveBuffer.readInt16LE(8);
-							msgOut["moduleVoltage"] = receiveBuffer.readInt16LE(10);
+							msgOut["moduleVoltage"] = receiveBuffer.readUInt16LE(10);
 							msgOut["moduleCurrent"] = receiveBuffer.readInt16LE(12);
 							msgOut["moduleStatus"] = receiveBuffer.readUInt32LE(22);
 							if (objectOutput) {
